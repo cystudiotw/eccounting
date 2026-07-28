@@ -1,0 +1,140 @@
+---
+import TrialModal from '../components/TrialModal.astro';
+import '../styles/global.css';
+
+const {
+  title = '雲記帳 - 你的 AI 財務神隊友',
+  currentPath = '/',
+} = Astro.props;
+
+const LOGO_URL = 'https://lh3.googleusercontent.com/aida-public/AB6AXuDO3lSJHht8waitGiunp2X0ooVAXOUX3bXH1Z_jhqST7TPeFx8jEbAcNGN4vT3kR1k7JN2CYBjEfJK-9hgjjdWDj7zsjn2HH7ckCdCWKJiDQLWbqH_Avw5VlBD0MHBEt4KDlb_ufyq7KvxusWUxMNmrzFQylv9yKTez2A7Bw6p_LkIeTNC24_Ao8iRDu5bC26gQz_oZMZIEER1FBE5lWcqyKoAC6peEYBd3bkdujLDKuXBEtuUkJ75K1vImTQqhFPGzA5gytFpllniF';
+
+const currentYear = new Date().getFullYear();
+
+const navItems = [
+  { href: '/', label: '首頁' },
+  { href: '/features/', label: '功能介紹' },
+  { href: '/setup/', label: '稅務優化' },
+  { href: '/faq/', label: '常見問題' },
+  { href: '/contact/', label: '聯繫我們' },
+];
+
+function isActive(href: string) {
+  if (href === '/') return currentPath === '/';
+  return currentPath.startsWith(href);
+}
+---
+<!doctype html>
+<html lang="zh-TW" class="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@600;700;800&family=Noto+Sans+TC:wght@400;500;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  </head>
+  <body class="bg-[#f9f9f9] text-[#1a1c1c] font-sans antialiased selection:bg-[#005f9d]/20 selection:text-[#005f9d]">
+    <div class="min-h-screen flex flex-col">
+      <!-- Navbar -->
+      <header class="fixed top-0 left-0 w-full z-50 bg-[#f9f9f9]/95 backdrop-blur-md border-b border-[#c0c7d2]/40 shadow-xs">
+        <div class="max-w-[1280px] mx-auto px-4 md:px-16 h-16 flex items-center justify-between">
+          <a href="/" class="flex items-center gap-2 scale-95 active:scale-90 transition-transform duration-200 group">
+            <img src={LOGO_URL} alt="雲記帳 Logo" class="h-8 w-auto object-contain transition-opacity group-hover:opacity-90" />
+            <span class="font-headline-md text-xl md:text-2xl font-bold text-[#005f9d] tracking-tight">雲記帳</span>
+          </a>
+          <nav class="hidden md:flex items-center gap-8">
+            {navItems.map((item) => (
+              <a
+                href={item.href}
+                class:list={[
+                  'font-label-sm text-sm px-2 py-1 transition-all',
+                  isActive(item.href)
+                    ? 'text-[#005f9d] font-bold border-b-2 border-[#005f9d] pb-1'
+                    : 'text-[#404750] hover:text-[#005f9d] hover:bg-[#f3f3f4] rounded',
+                ]}
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+          <div class="hidden md:flex items-center gap-4">
+            <button onclick="window.__openTrialModal()" class="bg-[#005f9d] text-white font-label-sm text-sm px-6 py-2 rounded-lg hover:bg-[#2079be] transition-all duration-200 scale-95 active:scale-90 shadow-xs cursor-pointer">
+              立即試用
+            </button>
+          </div>
+          <!-- Mobile Menu Button -->
+          <button id="mobile-menu-btn" class="md:hidden text-[#404750] p-2 rounded-lg hover:bg-[#f3f3f4] transition-colors" aria-label="Toggle Menu">
+            <span class="material-symbols-outlined text-2xl">menu</span>
+          </button>
+        </div>
+        <!-- Mobile Menu Drawer -->
+        <div id="mobile-menu" class="md:hidden hidden bg-[#ffffff] border-b border-[#c0c7d2]/40 px-4 py-4 space-y-3 shadow-lg">
+          {navItems.map((item) => (
+            <a
+              href={item.href}
+              class:list={[
+                'block w-full text-left font-label-sm text-base px-4 py-2.5 rounded-lg transition-colors',
+                isActive(item.href)
+                  ? 'bg-[#005f9d]/10 text-[#005f9d] font-bold'
+                  : 'text-[#404750] hover:bg-[#f3f3f4]',
+              ]}
+            >
+              {item.label}
+            </a>
+          ))}
+          <div class="pt-2 border-t border-[#f3f3f4]">
+            <button onclick="window.__openTrialModal(); document.getElementById('mobile-menu').classList.add('hidden')" class="w-full bg-[#005f9d] text-white font-label-sm text-center py-3 rounded-lg hover:bg-[#2079be] transition-colors">
+              立即試用
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="flex-1 pt-20">
+        <slot />
+      </main>
+
+      <!-- Footer -->
+      <footer class="bg-[#ffffff] border-t border-[#c0c7d2]/40 w-full mt-auto">
+        <div class="max-w-[1280px] mx-auto py-8 px-4 md:px-16 flex flex-col md:flex-row justify-between items-center gap-4">
+          <div class="flex items-center gap-2">
+            <img src={LOGO_URL} alt="雲記帳 Logo" class="h-6 w-auto object-contain opacity-90" />
+            <span class="text-xl font-headline-md font-bold text-[#1a1c1c]">雲記帳</span>
+          </div>
+          <div class="font-body-md text-sm md:text-base text-[#005f9d] font-medium text-center">
+            © {currentYear} 雲記帳. 版權所有。
+          </div>
+          <div class="flex items-center gap-6">
+            <a href="/faq/" class="font-label-sm text-sm text-[#404750] hover:text-[#1a1c1c] hover:underline transition-all opacity-80 hover:opacity-100">常見問題</a>
+            <a href="/privacy/" class="font-label-sm text-sm text-[#404750] hover:text-[#1a1c1c] hover:underline transition-all opacity-80 hover:opacity-100">隱私權政策</a>
+            <a href="/terms/" class="font-label-sm text-sm text-[#404750] hover:text-[#1a1c1c] hover:underline transition-all opacity-80 hover:opacity-100">服務條款</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Mobile menu toggle -->
+    <script>
+      document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
+        document.getElementById('mobile-menu')?.classList.toggle('hidden');
+      });
+    </script>
+
+    <!-- Trial Modal open/close -->
+    <script>
+      window.__openTrialModal = function() {
+        document.getElementById('trial-modal-overlay')?.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      };
+      window.__closeTrialModal = function() {
+        document.getElementById('trial-modal-overlay')?.classList.add('hidden');
+        document.body.style.overflow = '';
+      };
+    </script>
+
+    <TrialModal />
+  </body>
+</html>

@@ -1,0 +1,138 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const FEATURE_OCR_URL = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCZst70K3rB53qJTwF-RVpUEsfaDfwJKFm0Sn33QL2IvUXcALR4g44PBGWUdYzJvfaNrxKC8vVj-zj9WFiTeY5N--WmMHq-yxotqbzLQpsV8Ue9oBM7LOfWwTVSU8W_k8fkpXxMYzERHy21mwt5RwP66ThC9uhQ9j0RFnT4gVpVzQU7_sqB-1EJ2PA0K0DrnUb0a57aFmoqvVJbP6C-DFpJShu1PvbjSkhhXnFJZ0OlwDUbxNczWKGqaa9fWI35ZKpdg9agLaisqoCS';
+const FEATURE_AI_URL = 'https://lh3.googleusercontent.com/aida-public/AB6AXuDxw-4RKVMn9-ok6HzAgitFbkUXyf1zu0sqEj9gRRunJaoDJLW2WFygV9YgNw50P3fVN806ikd7EUu5mF-hTlxdYSm3JTEioFysJRnRsOCOjMkPk_nUyofqmKymZnWFGODw8eeutERBL7Joby-wzdKoNVUTdIL2g1UpjDvjZv7wemERMssDSKL02GqprPIvrKyl2RtT7NrBXTSGmM7oZtv5J9XMV5fyTIPJOxmQ4uX11cfNgQ3HXKQcmjeO3x_5os_sYom2hNDjcFRc';
+const FEATURE_SYNC_URL = 'https://lh3.googleusercontent.com/aida-public/AB6AXuB3OhCCA-zLoS7SuyiaZrFiJqtVzf_gsylFxqIgWCYYLTMvolsT2QCCggJYi-zGD6XcZPY_QllcUlq6W9IFQs3f9pN9XFG7t79gSw0yFkZHuxcenOIU3zx79iHK9K4ZvpxiTzFThAi7Kn4II6mkEy2alGbM2IUOReXiUpxrFKmhe1lCF_r_WPkJOCtLAkYgtspQ1xyUrLYEJlvDhoK4ptrfxTTDROnKLzQFTAC1euWE5WTd_uR3Ei9_mBGos9o7RuadwpdgeElLQI6F';
+---
+<BaseLayout title="功能介紹 - 雲記帳" currentPath="/features/">
+  <div class="w-full max-w-[1280px] mx-auto px-4 md:px-16 pt-10 pb-20">
+    <!-- Header -->
+    <section class="text-center mb-16 md:mb-24">
+      <h1 class="font-headline-lg text-2xl md:text-4xl text-[#005f9d] mb-4">核心功能詳解</h1>
+      <p class="font-body-lg text-base md:text-lg text-[#404750] max-w-2xl mx-auto leading-relaxed">
+        為新創團隊與自由工作者量身打造的專業雲端記帳解決方案，透過自動化與人工智慧，讓您的財務管理更高效、更精確。
+      </p>
+    </section>
+
+    <!-- Feature 1: 一鍵拍照辨識 -->
+    <section class="mb-24 md:mb-32">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
+        <div class="order-2 md:order-1 space-y-6">
+          <div class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-[#f3f3f4] text-[#005f9d] mb-2 shadow-xs">
+            <span class="material-symbols-outlined text-2xl">photo_camera</span>
+          </div>
+          <h2 class="font-headline-md text-2xl md:text-3xl text-[#1a1c1c]">一鍵拍照辨識</h2>
+          <p class="font-body-md text-base text-[#404750] leading-relaxed">
+            收據發票自動入帳，免手動輸入。我們的進階光學字元辨識 (OCR) 技術能精準擷取發票號碼、金額與日期，大幅減少人工建檔的時間與錯誤率。支援各類常見發票格式，讓財務歸檔變得輕鬆無負擔。
+          </p>
+          <ul class="space-y-3 font-body-md text-sm md:text-base text-[#404750]">
+            <li class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-[#005f9d] text-xl">check_circle</span>
+              高精準度 OCR 辨識
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-[#005f9d] text-xl">check_circle</span>
+              支援多種發票格式 (電子發票、三聯式、高鐵車票)
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-[#005f9d] text-xl">check_circle</span>
+              自動分類消費類別與進項稅額試算
+            </li>
+          </ul>
+        </div>
+        <div class="order-1 md:order-2">
+          <div class="rounded-xl overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-[#c0c7d2]/50 bg-white relative aspect-[4/3] group">
+            <img src={FEATURE_OCR_URL} alt="一鍵拍照辨識 示意圖" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature 2: AI 智慧財務顧問 -->
+    <section class="mb-24 md:mb-32">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
+        <div class="order-1">
+          <div class="rounded-xl overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-[#c0c7d2]/50 bg-white relative aspect-[4/3] group">
+            <img src={FEATURE_AI_URL} alt="AI 智慧財務顧問 圖表介面" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+          </div>
+        </div>
+        <div class="order-2 space-y-6">
+          <div class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-[#f3f3f4] text-[#005f9d] mb-2 shadow-xs">
+            <span class="material-symbols-outlined text-2xl">smart_toy</span>
+          </div>
+          <h2 class="font-headline-md text-2xl md:text-3xl text-[#1a1c1c]">AI 智慧財務顧問</h2>
+          <p class="font-body-md text-base text-[#404750] leading-relaxed">
+            每週自動生成消費圖表，提供專屬省錢與節稅建議。我們的 AI 引擎深度分析您的收支模式，並根據最新稅法規定位您找出潛在的節稅空間。不再只是記錄數字，而是獲得實用的財務策略。
+          </p>
+          <ul class="space-y-3 font-body-md text-sm md:text-base text-[#404750]">
+            <li class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-[#005f9d] text-xl">check_circle</span>
+              自動化收支趨勢分析
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-[#005f9d] text-xl">check_circle</span>
+              個人化節稅方案建議
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-[#005f9d] text-xl">check_circle</span>
+              異常支出警示通知
+            </li>
+          </ul>
+          <div class="pt-2">
+            <button onclick="window.__openTrialModal()" class="border border-[#005f9d] text-[#005f9d] hover:bg-[#005f9d]/10 font-label-sm text-sm px-5 py-2.5 rounded-lg transition-colors inline-flex items-center gap-2 cursor-pointer">
+              <span class="material-symbols-outlined text-lg">analytics</span>
+              查看 AI 分析報表範例
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature 3: 多用戶雲端同步 -->
+    <section class="mb-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
+        <div class="order-2 md:order-1 space-y-6">
+          <div class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-[#f3f3f4] text-[#005f9d] mb-2 shadow-xs">
+            <span class="material-symbols-outlined text-2xl">group</span>
+          </div>
+          <h2 class="font-headline-md text-2xl md:text-3xl text-[#1a1c1c]">多用戶雲端同步</h2>
+          <p class="font-body-md text-base text-[#404750] leading-relaxed">
+            支援合夥人與外包團隊共同記帳，權限分明。透過細緻的角色權限管理系統，確保敏感財務資料的安全性。無論身在何處，團隊成員皆可即時協作，提升整體營運效率。
+          </p>
+          <ul class="space-y-3 font-body-md text-sm md:text-base text-[#404750]">
+            <li class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-[#005f9d] text-xl">check_circle</span>
+              多層級權限設定 (管理者/編輯者/查閱者)
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-[#005f9d] text-xl">check_circle</span>
+              即時資料雲端同步與備份
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-[#005f9d] text-xl">check_circle</span>
+              完整操作稽核日誌 (Audit Log)
+            </li>
+          </ul>
+          <!-- Static Role Preview -->
+          <div class="bg-white p-4 rounded-xl border border-[#e2e2e2] shadow-xs space-y-3">
+            <div class="text-xs font-semibold text-[#404750] uppercase tracking-wider">權限角色預覽</div>
+            <div class="grid grid-cols-3 gap-2">
+              <div class="bg-[#005f9d] text-white px-3 py-1.5 rounded-md text-xs font-label-sm font-bold text-center">最高管理者</div>
+              <div class="bg-[#f3f3f4] text-[#404750] px-3 py-1.5 rounded-md text-xs font-label-sm text-center">記帳人員</div>
+              <div class="bg-[#f3f3f4] text-[#404750] px-3 py-1.5 rounded-md text-xs font-label-sm text-center">會計查核員</div>
+            </div>
+            <div class="p-3 bg-[#f9f9f9] rounded-lg text-xs text-[#404750] leading-relaxed">
+              🔒 最高管理者：擁有帳戶開立、預算審核、稅務匯出及人員邀請之完整操作權限。
+            </div>
+          </div>
+        </div>
+        <div class="order-1 md:order-2">
+          <div class="rounded-xl overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-[#c0c7d2]/50 bg-white relative aspect-[4/3] group">
+            <img src={FEATURE_SYNC_URL} alt="多用戶雲端同步 管理介面" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

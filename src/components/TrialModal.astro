@@ -1,0 +1,224 @@
+---
+const INITIAL_RECEIPTS = [
+  { id: 'REC-2024-001', merchant: '台灣高鐵 (台北至左營)', date: '2024-07-20', amount: 1490, taxDeductible: 71, category: '交通差旅', invoiceNumber: 'AB-88392011' },
+  { id: 'REC-2024-002', merchant: 'Apple Store (MacBook M3)', date: '2024-07-18', amount: 54900, taxDeductible: 2614, category: '設備採購', invoiceNumber: 'CD-91028374' },
+  { id: 'REC-2024-003', merchant: '微風廣場 – 晶華軒 (客戶聚餐)', date: '2024-07-15', amount: 4800, taxDeductible: 228, category: '業務聚餐', invoiceNumber: 'EF-33920192' },
+  { id: 'REC-2024-004', merchant: '7-ELEVEN (辦公室零食與咖啡)', date: '2024-07-22', amount: 380, taxDeductible: 18, category: '雜項費用', invoiceNumber: 'GH-10928374' },
+];
+---
+<div id="trial-modal-overlay" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs">
+  <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden border border-[#c0c7d2]/50">
+    <!-- Header -->
+    <div class="bg-[#005f9d] text-white p-6 flex justify-between items-center shrink-0">
+      <div class="flex items-center gap-3">
+        <span class="material-symbols-outlined text-3xl">developer_board</span>
+        <div>
+          <h2 class="font-headline-md text-xl md:text-2xl font-bold">雲記帳 系統沙盒試用體驗</h2>
+          <p class="text-xs md:text-sm text-white/80 font-body-md">即時體驗 OCR 單據建檔與財政部媒體申報檔匯出</p>
+        </div>
+      </div>
+      <button onclick="window.__closeTrialModal()" class="p-2 rounded-lg hover:bg-white/10 transition-colors cursor-pointer text-white" aria-label="Close">
+        <span class="material-symbols-outlined text-2xl">close</span>
+      </button>
+    </div>
+
+    <!-- Tab Subheader -->
+    <div class="bg-[#f3f3f4] px-6 border-b border-[#e2e2e2] flex items-center gap-4 shrink-0">
+      <button onclick="switchTab('receipts')" id="tab-receipts" class="py-3 font-label-sm text-sm border-b-2 cursor-pointer transition-colors border-[#005f9d] text-[#005f9d] font-bold">
+        發票單據明細 (<span id="receipt-count">4</span>)
+      </button>
+      <button onclick="switchTab('tax-report')" id="tab-tax-report" class="py-3 font-label-sm text-sm border-b-2 cursor-pointer transition-colors border-transparent text-[#404750] hover:text-[#1a1c1c]">
+        節稅與媒體申報檔預覽
+      </button>
+    </div>
+
+    <!-- Body Content -->
+    <div class="p-6 overflow-y-auto flex-1 space-y-6">
+      <!-- Metrics Banner -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="bg-[#f9f9f9] p-4 rounded-xl border border-[#e2e2e2]">
+          <div class="text-xs text-[#404750] font-medium">總費用消費金額</div>
+          <div id="total-expense" class="text-xl md:text-2xl font-bold font-data-mono text-[#1a1c1c] mt-1">NT$ 61,570</div>
+        </div>
+        <div class="bg-[#e8f5e9] p-4 rounded-xl border border-[#c8e6c9]">
+          <div class="text-xs text-[#2e7d32] font-semibold">5% 可扣抵進項稅額</div>
+          <div id="total-tax" class="text-xl md:text-2xl font-bold font-data-mono text-[#2e7d32] mt-1">NT$ 2,931</div>
+        </div>
+        <div class="bg-[#005f9d]/10 p-4 rounded-xl border border-[#005f9d]/20">
+          <div class="text-xs text-[#005f9d] font-semibold">AI 審核建議狀態</div>
+          <div class="text-sm font-bold text-[#005f9d] mt-2 flex items-center gap-1">
+            <span class="material-symbols-outlined text-base">verified</span> 單據合規率 100%
+          </div>
+        </div>
+      </div>
+
+      <!-- Receipts Tab -->
+      <div id="panel-receipts" class="space-y-6">
+        <!-- Quick Input Bar -->
+        <div class="bg-[#f9f9f9] p-4 rounded-xl border border-[#e2e2e2] space-y-3">
+          <div class="text-xs font-semibold text-[#005f9d] flex items-center gap-1">
+            <span class="material-symbols-outlined text-base">add_a_photo</span> 模擬單據快速登錄 (OCR 辨識)
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
+            <input type="text" id="new-merchant" placeholder="商家名稱 (例: 台灣電力公司)" class="sm:col-span-5 px-3 py-2 rounded-lg border border-[#c0c7d2] text-xs font-body-md focus:outline-none focus:border-[#005f9d]" />
+            <input type="number" id="new-amount" placeholder="金額 (NT$)" class="sm:col-span-3 px-3 py-2 rounded-lg border border-[#c0c7d2] text-xs font-body-md focus:outline-none focus:border-[#005f9d]" />
+            <select id="new-category" class="sm:col-span-2 px-3 py-2 rounded-lg border border-[#c0c7d2] text-xs font-body-md focus:outline-none focus:border-[#005f9d]">
+              <option value="交通差旅">交通差旅</option>
+              <option value="設備採購">設備採購</option>
+              <option value="業務聚餐">業務聚餐</option>
+              <option value="辦公租金">辦公租金</option>
+              <option value="雜項費用">雜項費用</option>
+            </select>
+            <button onclick="addReceipt()" class="sm:col-span-2 bg-[#005f9d] text-white text-xs font-label-sm py-2 rounded-lg hover:bg-[#2079be] transition-colors cursor-pointer flex items-center justify-center gap-1">
+              <span class="material-symbols-outlined text-sm">center_focus_weak</span> 新增單據
+            </button>
+          </div>
+        </div>
+
+        <!-- Receipts Table -->
+        <div class="border border-[#e2e2e2] rounded-xl overflow-x-auto">
+          <table class="w-full text-left text-xs md:text-sm">
+            <thead>
+              <tr class="bg-[#f3f3f4] text-[#404750] font-label-sm">
+                <th class="p-3">單據號碼</th>
+                <th class="p-3">開立商家</th>
+                <th class="p-3">分類</th>
+                <th class="p-3">日期</th>
+                <th class="p-3">金額 (含稅)</th>
+                <th class="p-3">可扣抵稅額</th>
+                <th class="p-3">狀態</th>
+              </tr>
+            </thead>
+            <tbody id="receipts-body" class="divide-y divide-[#f3f3f4] font-body-md"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tax Report Tab -->
+      <div id="panel-tax-report" class="hidden space-y-6">
+        <div class="p-4 bg-[#f9f9f9] rounded-xl border border-[#e2e2e2] space-y-2">
+          <h4 class="font-headline-md font-bold text-[#1a1c1c] text-sm">財政部電子申報媒體檔 (.TXT) 預覽</h4>
+          <p class="text-xs text-[#404750]">以下檔案結構完全相容於財政部國稅局電子申報系統，點選「立即下載檔案」可直接輸出真實文字檔案。</p>
+          <pre id="tax-report-preview" class="bg-[#1a1c1c] text-[#a5d6a7] p-4 rounded-lg font-data-mono text-xs overflow-x-auto whitespace-pre leading-relaxed"></pre>
+        </div>
+        <div class="flex justify-end">
+          <button onclick="exportTxt()" class="bg-[#005f9d] hover:bg-[#2079be] text-white font-label-sm text-sm px-6 py-2.5 rounded-lg transition-colors flex items-center gap-2 shadow-xs cursor-pointer">
+            <span class="material-symbols-outlined text-lg">download</span> 立即下載財政部媒體檔 (.TXT)
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="bg-[#f3f3f4] p-4 border-t border-[#e2e2e2] flex justify-between items-center text-xs text-[#404750] shrink-0">
+      <span>提示：在正式環境中可升級無限筆數與多團隊權限對接。</span>
+      <button onclick="window.__closeTrialModal()" class="bg-[#1a1c1c] text-white px-4 py-2 rounded-lg font-label-sm hover:bg-[#333] transition-colors cursor-pointer">關閉沙盒</button>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ INITIAL_RECEIPTS }}>
+  var receipts = JSON.parse(JSON.stringify(INITIAL_RECEIPTS));
+
+  function fmt(n) { return n.toLocaleString(); }
+
+  function renderReceipts() {
+    var tbody = document.getElementById('receipts-body');
+    if (!tbody) return;
+    tbody.innerHTML = receipts.map(function(r) {
+      return '<tr class="hover:bg-[#f9f9f9]">' +
+        '<td class="p-3 font-data-mono font-medium text-[#1a1c1c]">' + r.invoiceNumber + '</td>' +
+        '<td class="p-3 text-[#1a1c1c] font-medium">' + r.merchant + '</td>' +
+        '<td class="p-3 text-[#005f9d] font-semibold">' + r.category + '</td>' +
+        '<td class="p-3 text-[#404750]">' + r.date + '</td>' +
+        '<td class="p-3 font-data-mono font-bold text-[#1a1c1c]">NT$ ' + fmt(r.amount) + '</td>' +
+        '<td class="p-3 font-data-mono text-[#2e7d32] font-semibold">NT$ ' + fmt(r.taxDeductible) + '</td>' +
+        '<td class="p-3"><span class="bg-[#e8f5e9] text-[#2e7d32] text-[11px] font-bold px-2 py-0.5 rounded-full inline-flex items-center gap-1"><span class="material-symbols-outlined text-xs">check</span> 已入帳</span></td>' +
+        '</tr>';
+    }).join('');
+
+    var totalExp = receipts.reduce(function(s, r) { return s + r.amount; }, 0);
+    var totalTax = receipts.reduce(function(s, r) { return s + r.taxDeductible; }, 0);
+    document.getElementById('total-expense').textContent = 'NT$ ' + fmt(totalExp);
+    document.getElementById('total-tax').textContent = 'NT$ ' + fmt(totalTax);
+    document.getElementById('receipt-count').textContent = receipts.length;
+    updateReportPreview();
+  }
+
+  function updateReportPreview() {
+    var totalTax = receipts.reduce(function(s, r) { return s + r.taxDeductible; }, 0);
+    var header = '# 雲記帳 - 財政部電子申報媒體檔\n# 產生時間: ' + new Date().toLocaleString() + '\n# 總進項發票筆數: ' + receipts.length + '\n# 總可扣抵稅額: NT$ ' + fmt(totalTax) + '\n\n';
+    var rows = receipts.map(function(r) {
+      return '[' + r.date + '] 統編: 83920192 | 發票號: ' + r.invoiceNumber + ' | 商家: ' + r.merchant + ' | 銷售額: ' + (r.amount - r.taxDeductible) + ' | 稅額: ' + r.taxDeductible;
+    }).join('\n');
+    var el = document.getElementById('tax-report-preview');
+    if (el) el.textContent = header + rows;
+  }
+
+  function addReceipt() {
+    var merchant = document.getElementById('new-merchant').value.trim() || 'Uber 趟次收據 (商務出差)';
+    var amount = Number(document.getElementById('new-amount').value) || 450;
+    var category = document.getElementById('new-category').value;
+    var taxVal = Math.round(amount * 0.0476);
+    var invNum = 'XY-' + Math.floor(10000000 + Math.random() * 90000000);
+
+    receipts.unshift({
+      id: 'REC-2024-00' + (receipts.length + 1),
+      merchant: merchant,
+      date: new Date().toISOString().split('T')[0],
+      amount: amount,
+      taxDeductible: taxVal,
+      category: category,
+      invoiceNumber: invNum
+    });
+
+    document.getElementById('new-merchant').value = '';
+    document.getElementById('new-amount').value = '';
+    renderReceipts();
+  }
+
+  function switchTab(tab) {
+    var receiptTab = document.getElementById('tab-receipts');
+    var taxTab = document.getElementById('tab-tax-report');
+    var receiptPanel = document.getElementById('panel-receipts');
+    var taxPanel = document.getElementById('panel-tax-report');
+
+    if (tab === 'receipts') {
+      receiptTab.className = 'py-3 font-label-sm text-sm border-b-2 cursor-pointer transition-colors border-[#005f9d] text-[#005f9d] font-bold';
+      taxTab.className = 'py-3 font-label-sm text-sm border-b-2 cursor-pointer transition-colors border-transparent text-[#404750] hover:text-[#1a1c1c]';
+      receiptPanel.classList.remove('hidden');
+      taxPanel.classList.add('hidden');
+    } else {
+      taxTab.className = 'py-3 font-label-sm text-sm border-b-2 cursor-pointer transition-colors border-[#005f9d] text-[#005f9d] font-bold';
+      receiptTab.className = 'py-3 font-label-sm text-sm border-b-2 cursor-pointer transition-colors border-transparent text-[#404750] hover:text-[#1a1c1c]';
+      taxPanel.classList.remove('hidden');
+      receiptPanel.classList.add('hidden');
+      updateReportPreview();
+    }
+  }
+
+  function exportTxt() {
+    var totalTax = receipts.reduce(function(s, r) { return s + r.taxDeductible; }, 0);
+    var header = '# 雲記帳 - 財政部電子申報媒體檔\n# 產生時間: ' + new Date().toLocaleString() + '\n# 總進項發票筆數: ' + receipts.length + '\n# 總可扣抵稅額: NT$ ' + fmt(totalTax) + '\n\n';
+    var rows = receipts.map(function(r) {
+      return '[' + r.date + '] 統一編號: 83920192 | 發票號碼: ' + r.invoiceNumber + ' | 商家: ' + r.merchant + ' | 銷售額: ' + (r.amount - r.taxDeductible) + ' | 稅額: ' + r.taxDeductible + ' | 科目: ' + r.category;
+    }).join('\n');
+    var blob = new Blob([header + rows], { type: 'text/plain' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'CloudAcc_Tax_Report_' + new Date().toISOString().slice(0, 10) + '.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+  window.addReceipt = addReceipt;
+  window.switchTab = switchTab;
+  window.exportTxt = exportTxt;
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', renderReceipts);
+  } else {
+    renderReceipts();
+  }
+</script>

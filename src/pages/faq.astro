@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const FAQ_ITEMS = [
+  { id: 'faq-1', question: '資料安全嗎？', answer: '我們採用金融級加密技術，並提供雲端即時備份，確保您的所有財務數據安全無虞且隨時可用。您的信任是我們首要的考量。' },
+  { id: 'faq-2', question: '我還沒開公司可以用嗎？', answer: '可以，系統會模擬開公司能為您省下多少營業稅，幫助您提早為創業做準備，評估財務效益，讓您在正式設立公司前就能有清晰的財務藍圖。' },
+  { id: 'faq-3', question: '這可以替代記帳士嗎？', answer: '本系統可幫你省下日常理帳時間，並一鍵產出報稅資料，讓你與記帳士對接更順暢。它定位為您的得力助手，負責處理日常繁瑣紀錄，讓記帳士能更專注於高價值的稅務規劃建議。' },
+  { id: 'faq-4', question: '報稅季如何匯出媒體申報檔？', answer: '系統內建符合中華民國財政部標準格式的「一鍵匯出媒體檔」功能，點選匯出後即可取得格式正確的 .txt 或 .csv 檔案，可直接上傳至財政部電子申報繳稅系統或直接提供給您的合作記帳士。' },
+  { id: 'faq-5', question: '支援哪些發票辨識格式？', answer: '支援傳統二聯式/三聯式發票、電子發票證明聯（含 QR Code 掃描）、高鐵/台鐵實體票根與電子票根、計程車收據以及手寫收據 OCR 光學字元辨識。' },
+];
+---
+<BaseLayout title="常見問題 - 雲記帳" currentPath="/faq/">
+  <div class="w-full max-w-[1280px] mx-auto px-4 md:px-16 pt-10 pb-20">
+    <!-- Header -->
+    <section class="text-center mb-12">
+      <h1 class="font-headline-lg text-2xl md:text-4xl text-[#005f9d] mb-4">常見問題</h1>
+      <p class="font-body-lg text-base md:text-lg text-[#404750] max-w-2xl mx-auto leading-relaxed">
+        我們整理了用戶最常詢問的問題，協助您快速了解雲記帳的服務與優勢。
+      </p>
+    </section>
+
+    <!-- Accordion List using native details/summary -->
+    <section class="max-w-3xl mx-auto space-y-4">
+      {FAQ_ITEMS.map((item, i) => (
+        <details class="bg-white rounded-xl border border-[#c0c7d2]/40 shadow-xs overflow-hidden transition-all duration-200 group" {...(i === 0 ? { open: true } : {})}>
+          <summary class="w-full p-6 text-left flex justify-between items-center gap-4 hover:bg-[#f9f9f9] transition-colors cursor-pointer list-none">
+            <span class="font-headline-md text-lg text-[#1a1c1c] font-semibold">{item.question}</span>
+            <span class="material-symbols-outlined text-[#005f9d] transition-transform duration-300 group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-6 pb-6 pt-2 font-body-md text-base text-[#404750] leading-relaxed border-t border-[#f3f3f4] animate-fade-in">
+            {item.answer}
+          </div>
+        </details>
+      ))}
+    </section>
+
+    <!-- CTA Box -->
+    <section class="mt-16 text-center bg-[#f3f3f4] rounded-xl p-8 max-w-2xl mx-auto border border-[#e2e2e2]">
+      <h3 class="font-headline-md text-xl text-[#1a1c1c] mb-2 font-bold">還有其他疑問？</h3>
+      <p class="font-body-md text-sm md:text-base text-[#404750] mb-6">我們的專員隨時為您提供親切的諮詢服務與導入建議。</p>
+      <a href="/contact/" class="inline-block bg-[#005f9d] hover:bg-[#2079be] text-white font-label-sm text-sm px-6 py-2.5 rounded-lg transition-colors shadow-xs">與我們聯繫</a>
+    </section>
+  </div>
+</BaseLayout>
