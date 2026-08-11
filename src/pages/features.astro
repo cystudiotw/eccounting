@@ -4,8 +4,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 const FEATURE_OCR_URL = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCZst70K3rB53qJTwF-RVpUEsfaDfwJKFm0Sn33QL2IvUXcALR4g44PBGWUdYzJvfaNrxKC8vVj-zj9WFiTeY5N--WmMHq-yxotqbzLQpsV8Ue9oBM7LOfWwTVSU8W_k8fkpXxMYzERHy21mwt5RwP66ThC9uhQ9j0RFnT4gVpVzQU7_sqB-1EJ2PA0K0DrnUb0a57aFmoqvVJbP6C-DFpJShu1PvbjSkhhXnFJZ0OlwDUbxNczWKGqaa9fWI35ZKpdg9agLaisqoCS';
 const FEATURE_AI_URL = 'https://lh3.googleusercontent.com/aida-public/AB6AXuDxw-4RKVMn9-ok6HzAgitFbkUXyf1zu0sqEj9gRRunJaoDJLW2WFygV9YgNw50P3fVN806ikd7EUu5mF-hTlxdYSm3JTEioFysJRnRsOCOjMkPk_nUyofqmKymZnWFGODw8eeutERBL7Joby-wzdKoNVUTdIL2g1UpjDvjZv7wemERMssDSKL02GqprPIvrKyl2RtT7NrBXTSGmM7oZtv5J9XMV5fyTIPJOxmQ4uX11cfNgQ3HXKQcmjeO3x_5os_sYom2hNDjcFRc';
 const FEATURE_SYNC_URL = 'https://lh3.googleusercontent.com/aida-public/AB6AXuB3OhCCA-zLoS7SuyiaZrFiJqtVzf_gsylFxqIgWCYYLTMvolsT2QCCggJYi-zGD6XcZPY_QllcUlq6W9IFQs3f9pN9XFG7t79gSw0yFkZHuxcenOIU3zx79iHK9K4ZvpxiTzFThAi7Kn4II6mkEy2alGbM2IUOReXiUpxrFKmhe1lCF_r_WPkJOCtLAkYgtspQ1xyUrLYEJlvDhoK4ptrfxTTDROnKLzQFTAC1euWE5WTd_uR3Ei9_mBGos9o7RuadwpdgeElLQI6F';
+
+const additionalSchema = [
+  {
+    '@type': 'ItemList',
+    name: '雲記帳核心功能',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: '多種輸入記帳方式' },
+      { '@type': 'ListItem', position: 2, name: 'AI 驅動的自動化記帳' },
+      { '@type': 'ListItem', position: 3, name: '多用戶雲端同步' },
+    ],
+  },
+];
 ---
-<BaseLayout title="功能介紹 - 雲記帳 - 你的雲端財務神隊友" currentPath="/features/">
+<BaseLayout title="功能介紹 - 雲記帳 - 你的雲端財務神隊友" currentPath="/features/" additionalSchema={additionalSchema}>
   <div class="w-full max-w-[1280px] mx-auto px-4 md:px-16 pt-10 pb-20">
     <!-- Header -->
     <section class="text-center mb-16 md:mb-24">

@@ -12,8 +12,19 @@ const FAQ_ITEMS = [
   { id: 'faq-8', question: '這可以替代會計師、記帳士嗎？', answer: '本系統作為您的數位助理，負責幫您省下日常繁瑣的理帳與建檔時間；而專業的會計師、記帳士則負責為您把關，評估各項進銷項憑證是否符合法規抵扣標準，您也可以將配合會計師、記帳士加入公司多人協作。' },
   { id: 'faq-9', question: '會計師、記帳士也能使用嗎？', answer: '本系統具備多公司管理架構，會計師或記帳士可以透過單一主帳號，輕鬆建立並集中管理旗下數十、甚至數百家客戶企業的獨立帳本。無論是日常發票資料匯入、AI 自動辨識建檔，還是一鍵產出各客戶專屬的營業稅媒體申報檔，都能在同一個系統後台無縫切換。這不僅能大幅減輕事務所每月的庶務建檔負擔，更能有效提升一次服務多間客戶的整體作業效率。'},
 ];
+
+const additionalSchema = [
+  {
+    '@type': 'FAQPage',
+    mainEntity: FAQ_ITEMS.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: { '@type': 'Answer', text: item.answer },
+    })),
+  },
+];
 ---
-<BaseLayout title="常見問題 - 雲記帳 - 你的雲端財務神隊友" currentPath="/faq/">
+<BaseLayout title="常見問題 - 雲記帳 - 你的雲端財務神隊友" currentPath="/faq/" additionalSchema={additionalSchema}>
   <div class="w-full max-w-[1280px] mx-auto px-4 md:px-16 pt-10 pb-20">
     <!-- Header -->
     <section class="text-center mb-12">
