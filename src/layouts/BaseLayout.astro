@@ -2,7 +2,8 @@
 import '../styles/global.css';
 
 const {
-  title = '雲記帳 - 你的 AI 財務神隊友',
+  title = '雲記帳 - 你的雲端財務神隊友',
+  description = '專為創業者打造的智慧記帳系統。支援多元輸入與收付自動提醒，讓營業稅申報不再是苦差事，將寶貴時間留給企業成長。',
   currentPath = '/',
 } = Astro.props;
 
@@ -31,6 +32,7 @@ function isActive(href: string) {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
+    <meta name="description" content={description} />
     {import.meta.env.SITE && <link rel="canonical" href={new URL(currentPath, import.meta.env.SITE).href} />}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
