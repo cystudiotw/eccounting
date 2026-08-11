@@ -69,7 +69,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               </div>
             </div>
 
-            <div class="cf-turnstile" data-sitekey={import.meta.env.CLOUDFLARE_TURNSTILE_SITE_KEY} data-action="submit"></div>
+            <div class="cf-turnstile" data-sitekey={import.meta.env.PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY} data-action="submit"></div>
 
             <!-- Error message -->
             <div id="contact-error" class="hidden p-3 bg-[#ffdad6] text-[#ba1a1a] rounded-lg text-sm font-body-md"></div>
@@ -85,10 +85,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               <span class="material-symbols-outlined text-3xl">check</span>
             </div>
             <h3 class="font-headline-md text-2xl text-[#1a1c1c]">訊息已成功送出！</h3>
-            <p class="font-body-md text-[#404750] max-w-md mx-auto">感謝您的聯絡，專員將會於 24 小時內（工作日）回覆您的信箱。</p>
-            <button onclick="document.getElementById('contact-form-container').querySelector('#contact-success').classList.add('hidden'); document.getElementById('contact-form-container').querySelector('#contact-form').classList.remove('hidden');" class="mt-4 border border-[#005f9d] text-[#005f9d] font-label-sm text-sm px-6 py-2 rounded-lg hover:bg-[#005f9d]/10 transition-colors cursor-pointer">
-              發送另一則訊息
-            </button>
+            <p class="font-body-md text-[#404750] max-w-md mx-auto">感謝您的聯絡，我們會盡快回覆您的信箱。</p>
           </div>
         </div>
       </div>

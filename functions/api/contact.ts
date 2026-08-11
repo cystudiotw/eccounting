@@ -47,7 +47,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: '雲記帳網站 <onboarding@resend.dev>',
+        from: '雲記帳網站 <help@eccounting.com.tw>',
         to: ['help@eccounting.com.tw'],
         reply_to: email,
         subject: `[雲記帳] 新的諮詢 - ${name}`,

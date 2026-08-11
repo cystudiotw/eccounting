@@ -2,10 +2,10 @@ import { defineConfig } from 'astro/config';
 import { loadEnv } from 'vite';
 import tailwindcss from '@tailwindcss/vite';
 
-const { SITE_URL } = loadEnv(import.meta.env.MODE, process.cwd(), '');
+const siteUrl = process.env.PUBLIC_SITE_URL || 'http://localhost:3000';
 
 export default defineConfig({
-  site: SITE_URL,
+  site: siteUrl,
   vite: {
     plugins: [tailwindcss()],
   },
