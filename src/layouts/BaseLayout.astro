@@ -10,6 +10,8 @@ const LOGO_URL = 'https://lh3.googleusercontent.com/aida-public/AB6AXuDO3lSJHht8
 
 const currentYear = new Date().getFullYear();
 
+const GA_MEASUREMENT_ID = import.meta.env.GA_MEASUREMENT_ID;
+
 const navItems = [
   { href: '/', label: '首頁' },
   { href: '/features/', label: '功能介紹' },
@@ -33,6 +35,17 @@ function isActive(href: string) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@600;700;800&family=Noto+Sans+TC:wght@400;500;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    {GA_MEASUREMENT_ID && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){ dataLayer.push(arguments); }
+          gtag('js', new Date());
+          gtag('config', import.meta.env.GA_MEASUREMENT_ID);
+        </script>
+      </>
+    )}
   </head>
   <body class="bg-[#f9f9f9] text-[#1a1c1c] font-sans antialiased selection:bg-[#005f9d]/20 selection:text-[#005f9d]">
     <div class="min-h-screen flex flex-col">

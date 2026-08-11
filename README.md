@@ -59,6 +59,9 @@ RESEND_API_KEY=re_your_key_here
 # Cloudflare Turnstile
 CLOUDFLARE_TURNSTILE_SITE_KEY=0x4AAAAAAyour_site_key_here
 CLOUDFLARE_TURNSTILE_SECRET=0x4AAAAAAyour_secret_here
+
+# Google Analytics 4
+GA_MEASUREMENT_ID=G-XXXXXXXXXX
 ```
 
 `PUBLIC_*` 開頭變數可在瀏覽器端使用（Astro 慣例）。
