@@ -97,8 +97,8 @@ function isActive(href: string) {
               {item.label}
             </a>
           ))}
-          <div class="pt-2 border-t border-[#f3f3f4]">
-            <a href="https://s1.eccounting.com.tw" target="_blank" class="w-full bg-[#005f9d] text-white font-label-sm text-center py-3 rounded-lg hover:bg-[#2079be] transition-colors">立即試用</a>
+          <div class="pt-3 border-t border-[#f3f3f4]">
+            <a href="https://s1.eccounting.com.tw" target="_blank" class="w-full bg-[#005f9d] text-white font-label-sm text-sm text-center px-6 py-2 rounded-lg hover:bg-[#2079be] transition-all duration-200 shadow-xs cursor-pointer">立即試用</a>
           </div>
         </div>
       </header>
@@ -115,12 +115,12 @@ function isActive(href: string) {
             <img src={LOGO_URL} alt="雲記帳 Logo" class="h-6 w-auto object-contain opacity-90" />
             <span class="text-xl font-headline-md font-bold text-[#1a1c1c]">雲記帳</span>
           </div>
-          <div class="font-body-md text-sm md:text-base text-[#005f9d] font-medium text-center">
-            © {currentYear} 雲記帳 版權所有
-          </div>
           <div class="flex items-center gap-6">
             <a href="/privacy/" class="font-label-sm text-sm text-[#404750] hover:text-[#1a1c1c] hover:underline transition-all opacity-80 hover:opacity-100">隱私權政策</a>
             <a href="/terms/" class="font-label-sm text-sm text-[#404750] hover:text-[#1a1c1c] hover:underline transition-all opacity-80 hover:opacity-100">服務條款</a>
+          </div>
+          <div class="flex items-center text-sm">
+            © {currentYear} 雲橙工作室 版權所有
           </div>
         </div>
       </footer>
