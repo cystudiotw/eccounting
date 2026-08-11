@@ -56,6 +56,9 @@
 # Resend API
 RESEND_API_KEY=re_your_key_here
 
+# Site URL（用於 canonical URL）
+SITE_URL=https://your-domain.com
+
 # Cloudflare Turnstile
 CLOUDFLARE_TURNSTILE_SITE_KEY=0x4AAAAAAyour_site_key_here
 CLOUDFLARE_TURNSTILE_SECRET=0x4AAAAAAyour_secret_here
