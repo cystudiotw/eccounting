@@ -15,81 +15,74 @@ const FEATURE_SYNC_URL = 'https://lh3.googleusercontent.com/aida-public/AB6AXuB3
       </p>
     </section>
 
-    <!-- Feature 1: 一鍵拍照辨識 -->
     <section class="mb-24 md:mb-32">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
         <div class="order-2 md:order-1 space-y-6">
           <div class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-[#f3f3f4] text-[#005f9d] mb-2 shadow-xs">
             <span class="material-symbols-outlined text-2xl">photo_camera</span>
           </div>
-          <h2 class="font-headline-md text-2xl md:text-3xl text-[#1a1c1c]">一鍵拍照辨識</h2>
+          <h2 class="font-headline-md text-2xl md:text-3xl text-[#1a1c1c]">多種輸入記帳方式</h2>
           <p class="font-body-md text-base text-[#404750] leading-relaxed">
-            收據發票自動入帳，免手動輸入。我們的進階光學字元辨識 (OCR) 技術能精準擷取發票號碼、金額與日期，大幅減少人工建檔的時間與錯誤率。支援各類常見發票格式，讓財務歸檔變得輕鬆無負擔。
+            收入、支出、發票除了能手動輸入，也能透過電子發票平台資料自動匯入。還能支援各類常見發票格式，直接AI辨識發票QRCode、發票號碼、金額與日期，大幅減少人工建檔的時間與錯誤率，讓財務歸檔變得輕鬆無負擔。
           </p>
           <ul class="space-y-3 font-body-md text-sm md:text-base text-[#404750]">
             <li class="flex items-center gap-2">
               <span class="material-symbols-outlined text-[#005f9d] text-xl">check_circle</span>
-              高精準度 OCR 辨識
+              支援電子發票平台匯入
             </li>
             <li class="flex items-center gap-2">
               <span class="material-symbols-outlined text-[#005f9d] text-xl">check_circle</span>
-              支援多種發票格式 (電子發票、三聯式、高鐵車票)
+              支援多種發票格式 (電子發票、二聯式、三聯式、手寫發票)
             </li>
             <li class="flex items-center gap-2">
               <span class="material-symbols-outlined text-[#005f9d] text-xl">check_circle</span>
-              自動分類消費類別與進項稅額試算
+              自動進銷項稅額計算
             </li>
           </ul>
         </div>
         <div class="order-1 md:order-2">
           <div class="rounded-xl overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-[#c0c7d2]/50 bg-white relative aspect-[4/3] group">
-            <img src={FEATURE_OCR_URL} alt="一鍵拍照辨識 示意圖" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+            <img src={FEATURE_OCR_URL} alt="拍照辨識示意圖" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Feature 2: AI 智慧財務顧問 -->
     <section class="mb-24 md:mb-32">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
         <div class="order-1">
           <div class="rounded-xl overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-[#c0c7d2]/50 bg-white relative aspect-[4/3] group">
-            <img src={FEATURE_AI_URL} alt="AI 智慧財務顧問 圖表介面" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+            <img src={FEATURE_AI_URL} alt="AI 智慧財務顧問" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
           </div>
         </div>
         <div class="order-2 space-y-6">
           <div class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-[#f3f3f4] text-[#005f9d] mb-2 shadow-xs">
             <span class="material-symbols-outlined text-2xl">smart_toy</span>
           </div>
-          <h2 class="font-headline-md text-2xl md:text-3xl text-[#1a1c1c]">AI 智慧財務顧問</h2>
+          <h2 class="font-headline-md text-2xl md:text-3xl text-[#1a1c1c]">AI 驅動的自動化記帳</h2>
           <p class="font-body-md text-base text-[#404750] leading-relaxed">
-            每週自動生成消費圖表，提供專屬省錢與節稅建議。我們的 AI 引擎深度分析您的收支模式，並根據最新稅法規定位您找出潛在的節稅空間。不再只是記錄數字，而是獲得實用的財務策略。
+            從發票辨識、科目歸類到資料防呆，AI 全力打造無痛記帳體驗。隨著資料的累積，系統將自動建悉您的財務輪廓，產生深度的財務分析圖表。
+          </p>
           </p>
           <ul class="space-y-3 font-body-md text-sm md:text-base text-[#404750]">
             <li class="flex items-center gap-2">
               <span class="material-symbols-outlined text-[#005f9d] text-xl">check_circle</span>
-              自動化收支趨勢分析
+              發票拍照即記，自動辨識明細
             </li>
             <li class="flex items-center gap-2">
               <span class="material-symbols-outlined text-[#005f9d] text-xl">check_circle</span>
-              個人化節稅方案建議
+              智慧判定會計科目與是否能扣抵營業稅
             </li>
             <li class="flex items-center gap-2">
               <span class="material-symbols-outlined text-[#005f9d] text-xl">check_circle</span>
-              異常支出警示通知
+              自動防呆與異常數據檢測
             </li>
           </ul>
-          <div class="pt-2">
-            <button onclick="window.__openTrialModal()" class="border border-[#005f9d] text-[#005f9d] hover:bg-[#005f9d]/10 font-label-sm text-sm px-5 py-2.5 rounded-lg transition-colors inline-flex items-center gap-2 cursor-pointer">
-              <span class="material-symbols-outlined text-lg">analytics</span>
-              查看 AI 分析報表範例
-            </button>
-          </div>
+          
         </div>
       </div>
     </section>
 
-    <!-- Feature 3: 多用戶雲端同步 -->
     <section class="mb-12">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
         <div class="order-2 md:order-1 space-y-6">
@@ -98,7 +91,7 @@ const FEATURE_SYNC_URL = 'https://lh3.googleusercontent.com/aida-public/AB6AXuB3
           </div>
           <h2 class="font-headline-md text-2xl md:text-3xl text-[#1a1c1c]">多用戶雲端同步</h2>
           <p class="font-body-md text-base text-[#404750] leading-relaxed">
-            支援合夥人與外包團隊共同記帳，權限分明。透過細緻的角色權限管理系統，確保敏感財務資料的安全性。無論身在何處，團隊成員皆可即時協作，提升整體營運效率。
+            支援合夥人與外包團隊共同記帳，權限分明。透過角色權限管理系統，確保敏感財務資料的安全性。無論身在何處，團隊成員皆可即時協作，提升整體營運效率。
           </p>
           <ul class="space-y-3 font-body-md text-sm md:text-base text-[#404750]">
             <li class="flex items-center gap-2">
@@ -111,21 +104,9 @@ const FEATURE_SYNC_URL = 'https://lh3.googleusercontent.com/aida-public/AB6AXuB3
             </li>
             <li class="flex items-center gap-2">
               <span class="material-symbols-outlined text-[#005f9d] text-xl">check_circle</span>
-              完整操作稽核日誌 (Audit Log)
+              完整操作稽核日誌
             </li>
           </ul>
-          <!-- Static Role Preview -->
-          <div class="bg-white p-4 rounded-xl border border-[#e2e2e2] shadow-xs space-y-3">
-            <div class="text-xs font-semibold text-[#404750] uppercase tracking-wider">權限角色預覽</div>
-            <div class="grid grid-cols-3 gap-2">
-              <div class="bg-[#005f9d] text-white px-3 py-1.5 rounded-md text-xs font-label-sm font-bold text-center">最高管理者</div>
-              <div class="bg-[#f3f3f4] text-[#404750] px-3 py-1.5 rounded-md text-xs font-label-sm text-center">記帳人員</div>
-              <div class="bg-[#f3f3f4] text-[#404750] px-3 py-1.5 rounded-md text-xs font-label-sm text-center">會計查核員</div>
-            </div>
-            <div class="p-3 bg-[#f9f9f9] rounded-lg text-xs text-[#404750] leading-relaxed">
-              🔒 最高管理者：擁有帳戶開立、預算審核、稅務匯出及人員邀請之完整操作權限。
-            </div>
-          </div>
         </div>
         <div class="order-1 md:order-2">
           <div class="rounded-xl overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-[#c0c7d2]/50 bg-white relative aspect-[4/3] group">

@@ -1,12 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
-<BaseLayout title="稅務優化 - 雲記帳" currentPath="/setup/">
+<BaseLayout title="創業優勢 - 雲記帳" currentPath="/startup/">
   <div class="w-full max-w-[1280px] mx-auto px-4 md:px-16 pt-10 pb-20 space-y-20">
     <!-- Hero Header -->
     <section class="text-center space-y-4 max-w-3xl mx-auto">
       <h1 class="font-headline-lg text-2xl md:text-4xl text-[#005f9d] leading-tight">
-        為什麼你該成立公司？解密創業的「節稅超能力」
+        為什麼你該成立公司？
       </h1>
       <p class="font-body-lg text-base md:text-lg text-[#404750] leading-relaxed">
         從個人接案到成立公司，最大的差異在於稅務結構的優化。合法合規地將日常開銷轉化為節稅利器，讓你的每一分錢都發揮最大價值。
@@ -16,73 +16,104 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <!-- Comparison Table Bento Grid -->
     <section class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8">
       <!-- Individual Card -->
-      <div class="col-span-1 md:col-span-4 bg-white rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.05)] p-6 md:p-8 space-y-6 border border-[#e2e2e2] flex flex-col justify-between">
-        <div class="space-y-4">
-          <div class="flex items-center gap-2 text-[#4d6079]">
-            <span class="material-symbols-outlined text-2xl">person</span>
-            <h3 class="font-headline-md text-xl font-semibold text-[#1a1c1c]">個人接案</h3>
-          </div>
-          <p class="font-body-md text-sm md:text-base text-[#404750] leading-relaxed">
-            所有收入皆視為個人執行業務所得，依據高額的綜合所得稅率申報，且難以扣除營運相關成本。
-          </p>
+      <div class="col-span-1 md:col-span-6 bg-white rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.05)] p-6 md:p-8 space-y-6 border border-[#e2e2e2]">
+        <div class="flex items-center gap-2 text-[#ba1a1a]">
+          <span class="material-symbols-outlined text-2xl">person</span>
+          <h3 class="font-headline-md text-xl font-bold text-[#1a1c1c]">個人接案的劣勢</h3>
         </div>
-        <div class="pt-4 border-t border-[#e2e2e2]">
-          <div class="flex justify-between items-center py-2 text-[#ba1a1a] bg-[#ffdad6]/40 px-3 py-2 rounded-lg font-medium text-sm">
-            <span class="font-label-sm">無發票可抵扣 ✕</span>
-            <span class="material-symbols-outlined text-base">close</span>
+        <div class="space-y-5">
+          <div class="p-4 bg-[#ffdad6]/20 rounded-xl border-l-4 border-[#ba1a1a] space-y-2">
+            <h4 class="font-label-sm text-sm font-bold text-[#ba1a1a] flex items-center gap-2">
+              <span class="material-symbols-outlined text-lg">trending_up</span>
+              稅務負擔沉重，節稅空間受限
+            </h4>
+            <p class="font-body-md text-sm text-[#404750] leading-relaxed">
+              個人收入皆視為「執行業務所得」併入個人綜所稅，面臨高額累進稅率。雖有法定費用率可扣除，但遠不及開公司能將各項營運成本實報實銷、最大化抵稅來得靈活。
+            </p>
+          </div>
+          <div class="p-4 bg-[#ffdad6]/20 rounded-xl border-l-4 border-[#ba1a1a] space-y-2">
+            <h4 class="font-label-sm text-sm font-bold text-[#ba1a1a] flex items-center gap-2">
+              <span class="material-symbols-outlined text-lg">receipt</span>
+              發包方無法抵稅，降低合作意願
+            </h4>
+            <p class="font-body-md text-sm text-[#404750] leading-relaxed">
+              企業客戶更傾向找「有統一編號」的公司發包。因為個人無法開立發票，發包公司就無法取得 5% 進項稅額來扣抵自身的營業稅，無形中增加了客戶的稅務成本。
+            </p>
+          </div>
+          <div class="p-4 bg-[#ffdad6]/20 rounded-xl border-l-4 border-[#ba1a1a] space-y-2">
+            <h4 class="font-label-sm text-sm font-bold text-[#ba1a1a] flex items-center gap-2">
+              <span class="material-symbols-outlined text-lg">fact_check</span>
+              客戶行政繁瑣，錯失大型專案
+            </h4>
+            <p class="font-body-md text-sm text-[#404750] leading-relaxed">
+              與個人合作，發包方的財務還需額外處理勞務報酬單，並代扣 10% 所得稅與 2.11% 二代健保。為了省去繁瑣的申報流程，許多具規模的企業往往明文規定「只發包給能開發票的公司」。
+            </p>
           </div>
         </div>
       </div>
 
-      <!-- Company Table Card -->
-      <div class="col-span-1 md:col-span-8 bg-white rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.05)] overflow-hidden border border-[#e2e2e2]">
-        <div class="p-6 border-b border-[#e2e2e2] bg-[#f9f9f9] flex items-center justify-between flex-wrap gap-2">
-          <div class="flex items-center gap-2 text-[#005f9d]">
-            <span class="material-symbols-outlined text-2xl">corporate_fare</span>
-            <h3 class="font-headline-md text-xl font-bold text-[#1a1c1c]">成立公司 (開立統編)</h3>
-          </div>
-          <span class="bg-[#e8f5e9] text-[#2e7d32] px-3 py-1 rounded-full font-label-sm text-xs font-bold uppercase tracking-wider">節稅優勢 ✨</span>
+      <div class="col-span-1 md:col-span-6 bg-white rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.05)] overflow-hidden border border-[#e2e2e2]">
+        <div class="flex items-center gap-2 text-[#2e7d32] p-6 pb-4">
+          <span class="material-symbols-outlined text-2xl">corporate_fare</span>
+          <h3 class="font-headline-md text-xl font-bold text-[#1a1c1c]">成立公司的優勢</h3>
+          <span class="bg-[#e8f5e9] text-[#2e7d32] px-3 py-1 rounded-full font-label-sm text-xs font-bold uppercase tracking-wider">節稅舉例</span>
         </div>
-        <div class="overflow-x-auto">
-          <table class="w-full text-left border-collapse min-w-[580px]">
-            <thead>
-              <tr class="border-b border-[#f1f5f9] bg-[#f9f9f9] text-[#001d35] font-label-sm text-xs md:text-sm uppercase">
-                <th class="p-4">日常開銷項目</th>
-                <th class="p-4">節稅效益 (營業稅5% + 營所稅20%)</th>
-                <th class="p-4">說明</th>
-              </tr>
-            </thead>
-            <tbody class="font-body-md text-xs md:text-sm text-[#1a1c1c] divide-y divide-[#f1f5f9]">
-              <tr class="hover:bg-[#f9f9f9] transition-colors">
-                <td class="p-4 font-medium flex items-center gap-2">
-                  <span class="material-symbols-outlined text-[#4d6079] text-lg">apartment</span> 辦公租金
-                </td>
-                <td class="p-4 text-[#005f9d] font-bold">全額認列費用，可扣抵5%營業稅</td>
-                <td class="p-4 text-[#404750]">需取得出租人開立之發票或收據</td>
-              </tr>
-              <tr class="hover:bg-[#f9f9f9] transition-colors">
-                <td class="p-4 font-medium flex items-center gap-2">
-                  <span class="material-symbols-outlined text-[#4d6079] text-lg">train</span> 交通差旅 (高鐵/計程車)
-                </td>
-                <td class="p-4 text-[#005f9d] font-bold">可扣抵5%營業稅，降低營所稅基</td>
-                <td class="p-4 text-[#404750]">高鐵票根或計程車收據需打統編</td>
-              </tr>
-              <tr class="hover:bg-[#f9f9f9] transition-colors">
-                <td class="p-4 font-medium flex items-center gap-2">
-                  <span class="material-symbols-outlined text-[#4d6079] text-lg">laptop_mac</span> 設備採購 (電腦/軟體)
-                </td>
-                <td class="p-4 text-[#005f9d] font-bold">進項稅額可扣抵，可提列折舊</td>
-                <td class="p-4 text-[#404750]">公司營運必需之設備投資</td>
-              </tr>
-              <tr class="hover:bg-[#f9f9f9] transition-colors">
-                <td class="p-4 font-medium flex items-center gap-2">
-                  <span class="material-symbols-outlined text-[#4d6079] text-lg">restaurant</span> 業務聚餐
-                </td>
-                <td class="p-4 text-[#005f9d] font-bold">可列報交際費，降低營所稅基</td>
-                <td class="p-4 text-[#404750]">需與業務拓展相關，有額度上限</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="divide-y divide-[#f1f5f9]">
+          <div class="p-4 md:p-5 flex flex-col md:flex-row md:items-center gap-1 md:gap-4 hover:bg-[#f9f9f9] transition-colors">
+            <div class="flex items-center gap-2 font-medium text-[#1a1c1c]">
+              <span class="material-symbols-outlined text-[#4d6079] text-lg shrink-0">apartment</span>
+              <span>辦公租金</span>
+            </div>
+            <div class="md:ml-auto text-[#005f9d] font-bold text-sm md:text-base">全額認列費用，可扣抵5%營業稅</div>
+          </div>
+          
+          <div class="p-4 md:p-5 flex flex-col md:flex-row md:items-center gap-1 md:gap-4 hover:bg-[#f9f9f9] transition-colors">
+            <div class="flex items-center gap-2 font-medium text-[#1a1c1c]">
+              <span class="material-symbols-outlined text-[#4d6079] text-lg shrink-0">train</span>
+              <span>交通差旅</span>
+            </div>
+            <div class="md:ml-auto text-[#005f9d] font-bold text-sm md:text-base">可扣抵5%營業稅，降低營所稅基</div>
+          </div>
+          
+          <div class="p-4 md:p-5 flex flex-col md:flex-row md:items-center gap-1 md:gap-4 hover:bg-[#f9f9f9] transition-colors">
+            <div class="flex items-center gap-2 font-medium text-[#1a1c1c]">
+              <span class="material-symbols-outlined text-[#4d6079] text-lg shrink-0">laptop_mac</span>
+              <span>設備採購</span>
+            </div>
+            <div class="md:ml-auto text-[#005f9d] font-bold text-sm md:text-base">進項稅額可扣抵，可提列折舊</div>
+          </div>
+
+          <div class="p-4 md:p-5 flex flex-col md:flex-row md:items-center gap-1 md:gap-4 hover:bg-[#f9f9f9] transition-colors">
+            <div class="flex items-center gap-2 font-medium text-[#1a1c1c]">
+              <span class="material-symbols-outlined text-[#4d6079] text-lg shrink-0">cloud</span>
+              <span>雲端與IT服務</span>
+            </div>
+            <div class="md:ml-auto text-[#005f9d] font-bold text-sm md:text-base">進項稅額可扣抵，降低營所稅基</div>
+          </div>
+
+          <div class="p-4 md:p-5 flex flex-col md:flex-row md:items-center gap-1 md:gap-4 hover:bg-[#f9f9f9] transition-colors">
+            <div class="flex items-center gap-2 font-medium text-[#1a1c1c]">
+              <span class="material-symbols-outlined text-[#4d6079] text-lg shrink-0">campaign</span>
+              <span>行銷推廣</span>
+            </div>
+            <div class="md:ml-auto text-[#005f9d] font-bold text-sm md:text-base">依法取得憑證，可扣抵5%營業稅</div>
+          </div>
+
+          <div class="p-4 md:p-5 flex flex-col md:flex-row md:items-center gap-1 md:gap-4 hover:bg-[#f9f9f9] transition-colors">
+            <div class="flex items-center gap-2 font-medium text-[#1a1c1c]">
+              <span class="material-symbols-outlined text-[#4d6079] text-lg shrink-0">receipt_long</span>
+              <span>水電瓦斯與電信網路費</span>
+            </div>
+            <div class="md:ml-auto text-[#005f9d] font-bold text-sm md:text-base">帳單載明統編，即可扣抵營業稅</div>
+          </div>
+
+          <div class="p-4 md:p-5 flex flex-col md:flex-row md:items-center gap-1 md:gap-4 hover:bg-[#f9f9f9] transition-colors">
+            <div class="flex items-center gap-2 font-medium text-[#1a1c1c]">
+              <span class="material-symbols-outlined text-[#4d6079] text-lg shrink-0">restaurant</span>
+              <span>業務聚餐</span>
+            </div>
+            <div class="md:ml-auto text-[#005f9d] font-bold text-sm md:text-base">可列報交際費，降低營所稅基</div>
+          </div>
         </div>
       </div>
     </section>
@@ -95,7 +126,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <h2 class="text-2xl md:text-3xl font-headline-md text-[#1a1c1c] mt-2">即時公司節稅效益試算器</h2>
           <p class="text-sm md:text-base text-[#404750]">拉動下方輸入框，了解成立公司每年開立統編可為您合法省下的稅金總額。</p>
         </div>
-        <button onclick="window.__openTrialModal()" class="bg-[#005f9d] hover:bg-[#2079be] text-white text-sm font-label-sm px-6 py-2.5 rounded-lg transition-colors shadow-xs cursor-pointer">匯出試算表單</button>
+        
       </div>
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         <!-- Controls -->
@@ -161,28 +192,28 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div class="space-y-6">
         <h2 class="font-headline-md text-2xl md:text-3xl text-[#1a1c1c]">報稅季不再手忙腳亂</h2>
         <p class="font-body-lg text-base md:text-lg text-[#404750] leading-relaxed">
-          雲記帳系統自動為您歸類日常進項憑證。不論是高鐵票、發票還是收據，只要輸入系統，自動化標籤將它們歸入正確的會計科目。
+          雲端記帳系統讓日常進項憑證管理變得輕鬆簡單。不論是傳統發票還是手開發票，都能透過直覺的介面快速建檔；更支援電子發票輕鬆匯入，大幅減少手動輸入的時間，讓帳務井然有序。
         </p>
         <ul class="space-y-4">
           <li class="flex items-start gap-3">
             <span class="material-symbols-outlined text-[#005f9d] text-2xl mt-0.5">check_circle</span>
             <div>
-              <strong class="font-label-sm text-[#1a1c1c] text-base block">自動歸類進項憑證</strong>
-              <span class="font-body-md text-sm md:text-base text-[#404750]">拍下發票，AI 輔助辨識並歸檔，告別紙本堆疊。</span>
+              <strong class="font-label-sm text-[#1a1c1c] text-base block">發票匯入與快速建檔</strong>
+              <span class="font-body-md text-sm md:text-base text-[#404750]">支援電子發票快速匯入與憑證輕鬆新增，將帳務數位化集中管理，徹底告別紙本堆疊與遺失風險。</span>
             </div>
           </li>
           <li class="flex items-start gap-3">
             <span class="material-symbols-outlined text-[#005f9d] text-2xl mt-0.5">check_circle</span>
             <div>
               <strong class="font-label-sm text-[#1a1c1c] text-base block">一鍵匯出媒體檔</strong>
-              <span class="font-body-md text-sm md:text-base text-[#404750]">符合財政部申報格式，直接交給會計師或自行申報。</span>
+              <span class="font-body-md text-sm md:text-base text-[#404750]">無縫產出符合財政部申報規範的格式，無論是直接交給會計師處理，或是自行申報都順暢無礙。</span>
             </div>
           </li>
           <li class="flex items-start gap-3">
             <span class="material-symbols-outlined text-[#005f9d] text-2xl mt-0.5">check_circle</span>
             <div>
               <strong class="font-label-sm text-[#1a1c1c] text-base block">5 分鐘完成申報準備</strong>
-              <span class="font-body-md text-sm md:text-base text-[#404750]">將節省下來的時間，專注在更重要的業務發展上。</span>
+              <span class="font-body-md text-sm md:text-base text-[#404750]">省去繁瑣的對帳與單據整理流程，將節省下來的寶貴時間，專注在更重要的業務發展上。</span>
             </div>
           </li>
         </ul>
@@ -191,16 +222,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="grid grid-cols-2 gap-4 w-full max-w-sm">
           <div class="bg-white p-4 rounded-lg shadow-xs border border-[#e2e2e2] space-y-2">
             <div class="h-2 bg-[#e2e2e2] rounded w-1/2"></div>
-            <div class="h-8 bg-[#cee1ff] rounded w-full flex items-center px-2 text-xs font-data-mono text-[#005f9d] font-bold">進項發票 42 筆</div>
+            <div class="h-8 bg-[#cee1ff] rounded w-full flex items-center px-2 text-xs font-data-mono text-[#005f9d] font-bold">銷項發票 16 筆</div>
           </div>
           <div class="bg-white p-4 rounded-lg shadow-xs border border-[#e2e2e2] space-y-2">
             <div class="h-2 bg-[#e2e2e2] rounded w-1/2"></div>
-            <div class="h-8 bg-[#d0e4ff] rounded w-full flex items-center px-2 text-xs font-data-mono text-[#005f9d] font-bold">節稅估算 $18,400</div>
+            <div class="h-8 bg-[#d0e4ff] rounded w-full flex items-center px-2 text-xs font-data-mono text-[#005f9d] font-bold">進項發票 42 筆</div>
           </div>
           <div class="col-span-2 bg-white p-4 rounded-lg shadow-sm border border-[#005f9d]/30 flex justify-between items-center">
             <div>
               <div class="text-xs text-[#005f9d] font-bold">媒體檔匯出就緒</div>
-              <div class="text-[11px] text-[#404750]">格式: 財政部標準 TAX.TXT</div>
+              <div class="text-[11px] text-[#404750]">格式: 營業稅軟體匯入檔 .TXT, .BI</div>
             </div>
             <span class="material-symbols-outlined text-[#005f9d] text-2xl animate-bounce">cloud_download</span>
           </div>

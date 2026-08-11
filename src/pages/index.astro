@@ -3,23 +3,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const HERO_URL = 'https://lh3.googleusercontent.com/aida-public/AB6AXuC55QMC0I-J7nVuTUqyEIc9UX7MgwgoPdCm3mpM5i0utqzn7ONYNOfDKsaM3py9cR4g_VwY7A374dbUVBqqhqma4P6sGIRqCsyPITgz-UiiDwZ5G7URHh6WuTLZDeStJAzoTiydVhfM6l-xe5U6PCQtNCfnfxDZk9KNkLbxu_EvLUnnbl3qbhb59JkvZmYxyhLB4_daJg9OFEPRzFPoVyvC9wCoSfu4I0uL22JIp7r2kli9Uo9aatzzqijPIVEhjQFvRTuiYTzWJHSm';
 ---
-<BaseLayout title="雲記帳 - 你的 AI 財務神隊友" currentPath="/">
+<BaseLayout title="雲記帳 - 你的雲端財務神隊友" currentPath="/">
   <!-- Hero Section -->
   <section class="w-full max-w-[1280px] mx-auto px-4 md:px-16 py-12 md:py-24 flex flex-col md:flex-row items-center gap-8 md:gap-12">
     <div class="flex-1 flex flex-col gap-6 items-start text-left">
       <h1 class="font-headline-lg text-2xl md:text-4xl lg:text-[36px] leading-tight text-[#1a1c1c] tracking-tight">
-        從自由接案到新創公司，你的 AI 財務神隊友。
+        從自由接案到新創公司，你的雲端財務神隊友。
       </h1>
       <p class="font-body-lg text-base md:text-lg text-[#404750] max-w-2xl leading-relaxed">
-        別讓繁雜帳目拖慢成長。拍照即入帳，專為創業者打造的智慧記帳系統。
+        別讓繁雜帳目拖慢成長。多種輸入記帳方式，應收付提醒通知，專為創業者打造的智慧記帳系統，申報營業稅不再是苦差事。
       </p>
       <div class="flex flex-col sm:flex-row gap-4 mt-2 w-full sm:w-auto">
-        <button onclick="window.__openTrialModal()" class="bg-[#2C80C6] hover:bg-[#005f9d] text-white font-label-sm text-sm md:text-base px-6 py-3 rounded-lg shadow-sm transition-all duration-200 text-center scale-95 active:scale-90 cursor-pointer">
-          立即免費試用
-        </button>
         <a href="/features/" class="border border-[#2C80C6] text-[#2C80C6] hover:bg-[#2C80C6]/10 font-label-sm text-sm md:text-base px-6 py-3 rounded-lg transition-all duration-200 flex items-center justify-center gap-2 text-center">
           <span class="material-symbols-outlined text-xl">play_circle</span>
-          觀看線上 Demo
+          功能介紹
         </a>
       </div>
     </div>
@@ -28,9 +25,9 @@ const HERO_URL = 'https://lh3.googleusercontent.com/aida-public/AB6AXuC55QMC0I-J
       <div class="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur-md p-3 rounded-lg border border-[#e2e2e2] shadow-sm flex items-center justify-between text-xs md:text-sm">
         <div class="flex items-center gap-2 text-[#005f9d] font-semibold">
           <span class="material-symbols-outlined text-base">verified</span>
-          AI 財務顧問即時分析中
+          雲端財務顧問即時分析中
         </div>
-        <span class="text-[#404750] font-data-mono">月省 85% 理帳時間</span>
+        <span class="text-[#404750] font-data-mono">月省 75% 理帳時間</span>
       </div>
     </div>
   </section>
@@ -58,10 +55,6 @@ const HERO_URL = 'https://lh3.googleusercontent.com/aida-public/AB6AXuC55QMC0I-J
               缺乏系統性的收入與支出紀錄，導致報稅時無法有效列舉扣除額，無形中繳納了過高的稅金，侵蝕辛苦賺來的利潤。
             </p>
           </div>
-          <div class="mt-6 pt-4 border-t border-[#f3f3f4] flex justify-between items-center text-xs font-medium text-[#005f9d]">
-            <span>解決方案：進項憑證 AI 自動歸類</span>
-            <span class="material-symbols-outlined text-base">arrow_forward</span>
-          </div>
         </div>
         <!-- Pain Point 2 -->
         <div class="bg-white rounded-xl p-6 md:p-8 shadow-[0_4px_12px_rgba(0,0,0,0.05)] border-t-4 border-t-[#2C80C6] border-x border-b border-[#e8e8e8] flex flex-col justify-between hover:shadow-md transition-shadow">
@@ -73,10 +66,6 @@ const HERO_URL = 'https://lh3.googleusercontent.com/aida-public/AB6AXuC55QMC0I-J
             <p class="font-body-md text-sm md:text-base text-[#404750] leading-relaxed">
               許多企業客戶需要正規發票報帳，若無法開立合法憑證，將錯失許多大型專案與長期合作的機會，限制業務規模。
             </p>
-          </div>
-          <div class="mt-6 pt-4 border-t border-[#f3f3f4] flex justify-between items-center text-xs font-medium text-[#005f9d]">
-            <span>解決方案：設立公司節稅試算導引</span>
-            <span class="material-symbols-outlined text-base">arrow_forward</span>
           </div>
         </div>
         <!-- Pain Point 3 -->
@@ -90,11 +79,13 @@ const HERO_URL = 'https://lh3.googleusercontent.com/aida-public/AB6AXuC55QMC0I-J
               平時沒有養成記帳習慣，一到報稅季就要翻找滿桌的紙本收據與散落的數位明細，耗時耗力且容易出錯。
             </p>
           </div>
-          <div class="mt-6 pt-4 border-t border-[#f3f3f4] flex justify-between items-center text-xs font-medium text-[#005f9d]">
-            <span>解決方案：一鍵匯出財政部媒體申報檔</span>
-            <span class="material-symbols-outlined text-base">arrow_forward</span>
-          </div>
         </div>
+      </div>
+      <div class="mt-6 pt-4 border-t border-[#f3f3f4] flex justify-end items-center text-xs font-medium text-[#005f9d]">
+        <a href="/startup/">
+          <span>解決方案</span>
+          <span class="material-symbols-outlined text-base">arrow_forward</span>
+        </a>
       </div>
     </div>
   </section>
@@ -103,23 +94,22 @@ const HERO_URL = 'https://lh3.googleusercontent.com/aida-public/AB6AXuC55QMC0I-J
   <section class="w-full max-w-[1280px] mx-auto px-4 md:px-16 py-16">
     <div class="bg-gradient-to-r from-[#005f9d] to-[#2079be] rounded-2xl p-8 md:p-12 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-8">
       <div class="space-y-3 text-center md:text-left">
-        <span class="bg-white/20 text-white font-label-sm text-xs px-3 py-1 rounded-full uppercase tracking-wider">
-          全方位財務智慧體驗
-        </span>
+        <div class="mb-2">
+          <span class="bg-white/20 text-white font-label-sm text-xs px-3 py-1 rounded-full uppercase tracking-wider">
+            全方位財務智慧體驗
+          </span>
+        </div>
         <h3 class="text-2xl md:text-3xl font-headline-md font-bold">
           準備好開啟更輕鬆的記帳流程了嗎？
         </h3>
         <p class="text-white/90 font-body-md text-sm md:text-base max-w-xl">
-          立即體驗 雲記帳 的智慧發票辨識與節稅試算工具，無須綁定信用卡即可體驗完整功能。
+          立即體驗雲記帳，無須綁定信用卡註冊後即可體驗功能。
         </p>
       </div>
       <div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
-        <a href="/setup/" class="bg-white text-[#005f9d] font-label-sm text-sm px-6 py-3 rounded-lg hover:bg-[#f3f3f4] transition-colors shadow-sm font-semibold text-center">
-          前往節稅試算器
+        <a href="https://s1.eccounting.com.tw/" target="_blank" class="bg-white text-[#005f9d] font-label-sm text-sm px-6 py-3 rounded-lg hover:bg-[#f3f3f4] transition-colors shadow-sm font-semibold text-center">
+          前往免費使用
         </a>
-        <button onclick="window.__openTrialModal()" class="border border-white text-white hover:bg-white/10 font-label-sm text-sm px-6 py-3 rounded-lg transition-colors font-semibold text-center cursor-pointer">
-          進入試用沙盒
-        </button>
       </div>
     </div>
   </section>
