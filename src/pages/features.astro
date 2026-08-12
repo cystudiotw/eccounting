@@ -18,7 +18,7 @@ const additionalSchema = [
 ];
 ---
 <BaseLayout title="功能介紹 - 雲記帳 - 你的雲端財務神隊友" currentPath="/features/" additionalSchema={additionalSchema}>
-  <div class="w-full max-w-[1280px] mx-auto px-4 md:px-16 pt-10 pb-20">
+  <div class="w-full max-w-[1280px] mx-auto px-4 md:px-8 lg:px-16 pt-10 pb-20">
     <!-- Header -->
     <section class="text-center mb-16 md:mb-24">
       <h1 class="font-headline-lg text-2xl md:text-4xl text-[#005f9d] mb-4">核心功能詳解</h1>
@@ -28,7 +28,7 @@ const additionalSchema = [
     </section>
 
     <section class="mb-24 md:mb-32">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-10 lg:gap-16 items-center">
         <div class="order-2 md:order-1 space-y-6">
           <div class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-[#f3f3f4] text-[#005f9d] mb-2 shadow-xs">
             <span class="material-symbols-outlined text-2xl">photo_camera</span>
@@ -61,12 +61,98 @@ const additionalSchema = [
     </section>
 
     <section class="mb-24 md:mb-32">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-10 lg:gap-16 items-center">
+        <div class="order-2 space-y-6">
+          <div class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-[#f3f3f4] text-[#005f9d] mb-2 shadow-xs">
+            <span class="material-symbols-outlined text-2xl">group</span>
+          </div>
+          <h2 class="font-headline-md text-2xl md:text-3xl text-[#1a1c1c]">多用戶雲端同步</h2>
+          <p class="font-body-md text-base text-[#404750] leading-relaxed">
+            支援合夥人與外包團隊共同記帳，權限分明。透過角色權限管理系統，確保敏感財務資料的安全性。無論身在何處，團隊成員皆可即時協作，提升整體營運效率。
+          </p>
+          <ul class="space-y-3 font-body-md text-sm md:text-base text-[#404750]">
+            <li class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-[#005f9d] text-xl">check_circle</span>
+              多層級權限設定 (管理者/編輯者/查閱者)
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-[#005f9d] text-xl">check_circle</span>
+              即時資料雲端同步與備份
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-[#005f9d] text-xl">check_circle</span>
+              完整操作稽核日誌
+            </li>
+          </ul>
+        </div>
         <div class="order-1">
           <div class="rounded-xl overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-[#c0c7d2]/50 bg-white relative aspect-[4/3] group">
-            <img src={FEATURE_AI_URL} alt="AI 智慧財務顧問" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+            <img src={FEATURE_SYNC_URL} alt="多用戶雲端同步 管理介面" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="mb-24 md:mb-32">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-10 lg:gap-16 items-center">
+        <div class="order-2 md:order-1 space-y-6">
+          <div class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-[#f3f3f4] text-[#005f9d] mb-2 shadow-xs">
+            <span class="material-symbols-outlined text-2xl">bolt</span>
+          </div>
+          <h2 class="font-headline-md text-2xl md:text-3xl text-[#1a1c1c]">報稅季不再手忙腳亂</h2>
+          <p class="font-body-md text-base text-[#404750] leading-relaxed">
+            雲端記帳系統讓日常進項憑證管理變得輕鬆簡單。不論是傳統發票還是手開發票，都能透過直覺的介面快速建檔；更支援電子發票輕鬆匯入，大幅減少手動輸入的時間，讓帳務井然有序。
+          </p>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-[#005f9d] text-2xl mt-0.5">check_circle</span>
+              <div>
+                <strong class="font-label-sm text-[#1a1c1c] text-base block">發票匯入與快速建檔</strong>
+                <span class="font-body-md text-sm md:text-base text-[#404750]">支援電子發票快速匯入與憑證輕鬆新增，將帳務數位化集中管理，徹底告別紙本堆疊與遺失風險。</span>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-[#005f9d] text-2xl mt-0.5">check_circle</span>
+              <div>
+                <strong class="font-label-sm text-[#1a1c1c] text-base block">一鍵匯出媒體檔</strong>
+                <span class="font-body-md text-sm md:text-base text-[#404750]">無縫產出符合財政部申報規範的格式，無論是直接交給會計師處理，或是自行申報都順暢無礙。</span>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-[#005f9d] text-2xl mt-0.5">check_circle</span>
+              <div>
+                <strong class="font-label-sm text-[#1a1c1c] text-base block">5 分鐘完成申報準備</strong>
+                <span class="font-body-md text-sm md:text-base text-[#404750]">省去繁瑣的對帳與單據整理流程，將節省下來的寶貴時間，專注在更重要的業務發展上。</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="order-1 md:order-2">
+          <div class="relative h-64 md:h-96 rounded-xl overflow-hidden shadow-[0px_4px_12px_rgba(0,0,0,0.05)] bg-gradient-to-br from-[#cee1ff] to-[#f3f3f4] border border-[#c0c7d2]/50 flex items-center justify-center p-6">
+            <div class="grid grid-cols-2 gap-4 w-full max-w-sm">
+              <div class="bg-white p-4 rounded-lg shadow-xs border border-[#e2e2e2] space-y-2">
+                <div class="h-2 bg-[#e2e2e2] rounded w-1/2"></div>
+                <div class="h-8 bg-[#cee1ff] rounded w-full flex items-center px-2 text-xs font-data-mono text-[#005f9d] font-bold">銷項發票 16 筆</div>
+              </div>
+              <div class="bg-white p-4 rounded-lg shadow-xs border border-[#e2e2e2] space-y-2">
+                <div class="h-2 bg-[#e2e2e2] rounded w-1/2"></div>
+                <div class="h-8 bg-[#d0e4ff] rounded w-full flex items-center px-2 text-xs font-data-mono text-[#005f9d] font-bold">進項發票 42 筆</div>
+              </div>
+              <div class="col-span-2 bg-white p-4 rounded-lg shadow-sm border border-[#005f9d]/30 flex justify-between items-center">
+                <div>
+                  <div class="text-xs text-[#005f9d] font-bold">媒體檔匯出就緒</div>
+                  <div class="text-[11px] text-[#404750]">格式: 營業稅軟體匯入檔 .TXT, .BI</div>
+                </div>
+                <span class="material-symbols-outlined text-[#005f9d] text-2xl animate-bounce">cloud_download</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-10 lg:gap-16 items-center">        
         <div class="order-2 space-y-6">
           <div class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-[#f3f3f4] text-[#005f9d] mb-2 shadow-xs">
             <span class="material-symbols-outlined text-2xl">smart_toy</span>
@@ -90,39 +176,11 @@ const additionalSchema = [
               自動防呆與異常數據檢測
             </li>
           </ul>
-          
         </div>
-      </div>
-    </section>
 
-    <section class="mb-12">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
-        <div class="order-2 md:order-1 space-y-6">
-          <div class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-[#f3f3f4] text-[#005f9d] mb-2 shadow-xs">
-            <span class="material-symbols-outlined text-2xl">group</span>
-          </div>
-          <h2 class="font-headline-md text-2xl md:text-3xl text-[#1a1c1c]">多用戶雲端同步</h2>
-          <p class="font-body-md text-base text-[#404750] leading-relaxed">
-            支援合夥人與外包團隊共同記帳，權限分明。透過角色權限管理系統，確保敏感財務資料的安全性。無論身在何處，團隊成員皆可即時協作，提升整體營運效率。
-          </p>
-          <ul class="space-y-3 font-body-md text-sm md:text-base text-[#404750]">
-            <li class="flex items-center gap-2">
-              <span class="material-symbols-outlined text-[#005f9d] text-xl">check_circle</span>
-              多層級權限設定 (管理者/編輯者/查閱者)
-            </li>
-            <li class="flex items-center gap-2">
-              <span class="material-symbols-outlined text-[#005f9d] text-xl">check_circle</span>
-              即時資料雲端同步與備份
-            </li>
-            <li class="flex items-center gap-2">
-              <span class="material-symbols-outlined text-[#005f9d] text-xl">check_circle</span>
-              完整操作稽核日誌
-            </li>
-          </ul>
-        </div>
-        <div class="order-1 md:order-2">
+        <div class="order-1">
           <div class="rounded-xl overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-[#c0c7d2]/50 bg-white relative aspect-[4/3] group">
-            <img src={FEATURE_SYNC_URL} alt="多用戶雲端同步 管理介面" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+            <img src={FEATURE_AI_URL} alt="AI 智慧財務顧問" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
           </div>
         </div>
       </div>

@@ -16,10 +16,9 @@ const currentYear = new Date().getFullYear();
 const GA_MEASUREMENT_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 
 const navItems = [
-  { href: '/', label: '首頁' },
   { href: '/features/', label: '功能介紹' },
-  { href: '/startup/', label: '創業優勢' },
   { href: '/faq/', label: '常見問題' },
+  { href: '/startup/', label: '創業優勢' },
   { href: '/contact/', label: '聯絡我們' },
 ];
 
@@ -123,7 +122,7 @@ const structuredData = {
             <img src={LOGO_URL} alt="雲記帳 Logo" class="h-8 w-auto object-contain transition-opacity group-hover:opacity-90" />
             <span class="font-headline-md text-xl md:text-2xl font-bold text-[#005f9d] tracking-tight">雲記帳</span>
           </a>
-          <nav class="hidden md:flex items-center gap-8">
+          <nav class="hidden md:flex items-center gap-4 lg:gap-8">
             {navItems.map((item) => (
               <a
                 href={item.href}
@@ -140,7 +139,7 @@ const structuredData = {
           </nav>
 
           <div class="hidden md:flex items-center gap-4">
-            <a href="https://s1.eccounting.com.tw" target="_blank" class="bg-[#005f9d] text-white font-label-sm text-sm px-6 py-2 rounded-lg hover:bg-[#2079be] transition-all duration-200 scale-95 active:scale-90 shadow-xs cursor-pointer">立即試用</a>
+            <a href="https://s1.eccounting.com.tw" target="_blank" class="bg-[#005f9d] text-white font-label-sm text-sm px-6 py-2 rounded-lg hover:bg-[#2079be] transition-all duration-200 scale-95 active:scale-90 shadow-xs cursor-pointer">立即免費試用</a>
           </div>
 
           <!-- Mobile Menu Button -->
@@ -154,7 +153,7 @@ const structuredData = {
             <a
               href={item.href}
               class:list={[
-                'block w-full text-left font-label-sm text-base px-4 py-2.5 rounded-lg transition-colors',
+                'block w-full text-center font-label-sm text-base px-4 py-2.5 rounded-lg transition-colors',
                 isActive(item.href)
                   ? 'bg-[#005f9d]/10 text-[#005f9d] font-bold'
                   : 'text-[#404750] hover:bg-[#f3f3f4]',
@@ -163,8 +162,8 @@ const structuredData = {
               {item.label}
             </a>
           ))}
-          <div class="pt-3 border-t border-[#f3f3f4]">
-            <a href="https://s1.eccounting.com.tw" target="_blank" class="w-full bg-[#005f9d] text-white font-label-sm text-sm text-center px-6 py-2 rounded-lg hover:bg-[#2079be] transition-all duration-200 shadow-xs cursor-pointer">立即試用</a>
+          <div class="pt-3 border-t border-[#f3f3f4] text-center">
+            <a href="https://s1.eccounting.com.tw" target="_blank" class="w-full bg-[#005f9d] text-white font-label-sm text-sm text-center px-6 py-2 rounded-lg hover:bg-[#2079be] transition-all duration-200 shadow-xs cursor-pointer">立即免費試用</a>
           </div>
         </div>
       </header>
