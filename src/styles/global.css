@@ -1,5 +1,88 @@
 @import "tailwindcss";
 
+@theme {
+  /* ── Colors ────────────────────────────────────────────────
+     Tokens are the only legal source for color in this project.
+     See DESIGN.md → Colors. Do not hardcode hex in markup. */
+
+  --color-ledger-blue: #005f9d;
+  --color-ledger-blue-mid: #2c80c6;
+  --color-ledger-blue-hover: #2079be;
+  --color-ledger-blue-wash: #cee1ff;
+
+  --color-ink: #1a1c1c;
+  --color-graphite: #404750;
+  --color-steel: #4d6079;
+
+  --color-mist: #c0c7d2;
+  --color-vellum: #f3f3f4;
+  --color-paper: #f9f9f9;
+  --color-white: #ffffff;
+  --color-hairline: #e2e2e2;
+  --color-hairline-soft: #e8e8e8;
+
+  --color-hazard: #ba1a1a;
+  --color-hazard-wash: #ffdad6;
+  --color-sage: #2e7d32;
+  --color-sage-wash: #e8f5e9;
+
+  /* ── Selection ────────────────────────────────────────────
+     Text selection highlight. Must stay clearly visible on the
+     near-white surfaces (#f9f9f9 / #f3f3f4 / #dfe8ef) and on
+     ledger-blue. See DESIGN.md → Colors → Named Rules. */
+  --color-selection: #b3d0f5;
+
+  /* ── Radius ──────────────────────────────────────────────── */
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+
+  /* ── Elevation ───────────────────────────────────────────── */
+  --shadow-paper: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --shadow-structure: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+  /* ── Motion ──────────────────────────────────────────────── */
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+
+  /* ── Container ───────────────────────────────────────────── */
+  --container-ledger: 1280px;
+  --container-reading: 42rem;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+  }
+
+  /* ── Text selection ────────────────────────────────────────
+     One high-contrast pair for the whole site. Because ::selection
+     paints its own color and background, the selected text reads
+     the same regardless of what surface it sits on. Do not set
+     the selection color to a brand hue: on the ledger-blue
+     buttons and panels that produced blue text on a blue fill.
+     ink on --color-selection stays legible on paper, white,
+     vellum, and ledger-blue alike. */
+  ::selection {
+    background-color: var(--color-selection);
+    color: var(--color-ink);
+  }
+
+  ::-moz-selection {
+    background-color: var(--color-selection);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ledger-blue);
+    outline-offset: 2px;
+  }
+}
+
 @layer utilities {
   .font-headline-lg {
     font-family: 'Manrope', 'Noto Sans TC', sans-serif;
@@ -22,6 +105,11 @@
   .font-data-mono {
     font-family: 'JetBrains Mono', monospace;
   }
+
+  /* The reading measure cap from DESIGN.md → Typography */
+  .measure-reading {
+    max-width: var(--container-reading);
+  }
 }
 
 .material-symbols-outlined {
@@ -38,6 +126,88 @@
   to { opacity: 1; transform: scale(1); }
 }
 
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .animate-fade-in {
-  animation: fadeIn 0.25s ease-out forwards;
+  animation: fadeIn 0.25s var(--ease-out-quart) forwards;
+}
+
+.animate-rise-in {
+  animation: riseIn 0.3s var(--ease-out-quart) forwards;
+}
+
+/* ── Disclosure list ─────────────────────────────────────────
+   FAQ accordion. The rotating chevron is driven by the open
+   state so motion tracks the disclosure itself. */
+.ledger-disclosure > summary {
+  list-style: none;
+}
+.ledger-disclosure > summary::-webkit-details-marker {
+  display: none;
+}
+.ledger-disclosure > summary .ledger-chevron {
+  transition: transform 0.3s var(--ease-out-quart);
+}
+.ledger-disclosure[open] > summary .ledger-chevron {
+  transform: rotate(180deg);
+}
+
+/* ── Range slider ────────────────────────────────────────────
+   Tax calculator. The input box is 24px tall so the control
+   meets the 24x24 minimum target size; the visible track is a
+   separate 6px layer so the extra height stays invisible. */
+.ledger-slider {
+  appearance: none;
+  width: 100%;
+  height: 24px;
+  background: transparent;
+  cursor: pointer;
+}
+.ledger-slider::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--color-hairline);
+}
+.ledger-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  margin-top: -8px;
+  border-radius: 9999px;
+  background: var(--color-ledger-blue);
+  border: 3px solid var(--color-white);
+  box-shadow: var(--shadow-paper);
+}
+.ledger-slider::-moz-range-track {
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--color-hairline);
+}
+.ledger-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 9999px;
+  background: var(--color-ledger-blue);
+  border: 3px solid var(--color-white);
+  box-shadow: var(--shadow-paper);
+}
+.ledger-slider:focus-visible {
+  outline: 2px solid var(--color-ledger-blue);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

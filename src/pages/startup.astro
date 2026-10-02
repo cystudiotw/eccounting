@@ -1,202 +1,219 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
+
 <BaseLayout title="創業優勢 - 雲記帳 - 你的雲端財務神隊友" currentPath="/startup/">
-  <div class="w-full max-w-[1280px] mx-auto px-4 md:px-8 lg:px-16 pt-10 pb-20 space-y-20">
-    <!-- Hero Header -->
-    <section class="text-center space-y-4 max-w-3xl mx-auto">
-      <h1 class="font-headline-lg text-2xl md:text-4xl text-[#005f9d] leading-tight">
+  <div class="w-full max-w-ledger mx-auto px-4 md:px-8 lg:px-16 pt-10 pb-20">
+    <!-- Header -->
+    <header class="max-w-2xl">
+      <h1 class="font-headline-lg text-2xl md:text-4xl text-ink tracking-[-0.015em] leading-[1.25] text-balance">
         為什麼你該成立公司？
       </h1>
-      <p class="font-body-lg text-base md:text-lg text-[#404750] leading-relaxed">
-        從個人接案到成立公司，最大的差異在於稅務結構的優化。合法合規地將日常開銷轉化為節稅利器，讓你的每一分錢都發揮最大價值。
+      <p class="font-body-lg text-base md:text-lg text-graphite leading-[1.75] mt-4">
+        從個人接案到成立公司，最大的差異在稅務結構。把日常開銷合法轉化為可扣抵的費用，
+        讓每一分錢都發揮最大價值。
       </p>
-    </section>
+    </header>
 
-    <!-- Comparison Table Bento Grid -->
-    <section class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8">
-      <!-- Individual Card -->
-      <div class="col-span-1 md:col-span-6 bg-white rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.05)] p-6 md:p-8 space-y-6 border border-[#e2e2e2]">
-        <div class="flex items-center gap-2 text-[#ba1a1a]">
-          <span class="material-symbols-outlined text-2xl">person</span>
-          <h3 class="font-headline-md text-xl font-bold text-[#1a1c1c]">個人接案的劣勢</h3>
+    <!-- Comparison -->
+    <section class="mt-16 md:mt-20 grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-start">
+      <!-- Individual: the problems -->
+      <div class="bg-white rounded-lg shadow-paper border border-hairline-soft overflow-hidden h-full">
+        <div class="flex items-center gap-2.5 p-6 md:p-8 pb-5">
+          <span class="material-symbols-outlined text-2xl text-hazard" aria-hidden="true">person</span>
+          <h2 class="font-headline-md text-xl font-bold text-ink">個人接案的劣勢</h2>
         </div>
-        <div class="space-y-5">
-          <div class="p-4 bg-[#ffdad6]/20 rounded-xl border-l-4 border-[#ba1a1a] space-y-2">
-            <h4 class="font-label-sm text-sm font-bold text-[#ba1a1a] flex items-center gap-2">
-              <span class="material-symbols-outlined text-lg">trending_up</span>
+        <ul class="divide-y divide-hairline-soft border-t border-hairline-soft">
+          <li class="p-6 md:p-8">
+            <h3 class="font-label-sm text-sm font-bold text-ink flex items-center gap-2">
+              <span class="material-symbols-outlined text-lg text-hazard" aria-hidden="true">trending_up</span>
               稅務負擔沉重，節稅空間受限
-            </h4>
-            <p class="font-body-md text-sm text-[#404750] leading-relaxed">
-              個人收入皆視為「執行業務所得」併入個人綜所稅，面臨高額累進稅率。雖有法定費用率可扣除，但遠不及開公司能將各項營運成本實報實銷、最大化抵稅來得靈活。
+            </h3>
+            <p class="font-body-md text-sm text-graphite leading-[1.75] mt-2">
+              個人收入皆視為「執行業務所得」併入個人綜所稅，面臨高額累進稅率。雖有法定費用率可扣除，
+              但遠不及開公司能將各項營運成本實報實銷、最大化抵稅來得靈活。
             </p>
-          </div>
-          <div class="p-4 bg-[#ffdad6]/20 rounded-xl border-l-4 border-[#ba1a1a] space-y-2">
-            <h4 class="font-label-sm text-sm font-bold text-[#ba1a1a] flex items-center gap-2">
-              <span class="material-symbols-outlined text-lg">receipt</span>
+          </li>
+          <li class="p-6 md:p-8">
+            <h3 class="font-label-sm text-sm font-bold text-ink flex items-center gap-2">
+              <span class="material-symbols-outlined text-lg text-hazard" aria-hidden="true">receipt</span>
               發包方無法抵稅，降低合作意願
-            </h4>
-            <p class="font-body-md text-sm text-[#404750] leading-relaxed">
-              企業客戶更傾向找「有統一編號」的公司發包。因為個人無法開立發票，發包公司就無法取得 5% 進項稅額來扣抵自身的營業稅，無形中增加了客戶的稅務成本。
+            </h3>
+            <p class="font-body-md text-sm text-graphite leading-[1.75] mt-2">
+              企業客戶更傾向找「有統一編號」的公司發包。個人無法開立發票，發包公司就無法取得
+              5% 進項稅額來扣抵自身的營業稅，無形中增加了客戶的稅務成本。
             </p>
-          </div>
-          <div class="p-4 bg-[#ffdad6]/20 rounded-xl border-l-4 border-[#ba1a1a] space-y-2">
-            <h4 class="font-label-sm text-sm font-bold text-[#ba1a1a] flex items-center gap-2">
-              <span class="material-symbols-outlined text-lg">fact_check</span>
+          </li>
+          <li class="p-6 md:p-8">
+            <h3 class="font-label-sm text-sm font-bold text-ink flex items-center gap-2">
+              <span class="material-symbols-outlined text-lg text-hazard" aria-hidden="true">fact_check</span>
               客戶行政繁瑣，錯失大型專案
-            </h4>
-            <p class="font-body-md text-sm text-[#404750] leading-relaxed">
-              與個人合作，發包方的財務還需額外處理勞務報酬單，並代扣 10% 所得稅與 2.11% 二代健保。為了省去繁瑣的申報流程，許多具規模的企業往往明文規定「只發包給能開發票的公司」。
+            </h3>
+            <p class="font-body-md text-sm text-graphite leading-[1.75] mt-2">
+              與個人合作，發包方的財務還需額外處理勞務報酬單，並代扣 10% 所得稅與 2.11% 二代健保。
+              為了省去繁瑣的申報流程，許多具規模的企業往往明文規定「只發包給能開發票的公司」。
             </p>
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
 
-      <div class="col-span-1 md:col-span-6 bg-white rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.05)] overflow-hidden border border-[#e2e2e2]">
-        <div class="flex items-center gap-2 text-[#2e7d32] p-6 pb-4">
-          <span class="material-symbols-outlined text-2xl">corporate_fare</span>
-          <h3 class="font-headline-md text-xl font-bold text-[#1a1c1c]">成立公司的優勢</h3>
-          <span class="bg-[#e8f5e9] text-[#2e7d32] px-3 py-1 rounded-full font-label-sm text-xs font-bold uppercase tracking-wider">節稅舉例</span>
+      <!-- Company: the itemized benefits -->
+      <div class="bg-white rounded-lg shadow-paper border border-hairline-soft overflow-hidden h-full">
+        <div class="flex flex-wrap items-center gap-2.5 p-6 md:p-8 pb-5">
+          <span class="material-symbols-outlined text-2xl text-sage" aria-hidden="true">corporate_fare</span>
+          <h2 class="font-headline-md text-xl font-bold text-ink">成立公司的優勢</h2>
+          <span class="bg-sage-wash text-sage px-3 py-1 rounded-full font-label-sm text-xs font-bold">節稅舉例</span>
         </div>
-        <div class="divide-y divide-[#f1f5f9]">
-          <div class="p-4 md:p-5 flex flex-col md:flex-row md:items-center gap-1 md:gap-4 hover:bg-[#f9f9f9] transition-colors">
-            <div class="flex items-center gap-2 font-medium text-[#1a1c1c]">
-              <span class="material-symbols-outlined text-[#4d6079] text-lg shrink-0">apartment</span>
+        <ul class="divide-y divide-hairline-soft border-t border-hairline-soft">
+          <li class="px-6 md:px-8 py-4 flex flex-col lg:flex-row lg:items-center gap-1 lg:gap-6 hover:bg-vellum/50 transition-colors">
+            <span class="flex items-center gap-2 font-medium text-ink shrink-0">
+              <span class="material-symbols-outlined text-steel text-lg shrink-0" aria-hidden="true">apartment</span>
               <span>辦公租金</span>
-            </div>
-            <div class="md:ml-auto text-[#005f9d] font-bold text-sm md:text-base">全額認列費用，可扣抵5%營業稅</div>
-          </div>
-          
-          <div class="p-4 md:p-5 flex flex-col md:flex-row md:items-center gap-1 md:gap-4 hover:bg-[#f9f9f9] transition-colors">
-            <div class="flex items-center gap-2 font-medium text-[#1a1c1c]">
-              <span class="material-symbols-outlined text-[#4d6079] text-lg shrink-0">train</span>
+            </span>
+            <span class="lg:ml-auto text-ledger-blue font-bold text-sm lg:text-base">全額認列費用，可扣抵 5% 營業稅</span>
+          </li>
+          <li class="px-6 md:px-8 py-4 flex flex-col lg:flex-row lg:items-center gap-1 lg:gap-6 hover:bg-vellum/50 transition-colors">
+            <span class="flex items-center gap-2 font-medium text-ink shrink-0">
+              <span class="material-symbols-outlined text-steel text-lg shrink-0" aria-hidden="true">train</span>
               <span>交通差旅</span>
-            </div>
-            <div class="md:ml-auto text-[#005f9d] font-bold text-sm md:text-base">可扣抵5%營業稅，降低營所稅基</div>
-          </div>
-          
-          <div class="p-4 md:p-5 flex flex-col md:flex-row md:items-center gap-1 md:gap-4 hover:bg-[#f9f9f9] transition-colors">
-            <div class="flex items-center gap-2 font-medium text-[#1a1c1c]">
-              <span class="material-symbols-outlined text-[#4d6079] text-lg shrink-0">laptop_mac</span>
+            </span>
+            <span class="lg:ml-auto text-ledger-blue font-bold text-sm lg:text-base">可扣抵 5% 營業稅，降低營所稅基</span>
+          </li>
+          <li class="px-6 md:px-8 py-4 flex flex-col lg:flex-row lg:items-center gap-1 lg:gap-6 hover:bg-vellum/50 transition-colors">
+            <span class="flex items-center gap-2 font-medium text-ink shrink-0">
+              <span class="material-symbols-outlined text-steel text-lg shrink-0" aria-hidden="true">laptop_mac</span>
               <span>設備採購</span>
-            </div>
-            <div class="md:ml-auto text-[#005f9d] font-bold text-sm md:text-base">進項稅額可扣抵，可提列折舊</div>
-          </div>
-
-          <div class="p-4 md:p-5 flex flex-col md:flex-row md:items-center gap-1 md:gap-4 hover:bg-[#f9f9f9] transition-colors">
-            <div class="flex items-center gap-2 font-medium text-[#1a1c1c]">
-              <span class="material-symbols-outlined text-[#4d6079] text-lg shrink-0">cloud</span>
-              <span>雲端與IT服務</span>
-            </div>
-            <div class="md:ml-auto text-[#005f9d] font-bold text-sm md:text-base">進項稅額可扣抵，降低營所稅基</div>
-          </div>
-
-          <div class="p-4 md:p-5 flex flex-col md:flex-row md:items-center gap-1 md:gap-4 hover:bg-[#f9f9f9] transition-colors">
-            <div class="flex items-center gap-2 font-medium text-[#1a1c1c]">
-              <span class="material-symbols-outlined text-[#4d6079] text-lg shrink-0">campaign</span>
+            </span>
+            <span class="lg:ml-auto text-ledger-blue font-bold text-sm lg:text-base">進項稅額可扣抵，可提列折舊</span>
+          </li>
+          <li class="px-6 md:px-8 py-4 flex flex-col lg:flex-row lg:items-center gap-1 lg:gap-6 hover:bg-vellum/50 transition-colors">
+            <span class="flex items-center gap-2 font-medium text-ink shrink-0">
+              <span class="material-symbols-outlined text-steel text-lg shrink-0" aria-hidden="true">cloud</span>
+              <span>雲端與 IT 服務</span>
+            </span>
+            <span class="lg:ml-auto text-ledger-blue font-bold text-sm lg:text-base">進項稅額可扣抵，降低營所稅基</span>
+          </li>
+          <li class="px-6 md:px-8 py-4 flex flex-col lg:flex-row lg:items-center gap-1 lg:gap-6 hover:bg-vellum/50 transition-colors">
+            <span class="flex items-center gap-2 font-medium text-ink shrink-0">
+              <span class="material-symbols-outlined text-steel text-lg shrink-0" aria-hidden="true">campaign</span>
               <span>行銷推廣</span>
-            </div>
-            <div class="md:ml-auto text-[#005f9d] font-bold text-sm md:text-base">依法取得憑證，可扣抵5%營業稅</div>
-          </div>
-
-          <div class="p-4 md:p-5 flex flex-col md:flex-row md:items-center gap-1 md:gap-4 hover:bg-[#f9f9f9] transition-colors">
-            <div class="flex items-center gap-2 font-medium text-[#1a1c1c]">
-              <span class="material-symbols-outlined text-[#4d6079] text-lg shrink-0">receipt_long</span>
+            </span>
+            <span class="lg:ml-auto text-ledger-blue font-bold text-sm lg:text-base">依法取得憑證，可扣抵 5% 營業稅</span>
+          </li>
+          <li class="px-6 md:px-8 py-4 flex flex-col lg:flex-row lg:items-center gap-1 lg:gap-6 hover:bg-vellum/50 transition-colors">
+            <span class="flex items-center gap-2 font-medium text-ink shrink-0">
+              <span class="material-symbols-outlined text-steel text-lg shrink-0" aria-hidden="true">receipt_long</span>
               <span>水電瓦斯與電信網路費</span>
-            </div>
-            <div class="md:ml-auto text-[#005f9d] font-bold text-sm md:text-base">帳單載明統編，即可扣抵營業稅</div>
-          </div>
-
-          <div class="p-4 md:p-5 flex flex-col md:flex-row md:items-center gap-1 md:gap-4 hover:bg-[#f9f9f9] transition-colors">
-            <div class="flex items-center gap-2 font-medium text-[#1a1c1c]">
-              <span class="material-symbols-outlined text-[#4d6079] text-lg shrink-0">restaurant</span>
+            </span>
+            <span class="lg:ml-auto text-ledger-blue font-bold text-sm lg:text-base">帳單載明統編，即可扣抵營業稅</span>
+          </li>
+          <li class="px-6 md:px-8 py-4 flex flex-col lg:flex-row lg:items-center gap-1 lg:gap-6 hover:bg-vellum/50 transition-colors">
+            <span class="flex items-center gap-2 font-medium text-ink shrink-0">
+              <span class="material-symbols-outlined text-steel text-lg shrink-0" aria-hidden="true">restaurant</span>
               <span>業務聚餐</span>
-            </div>
-            <div class="md:ml-auto text-[#005f9d] font-bold text-sm md:text-base">可列報交際費，降低營所稅基</div>
-          </div>
-        </div>
+            </span>
+            <span class="lg:ml-auto text-ledger-blue font-bold text-sm lg:text-base">可列報交際費，降低營所稅基</span>
+          </li>
+        </ul>
       </div>
     </section>
 
-    <!-- Interactive Tax Savings Calculator (embedded as island) -->
-    <section class="bg-gradient-to-br from-[#ffffff] to-[#f3f3f4] rounded-2xl p-6 md:p-10 border border-[#005f9d]/20 shadow-[0_4px_12px_rgba(0,0,0,0.05)] space-y-8">
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-[#e2e2e2] pb-6">
-        <div>
-          <span class="bg-[#005f9d]/10 text-[#005f9d] text-xs font-bold px-3 py-1 rounded-full font-label-sm uppercase">智慧計算器</span>
-          <h2 class="text-2xl md:text-3xl font-headline-md text-[#1a1c1c] mt-2">即時公司節稅效益試算器</h2>
-          <p class="text-sm md:text-base text-[#404750]">拉動下方輸入框，了解成立公司每年開立統編可為您合法省下的稅金總額。</p>
-        </div>
-        
+    <!-- Tax savings calculator -->
+    <section class="mt-16 md:mt-20 bg-white rounded-xl border border-mist/50 shadow-paper overflow-hidden">
+      <div class="px-6 md:px-10 pt-8 md:pt-10 pb-6 border-b border-hairline">
+        <h2 class="font-headline-md text-2xl md:text-3xl text-ink leading-[1.3]">即時公司節稅效益試算器</h2>
+        <p class="font-body-md text-sm md:text-base text-graphite leading-[1.75] mt-3 max-w-2xl">
+          拉動下方輸入框，看看你目前的營運規模，開立統編後每年可以合法省下的稅金大概是多少。
+        </p>
       </div>
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+
+      <div class="grid grid-cols-1 lg:grid-cols-12">
         <!-- Controls -->
-        <div class="lg:col-span-7 space-y-6">
-          <div class="space-y-2">
-            <div class="flex justify-between text-sm font-medium">
-              <span>月辦公室租金:</span>
-              <span id="rent-value" class="text-[#005f9d] font-data-mono font-bold">NT$ 25,000 / 月</span>
+        <div class="lg:col-span-7 p-6 md:p-10 space-y-7">
+          <div class="space-y-2.5">
+            <div class="flex justify-between items-baseline gap-4">
+              <label for="rent-slider" class="font-label-sm text-sm font-medium text-ink">月辦公室租金</label>
+              <output for="rent-slider" id="rent-value" class="font-data-mono text-sm font-bold text-ledger-blue">NT$ 25,000 / 月</output>
             </div>
-            <input id="rent-slider" type="range" min="0" max="100000" step="2000" value="25000" class="w-full accent-[#005f9d] cursor-pointer" />
+            <input id="rent-slider" class="ledger-slider" type="range" min="0" max="100000" step="1000" value="25000" aria-describedby="rent-value" />
           </div>
-          <div class="space-y-2">
-            <div class="flex justify-between text-sm font-medium">
-              <span>月交通差旅 (高鐵/計程車):</span>
-              <span id="travel-value" class="text-[#005f9d] font-data-mono font-bold">NT$ 8,000 / 月</span>
+
+          <div class="space-y-2.5">
+            <div class="flex justify-between items-baseline gap-4">
+              <label for="travel-slider" class="font-label-sm text-sm font-medium text-ink">月交通差旅（高鐵、計程車）</label>
+              <output for="travel-slider" id="travel-value" class="font-data-mono text-sm font-bold text-ledger-blue">NT$ 8,000 / 月</output>
             </div>
-            <input id="travel-slider" type="range" min="0" max="50000" step="1000" value="8000" class="w-full accent-[#005f9d] cursor-pointer" />
+            <input id="travel-slider" class="ledger-slider" type="range" min="0" max="50000" step="1000" value="8000" aria-describedby="travel-value" />
           </div>
-          <div class="space-y-2">
-            <div class="flex justify-between text-sm font-medium">
-              <span>年設備軟體採購 (電腦/雲端訂閱):</span>
-              <span id="equipment-value" class="text-[#005f9d] font-data-mono font-bold">NT$ 60,000 / 年</span>
+
+          <div class="space-y-2.5">
+            <div class="flex justify-between items-baseline gap-4">
+              <label for="equipment-slider" class="font-label-sm text-sm font-medium text-ink">年設備軟體採購（電腦、雲端訂閱）</label>
+              <output for="equipment-slider" id="equipment-value" class="font-data-mono text-sm font-bold text-ledger-blue">NT$ 60,000 / 年</output>
             </div>
-            <input id="equipment-slider" type="range" min="0" max="300000" step="10000" value="60000" class="w-full accent-[#005f9d] cursor-pointer" />
+            <input id="equipment-slider" class="ledger-slider" type="range" min="0" max="300000" step="5000" value="60000" aria-describedby="equipment-value" />
           </div>
-          <div class="space-y-2">
-            <div class="flex justify-between text-sm font-medium">
-              <span>月業務交際聚餐:</span>
-              <span id="dining-value" class="text-[#005f9d] font-data-mono font-bold">NT$ 10,000 / 月</span>
+
+          <div class="space-y-2.5">
+            <div class="flex justify-between items-baseline gap-4">
+              <label for="dining-slider" class="font-label-sm text-sm font-medium text-ink">月業務交際聚餐</label>
+              <output for="dining-slider" id="dining-value" class="font-data-mono text-sm font-bold text-ledger-blue">NT$ 10,000 / 月</output>
             </div>
-            <input id="dining-slider" type="range" min="0" max="50000" step="1000" value="10000" class="w-full accent-[#005f9d] cursor-pointer" />
+            <input id="dining-slider" class="ledger-slider" type="range" min="0" max="50000" step="1000" value="10000" aria-describedby="dining-value" />
           </div>
         </div>
-        <!-- Results Box -->
-        <div class="lg:col-span-5 bg-white p-6 rounded-xl border border-[#005f9d]/30 shadow-md space-y-6">
-          <h4 class="font-headline-md text-lg text-[#1a1c1c] font-bold border-b border-[#f3f3f4] pb-3">預估年度節稅試算結果</h4>
-          <div class="space-y-3 text-sm">
-            <div class="flex justify-between items-center text-[#404750]">
-              <span>年度列舉合法抵扣總額:</span>
-              <span id="annual-expenses" class="font-data-mono font-semibold">NT$ 520,000</span>
+
+        <!-- Results -->
+        <div class="lg:col-span-5 bg-vellum/60 border-t lg:border-t-0 lg:border-l border-hairline p-6 md:p-10">
+          <h3 class="font-headline-md text-base font-bold text-ink pb-3 border-b border-mist">預估年度節稅試算結果</h3>
+
+          <dl class="space-y-3 text-sm mt-4">
+            <div class="flex justify-between items-baseline gap-4">
+              <dt class="text-graphite">年度列舉合法抵扣總額</dt>
+              <dd id="annual-expenses" class="font-data-mono font-semibold text-ink">NT$ 576,000</dd>
             </div>
-            <div class="flex justify-between items-center text-[#404750]">
-              <span>可扣抵 5% 營業稅:</span>
-              <span id="business-tax" class="font-data-mono text-[#2e7d32] font-semibold">+ NT$ 26,000</span>
+            <div class="flex justify-between items-baseline gap-4">
+              <dt class="text-graphite">可扣抵 5% 營業稅</dt>
+              <dd id="business-tax" class="font-data-mono font-semibold text-sage">+ NT$ 22,800</dd>
             </div>
-            <div class="flex justify-between items-center text-[#404750]">
-              <span>可降低 20% 營所稅基效益:</span>
-              <span id="profit-tax" class="font-data-mono text-[#2e7d32] font-semibold">+ NT$ 104,000</span>
+            <div class="flex justify-between items-baseline gap-4">
+              <dt class="text-graphite">可降低 20% 營所稅基</dt>
+              <dd id="profit-tax" class="font-data-mono font-semibold text-sage">+ NT$ 115,200</dd>
+            </div>
+          </dl>
+
+          <div class="mt-6 p-5 rounded-lg bg-ledger-blue/10 border border-ledger-blue/20" role="status" aria-live="polite">
+            <div class="font-label-sm text-xs text-ledger-blue font-semibold">成立公司預估可幫您省下</div>
+            <div class="mt-1.5 flex items-baseline gap-2">
+              <span id="total-savings" class="text-2xl md:text-3xl font-bold font-data-mono text-ledger-blue">NT$ 138,000</span>
+              <span class="text-xs text-graphite">/ 每年</span>
             </div>
           </div>
-          <div class="p-4 bg-[#005f9d]/10 rounded-lg border border-[#005f9d]/20 space-y-1">
-            <div class="text-xs text-[#005f9d] font-semibold uppercase tracking-wide">成立公司預估可幫您省下</div>
-            <div class="text-2xl md:text-3xl font-bold font-data-mono text-[#005f9d]">
-              <span id="total-savings">NT$ 130,000</span> <span class="text-xs font-normal text-[#404750]">/ 每年</span>
-            </div>
-          </div>
+
+          <p class="mt-5 font-body-md text-xs text-steel leading-[1.75]">
+            試算僅供參考，實際節稅金額依你的憑證種類、申報方式與業務情境而異。
+            正式申報前請確認，或諮詢合格會計師、記帳士。
+          </p>
         </div>
       </div>
     </section>
   </div>
 
-  <!-- Tax Calculator Script -->
   <script>
-    (function() {
+    (function () {
       const rentSlider = document.getElementById('rent-slider') as HTMLInputElement;
       const travelSlider = document.getElementById('travel-slider') as HTMLInputElement;
       const equipmentSlider = document.getElementById('equipment-slider') as HTMLInputElement;
       const diningSlider = document.getElementById('dining-slider') as HTMLInputElement;
 
-      function format(n: number) { return n.toLocaleString(); }
+      function set(id: string, text: string) {
+        const el = document.getElementById(id);
+        if (el) el.textContent = text;
+      }
+
+      function format(n: number) {
+        return n.toLocaleString('en-US');
+      }
 
       function calculate() {
         const rent = Number(rentSlider.value);
@@ -204,23 +221,29 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         const equipment = Number(equipmentSlider.value);
         const dining = Number(diningSlider.value);
 
-        const annual = rent * 12 + travel * 12 + equipment + dining * 12;
-        const bizTax = Math.round(annual * 0.05);
-        const profitTax = Math.round(annual * 0.20);
+        const rentAnnual = rent * 12;
+        const travelAnnual = travel * 12;
+        const diningAnnual = dining * 12;
+        const annual = rentAnnual + travelAnnual + equipment + diningAnnual;
+        const bizTaxBase = rentAnnual + travelAnnual + equipment;
+        const bizTax = Math.round(bizTaxBase * 0.05);
+        const profitTax = Math.round(annual * 0.2);
         const total = bizTax + profitTax;
 
-        document.getElementById('rent-value')!.textContent = `NT$ ${format(rent)} / 月`;
-        document.getElementById('travel-value')!.textContent = `NT$ ${format(travel)} / 月`;
-        document.getElementById('equipment-value')!.textContent = `NT$ ${format(equipment)} / 年`;
-        document.getElementById('dining-value')!.textContent = `NT$ ${format(dining)} / 月`;
+        set('rent-value', `NT$ ${format(rent)} / 月`);
+        set('travel-value', `NT$ ${format(travel)} / 月`);
+        set('equipment-value', `NT$ ${format(equipment)} / 年`);
+        set('dining-value', `NT$ ${format(dining)} / 月`);
 
-        document.getElementById('annual-expenses')!.textContent = `NT$ ${format(annual)}`;
-        document.getElementById('business-tax')!.textContent = `+ NT$ ${format(bizTax)}`;
-        document.getElementById('profit-tax')!.textContent = `+ NT$ ${format(profitTax)}`;
-        document.getElementById('total-savings')!.textContent = `NT$ ${format(total)}`;
+        set('annual-expenses', `NT$ ${format(annual)}`);
+        set('business-tax', `+ NT$ ${format(bizTax)}`);
+        set('profit-tax', `+ NT$ ${format(profitTax)}`);
+        set('total-savings', `NT$ ${format(total)}`);
       }
 
-      [rentSlider, travelSlider, equipmentSlider, diningSlider].forEach(s => s.addEventListener('input', calculate));
+      [rentSlider, travelSlider, equipmentSlider, diningSlider].forEach((slider) => {
+        slider.addEventListener('input', calculate);
+      });
       calculate();
     })();
   </script>

@@ -1,116 +1,277 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ChatMockup from '../components/ChatMockup.astro';
 
 const HERO_URL = 'https://lh3.googleusercontent.com/aida-public/AB6AXuC55QMC0I-J7nVuTUqyEIc9UX7MgwgoPdCm3mpM5i0utqzn7ONYNOfDKsaM3py9cR4g_VwY7A374dbUVBqqhqma4P6sGIRqCsyPITgz-UiiDwZ5G7URHh6WuTLZDeStJAzoTiydVhfM6l-xe5U6PCQtNCfnfxDZk9KNkLbxu_EvLUnnbl3qbhb59JkvZmYxyhLB4_daJg9OFEPRzFPoVyvC9wCoSfu4I0uL22JIp7r2kli9Uo9aatzzqijPIVEhjQFvRTuiYTzWJHSm';
+
+const TRIAL_URL = 'https://s1.eccounting.com.tw';
+
+const PAIN_POINTS = [
+  {
+    icon: 'account_balance_wallet',
+    title: '個人接案，稅繳得比想像中多',
+    body: '沒有系統性的收支紀錄，報稅時無從列舉扣除額。個人所得依「執行業務所得」併入綜所稅並適用累進稅率，等於用辛苦賺來的收入去補那個沒能被證明的成本。',
+  },
+  {
+    icon: 'receipt_long',
+    title: '沒有發票，就接不到大案子',
+    body: '企業客戶需要正規憑證才能報帳。若無法開立發票，發包方拿不到進項稅額可以扣抵，許多規模稍大的專案就直接把你排除在外。這不是能力問題，是資格問題。',
+  },
+  {
+    icon: 'event_busy',
+    title: '報稅季才開始找發票',
+    body: '平時沒有記帳習慣，報稅季就只剩翻紙本收據與散落在通訊軟體裡的對話紀錄。耗時之外更容易出錯，一筆遺漏就是一次補件。',
+  },
+];
+
+const FLOW = [
+  { step: '憑證進來', detail: '跟 AI 聊一句、傳一張發票照片，或從電子發票平台匯入 Excel' },
+  { step: '帳目歸類', detail: 'AI 判斷會計科目與可否扣抵營業稅，你覆核確認' },
+  { step: '媒體檔產出', detail: '輸出符合財政部規範的 .txt / .bi，直接匯入申報軟體' },
+];
+
+const CHAT_CAPS = [
+  { icon: 'add_circle', label: '新增', detail: '一句話或一張發票照片，就是一筆帳' },
+  { icon: 'edit', label: '編輯', detail: '說「剛剛那筆改成 3,100」就改完了' },
+  { icon: 'delete', label: '刪除', detail: '說要刪哪一筆，它就刪哪一筆' },
+  { icon: 'insights', label: '分析', detail: '直接問「上個月哪些能扣抵」，它會整理給你' },
+  { icon: 'dataset', label: '統整', detail: '依科目、客戶或時間重新整理你的帳' },
+];
+
+const CHAT_CHANNELS = [
+  { name: '網頁版', plan: '試用方案即可使用', detail: '含使用額度限制' },
+  { name: 'Telegram', plan: '試用版即可使用', detail: '綁定後直接在聊天室記帳' },
+  { name: 'LINE', plan: '需付費方案', detail: '與 Telegram 相同功能' },
+];
+
+const HOME_CHAT_MESSAGES = [
+  { side: 'user' as const, text: '今天到台南出差，住宿 2,400，發票AB12345678' },
+  {
+    side: 'ai' as const,
+    text: '已為您備妥住宿費用的支出紀錄：住宿費 [[NT$ 2,400]]，日期2026/01/01，建議科目為「差旅費」，請你確認。',
+  },
+  { side: 'user' as const, text: '幫我把上個月超過 5,000 的支出列出來' },
+  {
+    side: 'ai' as const,
+    text: '上個月共 3 筆超過 [[NT$ 5,000]]，合計 [[NT$ 21,600]]。',
+  },
+];
 ---
+
 <BaseLayout title="雲記帳 - 你的雲端財務神隊友" currentPath="/">
-  <!-- Hero Section -->
-  <section class="w-full max-w-[1280px] mx-auto px-4 md:px-8 lg:px-16 py-12 md:py-24 flex flex-col md:flex-row items-center gap-8 md:gap-8 lg:gap-12">
-    <div class="flex-1 flex flex-col gap-6 items-start text-left">
-      <h1 class="font-headline-lg text-2xl md:text-4xl lg:text-[36px] leading-tight text-[#1a1c1c] tracking-tight">
-        從自由接案到新創公司，你的雲端財務神隊友。
+  <!-- Hero -->
+  <section class="w-full max-w-ledger mx-auto px-4 md:px-8 lg:px-16 pt-10 pb-16 md:pt-16 md:pb-24 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+    <div class="lg:col-span-6 flex flex-col gap-6 items-start">
+      <h1 class="font-headline-lg text-2xl md:text-4xl leading-[1.25] text-ink tracking-[-0.015em] text-balance">
+        從自由接案到新創公司，<br class="hidden md:block" />
+        你的雲端財務神隊友。
       </h1>
-      <p class="font-body-lg text-base md:text-lg text-[#404750] max-w-2xl leading-relaxed">
-        專為創業者打造的智慧記帳系統。支援多元輸入與收付自動提醒，讓營業稅申報不再是苦差事，將寶貴時間留給企業成長。
+      <p class="font-body-lg text-base md:text-lg text-graphite leading-[1.75] max-w-[42rem]">
+        專為創業者打造的雲端記帳系統。記帳像聊天一樣，直接跟 AI 說一句、或傳一張發票照片，
+        它就幫你新增、修改、歸類、統整。輕鬆產出財政部規範的營業稅媒體申報檔，
+        讓申報不再匆忙。
       </p>
-      <div class="flex flex-col sm:flex-row gap-4 mt-2 w-full sm:w-auto">
-        <a href="/features/" class="border border-[#2C80C6] text-[#2C80C6] hover:bg-[#2C80C6]/10 font-label-sm text-sm md:text-base px-6 py-3 rounded-lg transition-all duration-200 flex items-center justify-center gap-2 text-center">
-          <span class="material-symbols-outlined text-xl">play_circle</span>
-          功能介紹
+      <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+        <a
+          href={TRIAL_URL}
+          target="_blank"
+          rel="noopener"
+          class="bg-ledger-blue text-white font-label-sm text-sm md:text-base px-6 py-3 rounded-md hover:bg-ledger-blue-hover transition-colors duration-200 active:scale-[0.98] flex items-center justify-center gap-2 shadow-xs"
+        >
+          免費試用，無須信用卡
+          <span class="material-symbols-outlined text-lg" aria-hidden="true">arrow_outward</span>
+        </a>
+        <a
+          href="/features/"
+          class="border border-ledger-blue text-ledger-blue hover:bg-ledger-blue/10 font-label-sm text-sm md:text-base px-6 py-3 rounded-md transition-colors duration-200 flex items-center justify-center gap-2"
+        >
+          <span class="material-symbols-outlined text-xl" aria-hidden="true">play_circle</span>
+          看功能怎麼運作
         </a>
       </div>
+      <p class="font-body-md text-sm text-steel">
+        或先了解
+        <a href="/startup/" class="text-ledger-blue underline underline-offset-4 hover:text-ledger-blue-hover transition-colors">為什麼該成立公司</a>
+        的稅務差異。
+      </p>
     </div>
-    <div class="flex-1 w-full h-[280px] md:h-[380px] relative rounded-xl overflow-hidden border border-[#c0c7d2]/50 shadow-[0_4px_12px_rgba(0,0,0,0.05)] bg-white group">
-      <img src={HERO_URL} alt="雲記帳 系統介面" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-      <div class="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur-md p-3 rounded-lg border border-[#e2e2e2] shadow-sm flex items-center justify-between text-xs md:text-sm">
-        <div class="flex items-center gap-2 text-[#005f9d] font-semibold">
-          <span class="material-symbols-outlined text-base">verified</span>
-          雲端財務顧問即時分析中
-        </div>
-        <span class="text-[#404750] font-data-mono">月省 75% 理帳時間</span>
+
+    <figure class="lg:col-span-6 w-full">
+      <div class="relative rounded-lg overflow-hidden border border-mist/50 bg-white shadow-paper">
+        <img
+          src={HERO_URL}
+          alt="雲記帳系統介面：帳目列表與營業稅試算"
+          width="1280"
+          height="960"
+          loading="eager"
+          decoding="async"
+          class="w-full h-full object-cover aspect-[4/3]"
+        />
       </div>
-    </div>
+      <figcaption class="mt-3 flex items-center gap-2 font-label-sm text-sm text-graphite">
+        <span class="material-symbols-outlined text-base text-ledger-blue" aria-hidden="true">description</span>
+        記帳用講的，最後交出去的是財政部規範的媒體申報檔。
+      </figcaption>
+    </figure>
   </section>
 
-  <!-- Pain Points Section -->
-  <section class="w-full bg-[#f9f9f9] py-16 md:py-24 border-t border-b border-[#e2e2e2]/60">
-    <div class="max-w-[1280px] mx-auto px-4 md:px-8 lg:px-16">
-      <div class="text-center mb-12">
-        <h2 class="font-headline-md text-2xl md:text-3xl text-[#1a1c1c] mb-4">
-          創業路上的財務挑戰，我們都懂
+  <!-- Pain Points -->
+  <section class="w-full bg-vellum border-y border-hairline-soft py-16 md:py-24">
+    <div class="max-w-ledger mx-auto px-4 md:px-8 lg:px-16">
+      <div class="max-w-2xl mb-12 md:mb-16">
+        <h2 class="font-headline-md text-2xl md:text-3xl text-ink leading-[1.3] text-balance">
+          創業路上的財務挑戰，不是你能力不夠
         </h2>
-        <p class="font-body-md text-base text-[#404750] max-w-2xl mx-auto">
-          專注於業務發展，把繁雜的數字交給專業的系統。
+        <p class="font-body-lg text-base text-graphite leading-[1.75] mt-4">
+          下面這三件事每天都在消耗小團隊的時間與現金，而且越晚處理越貴。
         </p>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-        <!-- Pain Point 1 -->
-        <div class="bg-white rounded-xl p-6 md:p-8 shadow-[0_4px_12px_rgba(0,0,0,0.05)] border-t-4 border-t-[#2C80C6] border-x border-b border-[#e8e8e8] flex flex-col justify-between hover:shadow-md transition-shadow">
-          <div>
-            <div class="w-12 h-12 rounded-lg bg-[#f3f3f4] flex items-center justify-center text-[#005f9d] mb-4">
-              <span class="material-symbols-outlined text-2xl">account_balance_wallet</span>
+
+      <ul class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+        {PAIN_POINTS.map((point) => (
+          <li class="bg-white rounded-lg p-6 md:p-8 shadow-paper border border-hairline-soft">
+            <div class="w-12 h-12 rounded-md bg-vellum flex items-center justify-center text-ledger-blue mb-5">
+              <span class="material-symbols-outlined text-2xl" aria-hidden="true">{point.icon}</span>
             </div>
-            <h3 class="font-headline-md text-xl text-[#1a1c1c] mb-3">個人接案稅率高</h3>
-            <p class="font-body-md text-sm md:text-base text-[#404750] leading-relaxed">
-              缺乏系統性的收入與支出紀錄，導致報稅時無法有效列舉扣除額，無形中繳納了過高的稅金，侵蝕辛苦賺來的利潤。
-            </p>
-          </div>
-        </div>
-        <!-- Pain Point 2 -->
-        <div class="bg-white rounded-xl p-6 md:p-8 shadow-[0_4px_12px_rgba(0,0,0,0.05)] border-t-4 border-t-[#2C80C6] border-x border-b border-[#e8e8e8] flex flex-col justify-between hover:shadow-md transition-shadow">
-          <div>
-            <div class="w-12 h-12 rounded-lg bg-[#f3f3f4] flex items-center justify-center text-[#005f9d] mb-4">
-              <span class="material-symbols-outlined text-2xl">receipt_long</span>
-            </div>
-            <h3 class="font-headline-md text-xl text-[#1a1c1c] mb-3">工作室沒發票流失大客戶</h3>
-            <p class="font-body-md text-sm md:text-base text-[#404750] leading-relaxed">
-              許多企業客戶需要正規發票報帳，若無法開立合法憑證，將錯失許多大型專案與長期合作的機會，限制業務規模。
-            </p>
-          </div>
-        </div>
-        <!-- Pain Point 3 -->
-        <div class="bg-white rounded-xl p-6 md:p-8 shadow-[0_4px_12px_rgba(0,0,0,0.05)] border-t-4 border-t-[#2C80C6] border-x border-b border-[#e8e8e8] flex flex-col justify-between hover:shadow-md transition-shadow">
-          <div>
-            <div class="w-12 h-12 rounded-lg bg-[#f3f3f4] flex items-center justify-center text-[#005f9d] mb-4">
-              <span class="material-symbols-outlined text-2xl">event_busy</span>
-            </div>
-            <h3 class="font-headline-md text-xl text-[#1a1c1c] mb-3">報稅季帳目混亂</h3>
-            <p class="font-body-md text-sm md:text-base text-[#404750] leading-relaxed">
-              平時沒有養成記帳習慣，一到報稅季就要翻找滿桌的紙本收據與散落的數位明細，耗時耗力且容易出錯。
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="mt-6 pt-4 border-t border-[#f3f3f4] flex justify-end items-center text-xs font-medium text-[#005f9d]">
-        <a href="/startup/">
-          <span>解決方案</span>
-          <span class="material-symbols-outlined text-base">arrow_forward</span>
+            <h3 class="font-headline-md text-xl text-ink leading-[1.45] mb-3">{point.title}</h3>
+            <p class="font-body-md text-sm md:text-base text-graphite leading-[1.75]">{point.body}</p>
+          </li>
+        ))}
+      </ul>
+
+      <div class="mt-8 pt-6 border-t border-mist/40 flex justify-end">
+        <a
+          href="/startup/"
+          class="inline-flex items-center gap-2 font-label-sm text-sm text-ledger-blue hover:text-ledger-blue-hover transition-colors duration-200"
+        >
+          看完整解決方案
+          <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- Quick Showcase Banner -->
-  <section class="w-full max-w-[1280px] mx-auto px-4 md:px-8 lg:px-16 py-16">
-    <div class="bg-gradient-to-r from-[#005f9d] to-[#2079be] rounded-2xl p-8 md:p-12 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-8 md:gap-0 lg:gap-10">
-      <div class="space-y-3 text-center md:text-left">
-        <div class="mb-2">
-          <span class="bg-white/20 text-white font-label-sm text-xs px-3 py-1 rounded-full uppercase tracking-wider">
-            全方位財務智慧體驗
-          </span>
-        </div>
-        <h3 class="text-2xl md:text-3xl font-headline-md font-bold">
-          準備好開啟更輕鬆的記帳流程了嗎？
-        </h3>
-        <p class="text-white/90 font-body-md text-sm md:text-base max-w-xl">
-          立即體驗雲記帳，無須綁定信用卡註冊後即可體驗功能。
+  <!-- AI 記帳模式：how the money gets in -->
+  <section class="w-full max-w-ledger mx-auto px-4 md:px-8 lg:px-16 py-16 md:py-24">
+    <div class="max-w-2xl mb-12 md:mb-16">
+      <h2 class="font-headline-md text-2xl md:text-3xl text-ink leading-[1.3] text-balance">
+        記帳像聊天一樣，不用一個欄位一個欄位填
+      </h2>
+      <p class="font-body-lg text-base text-graphite leading-[1.75] mt-4">
+        傳統記帳軟體要你把每一欄填完，帳才會進來。雲記帳的 AI 記帳模式不一樣：
+        你用一句話描述今天發生什麼事，或直接傳一張發票照片，AI 就把這一筆記進去。
+        要改就說要改，要刪就說要刪，想知道錢花在哪裡就直接問。
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+      <figure>
+        <ChatMockup
+          messages={HOME_CHAT_MESSAGES}
+          footer="帳目已同步，隨時可在網頁版覆核"
+        />
+        <figcaption class="mt-3 font-label-sm text-sm text-graphite">
+          示意對話，非實際資料。AI 先提出建議，最後確認的權限在你手上。
+        </figcaption>
+      </figure>
+
+      <div>
+        <h3 class="font-headline-md text-xl text-ink mb-2">這些事，都用講的</h3>
+        <ul class="border-t border-mist">
+          {CHAT_CAPS.map((cap) => (
+            <li class="flex items-start gap-4 py-4 border-b border-mist">
+              <span class="material-symbols-outlined text-xl text-ledger-blue shrink-0 mt-0.5" aria-hidden="true">
+                {cap.icon}
+              </span>
+              <div>
+                <p class="font-headline-md text-base text-ink">{cap.label}</p>
+                <p class="font-body-md text-sm text-graphite leading-[1.75]">{cap.detail}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+        <p class="mt-5 font-body-md text-sm text-graphite leading-[1.75]">
+          除了打字，發票拍照片直接傳，財政部電子發票平台下載的 Excel 也能丟進對話裡匯入。
         </p>
       </div>
-      <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto">
-        <a href="https://s1.eccounting.com.tw/" target="_blank" class="bg-white text-[#005f9d] font-label-sm text-sm px-6 py-3 rounded-lg hover:bg-[#f3f3f4] transition-colors shadow-sm font-semibold text-center">
-          前往免費使用
-        </a>
+    </div>
+
+    <div class="mt-12 rounded-lg border border-mist/50 bg-white p-6 md:p-8 shadow-paper">
+      <div class="flex flex-col md:flex-row md:items-baseline md:justify-between gap-2 pb-5 border-b border-mist">
+        <h3 class="font-headline-md text-lg text-ink">在哪裡聊都算同一份帳</h3>
+        <p class="font-body-md text-sm text-graphite">換個地方繼續記，帳不會分開。</p>
       </div>
+
+      <ul class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+        {CHAT_CHANNELS.map((channel) => (
+          <li>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="font-headline-md text-base text-ink">{channel.name}</span>
+              <span class="font-data-mono text-xs text-ledger-blue bg-ledger-blue/10 px-2 py-0.5 rounded">
+                {channel.plan}
+              </span>
+            </div>
+            <p class="font-body-md text-sm text-graphite leading-[1.75] mt-2">{channel.detail}</p>
+          </li>
+        ))}
+      </ul>
+
+      <p class="mt-6 pt-5 border-t border-hairline-soft font-body-md text-sm text-steel leading-[1.75]">
+        試用方案就能使用 AI 記帳模式，另有使用額度限制。各方案的實際計價方式以方案頁面為準。LINE 與 Telegram 綁定後，也會繼續收到應收付的到期通知。
+      </p>
+    </div>
+  </section>
+
+  <!-- How it works: the mechanism, stated as a ledger flow -->
+  <section class="w-full max-w-ledger mx-auto px-4 md:px-8 lg:px-16 py-16 md:py-24">
+    <div class="max-w-2xl mb-12 md:mb-16">
+      <h2 class="font-headline-md text-2xl md:text-3xl text-ink leading-[1.3] text-balance">
+        從發票到申報檔，中間只隔三步
+      </h2>
+      <p class="font-body-lg text-base text-graphite leading-[1.75] mt-4">
+        差別不在「記帳記得比較快」，而在於最後產出的那份檔案能不能直接匯進申報軟體。
+      </p>
+    </div>
+
+    <ol class="border-t border-mist">
+      {FLOW.map((item) => (
+        <li class="grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-8 py-6 md:py-8 border-b border-mist items-baseline">
+          <h3 class="md:col-span-3 font-headline-md text-lg md:text-xl text-ink">{item.step}</h3>
+          <p class="md:col-span-9 font-body-md text-sm md:text-base text-graphite leading-[1.75]">{item.detail}</p>
+        </li>
+      ))}
+    </ol>
+
+    <div class="mt-8 rounded-lg bg-white border border-mist/50 p-5 md:p-6 flex items-start gap-3">
+      <span class="material-symbols-outlined text-xl text-steel shrink-0 mt-0.5" aria-hidden="true">info</span>
+      <p class="font-body-md text-sm text-graphite leading-[1.75]">
+        媒體檔是否可扣抵，仍取決於個別憑證與業務情境。系統會用 AI 給出建議，最後請自行確認，
+        或交由會計師、記帳士把關。
+        <a href="/faq/" class="text-ledger-blue underline underline-offset-4 hover:text-ledger-blue-hover transition-colors">看常見問題</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Closing CTA -->
+  <section class="w-full px-4 md:px-8 lg:px-16 pb-16 md:pb-24">
+    <div class="max-w-ledger mx-auto bg-ledger-blue rounded-xl p-8 md:p-12 text-white flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+      <div class="max-w-xl">
+        <h2 class="font-headline-md text-2xl md:text-3xl font-bold leading-[1.3] text-balance">
+          從今天的第一張發票開始
+        </h2>
+        <p class="text-white/90 font-body-md text-sm md:text-base leading-[1.75] mt-3">
+          註冊即可試用，不綁定信用卡。第一筆帳不用打開任何表單，跟 AI 講一句就好。
+        </p>
+      </div>
+      <a
+        href={TRIAL_URL}
+        target="_blank"
+        rel="noopener"
+        class="shrink-0 bg-white text-ledger-blue font-label-sm text-sm px-6 py-3 rounded-md hover:bg-vellum transition-colors duration-200 font-semibold shadow-xs flex items-center justify-center gap-2"
+      >
+        前往免費使用
+        <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_outward</span>
+      </a>
     </div>
   </section>
 </BaseLayout>

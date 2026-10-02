@@ -27,6 +27,8 @@ function isActive(href: string) {
   return currentPath.startsWith(href);
 }
 
+const TRIAL_URL = 'https://s1.eccounting.com.tw';
+
 const SITE_URL = import.meta.env.SITE;
 const homeUrl = new URL('/', SITE_URL).href;
 const pageUrl = new URL(currentPath, SITE_URL).href;
@@ -97,6 +99,11 @@ const structuredData = {
     <title>{title}</title>
     <meta name="description" content={description} />
     {import.meta.env.SITE && <link rel="canonical" href={new URL(currentPath, import.meta.env.SITE).href} />}
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    <meta name="theme-color" content="#f9f9f9" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@600;700;800&family=Noto+Sans+TC:wght@400;500;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -113,24 +120,33 @@ const structuredData = {
       </>
     )}
   </head>
-  <body class="bg-[#f9f9f9] text-[#1a1c1c] font-sans antialiased selection:bg-[#005f9d]/20 selection:text-[#005f9d]">
+  <body class="bg-paper text-ink font-sans antialiased">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[60] focus:rounded-md focus:bg-ledger-blue focus:px-4 focus:py-2 focus:font-label-sm focus:text-sm focus:text-white"
+    >
+      跳至主要內容
+    </a>
     <div class="min-h-screen flex flex-col">
       <!-- Navbar -->
-      <header class="fixed top-0 left-0 w-full z-50 bg-[#f9f9f9]/95 backdrop-blur-md border-b border-[#c0c7d2]/40 shadow-xs">
-        <div class="max-w-[1280px] mx-auto px-4 md:px-16 h-16 flex items-center justify-between">
-          <a href="/" class="flex items-center gap-2 scale-95 active:scale-90 transition-transform duration-200 group">
-            <img src={LOGO_URL} alt="雲記帳 Logo" class="h-8 w-auto object-contain transition-opacity group-hover:opacity-90" />
-            <span class="font-headline-md text-xl md:text-2xl font-bold text-[#005f9d] tracking-tight">雲記帳</span>
+      <header class="fixed top-0 left-0 w-full z-50 bg-paper/95 backdrop-blur-md border-b border-mist/40 shadow-xs">
+        <div class="max-w-ledger mx-auto px-4 md:px-16 h-16 flex items-center justify-between">
+          <a href="/" class="flex items-center gap-2 py-2 -my-2 transition-opacity duration-200 hover:opacity-80">
+            <img src={LOGO_URL} alt="" width="32" height="32" class="h-8 w-auto object-contain" />
+            <span class="font-headline-md text-2xl font-bold text-ledger-blue tracking-tight">雲記帳</span>
           </a>
-          <nav class="hidden md:flex items-center gap-4 lg:gap-8">
+          <nav class="hidden md:flex items-center gap-4 lg:gap-8" aria-label="主要導覽">
             {navItems.map((item) => (
               <a
                 href={item.href}
+                aria-current={isActive(item.href) ? 'page' : undefined}
                 class:list={[
-                  'font-label-sm text-sm px-2 py-1 transition-all',
+                  // relative + before grows the hit area vertically to ~44px
+                  // without changing the box, so the active underline stays tight.
+                  'relative font-label-sm text-sm px-2 py-1 transition-colors duration-200 before:absolute before:inset-x-0 before:-top-2 before:-bottom-2 before:content-[""]',
                   isActive(item.href)
-                    ? 'text-[#005f9d] font-bold border-b-2 border-[#005f9d] pb-1'
-                    : 'text-[#404750] hover:text-[#005f9d] hover:bg-[#f3f3f4] rounded',
+                    ? 'text-ledger-blue font-bold border-b-2 border-ledger-blue pb-1'
+                    : 'text-graphite hover:text-ledger-blue hover:bg-vellum rounded',
                 ]}
               >
                 {item.label}
@@ -139,53 +155,88 @@ const structuredData = {
           </nav>
 
           <div class="hidden md:flex items-center gap-4">
-            <a href="https://s1.eccounting.com.tw" target="_blank" class="bg-[#005f9d] text-white font-label-sm text-sm px-6 py-2 rounded-lg hover:bg-[#2079be] transition-all duration-200 scale-95 active:scale-90 shadow-xs cursor-pointer">立即免費試用</a>
+            <a
+              href={TRIAL_URL}
+              target="_blank"
+              rel="noopener"
+              class="bg-ledger-blue text-white font-label-sm text-sm px-6 py-3 rounded-md hover:bg-ledger-blue-hover transition-colors duration-200 active:scale-[0.97] shadow-xs"
+            >
+              立即免費試用
+            </a>
           </div>
 
           <!-- Mobile Menu Button -->
-          <button id="mobile-menu-btn" class="md:hidden text-[#404750] p-2 rounded-lg hover:bg-[#f3f3f4] transition-colors" aria-label="Toggle Menu">
-            <span class="material-symbols-outlined text-2xl">menu</span>
+          <button
+            id="mobile-menu-btn"
+            type="button"
+            class="md:hidden text-graphite p-2.5 -mr-2.5 rounded-md hover:bg-vellum transition-colors"
+            aria-label="開啟選單"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+          >
+            <span class="material-symbols-outlined text-2xl" aria-hidden="true">menu</span>
           </button>
         </div>
         <!-- Mobile Menu Drawer -->
-        <div id="mobile-menu" class="md:hidden hidden bg-[#ffffff] border-b border-[#c0c7d2]/40 px-4 py-4 space-y-3 shadow-lg">
-          {navItems.map((item) => (
+        <div
+          id="mobile-menu"
+          class="md:hidden hidden bg-white border-b border-mist/40 px-4 py-4 space-y-1 shadow-structure"
+        >
+          <nav aria-label="行動裝置導覽" class="flex flex-col">
+            {navItems.map((item) => (
+              <a
+                href={item.href}
+                aria-current={isActive(item.href) ? 'page' : undefined}
+                class:list={[
+                  'block font-label-sm text-lg px-4 py-3 rounded-md transition-colors duration-200',
+                  isActive(item.href)
+                    ? 'bg-ledger-blue/10 text-ledger-blue font-bold'
+                    : 'text-graphite hover:bg-vellum',
+                ]}
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+          <div class="pt-3 mt-3 border-t border-hairline">
             <a
-              href={item.href}
-              class:list={[
-                'block w-full text-center font-label-sm text-base px-4 py-2.5 rounded-lg transition-colors',
-                isActive(item.href)
-                  ? 'bg-[#005f9d]/10 text-[#005f9d] font-bold'
-                  : 'text-[#404750] hover:bg-[#f3f3f4]',
-              ]}
+              href={TRIAL_URL}
+              target="_blank"
+              rel="noopener"
+              class="flex items-center justify-center gap-1.5 w-full bg-ledger-blue text-white font-label-sm text-sm px-6 py-3 rounded-md hover:bg-ledger-blue-hover transition-colors duration-200 shadow-xs"
             >
-              {item.label}
+              立即免費試用
+              <span class="material-symbols-outlined text-lg" aria-hidden="true">open_in_new</span>
             </a>
-          ))}
-          <div class="pt-3 border-t border-[#f3f3f4] text-center">
-            <a href="https://s1.eccounting.com.tw" target="_blank" class="w-full bg-[#005f9d] text-white font-label-sm text-sm text-center px-6 py-2 rounded-lg hover:bg-[#2079be] transition-all duration-200 shadow-xs cursor-pointer">立即免費試用</a>
           </div>
         </div>
       </header>
 
       <!-- Main Content -->
-      <main class="flex-1 pt-20">
+      <main id="main" tabindex="-1" class="flex-1 pt-20 focus:outline-none">
         <slot />
       </main>
 
       <!-- Footer -->
-      <footer class="bg-[#ffffff] border-t border-[#c0c7d2]/40 w-full mt-auto">
-        <div class="max-w-[1280px] mx-auto py-8 px-4 md:px-16 flex flex-col md:flex-row justify-between items-center gap-4">
+      <footer class="bg-white border-t border-mist/40 w-full mt-auto">
+        <div class="max-w-ledger mx-auto py-10 px-4 md:px-16 flex flex-col md:flex-row justify-between items-center gap-6">
           <div class="flex items-center gap-2">
-            <img src={LOGO_URL} alt="雲記帳 Logo" class="h-6 w-auto object-contain opacity-90" />
-            <span class="text-xl font-headline-md font-bold text-[#1a1c1c]">雲記帳</span>
+            <img src={LOGO_URL} alt="" width="24" height="24" class="h-6 w-auto object-contain" />
+            <span class="text-2xl font-headline-md font-bold text-ink">雲記帳</span>
           </div>
-          <div class="flex items-center gap-6">
-            <a href="/privacy/" class="font-label-sm text-sm text-[#404750] hover:text-[#1a1c1c] hover:underline transition-all opacity-80 hover:opacity-100">隱私權政策</a>
-            <a href="/terms/" class="font-label-sm text-sm text-[#404750] hover:text-[#1a1c1c] hover:underline transition-all opacity-80 hover:opacity-100">服務條款</a>
-          </div>
-          <div class="flex items-center text-sm">
-            © {currentYear} 雲橙工作室 版權所有
+          <nav aria-label="頁尾導覽" class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+            {navItems.map((item) => (
+              <a href={item.href} class="py-1 -my-1 font-label-sm text-sm text-graphite hover:text-ink hover:underline underline-offset-4 transition-colors duration-200">
+                {item.label}
+              </a>
+            ))}
+          </nav>
+          <div class="flex flex-col md:items-end gap-1 text-sm text-graphite">
+            <span>© {currentYear} 雲橙工作室 版權所有</span>
+            <span class="flex gap-4">
+              <a href="/privacy/" class="py-1 -my-1 hover:text-ink hover:underline underline-offset-4 transition-colors duration-200">隱私權政策</a>
+              <a href="/terms/" class="py-1 -my-1 hover:text-ink hover:underline underline-offset-4 transition-colors duration-200">服務條款</a>
+            </span>
           </div>
         </div>
       </footer>
@@ -193,9 +244,36 @@ const structuredData = {
 
     <!-- Mobile menu toggle -->
     <script>
-      document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
-        document.getElementById('mobile-menu')?.classList.toggle('hidden');
-      });
+      (function () {
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        if (!(menuBtn instanceof HTMLButtonElement) || !(menu instanceof HTMLElement)) return;
+
+        const icon = menuBtn.querySelector('.material-symbols-outlined');
+        const label = menuBtn.getAttribute('aria-label');
+
+        const setOpen = (open: boolean) => {
+          menu.classList.toggle('hidden', !open);
+          menuBtn.setAttribute('aria-expanded', String(open));
+          if (label) menuBtn.setAttribute('aria-label', open ? '關閉選單' : '開啟選單');
+          if (icon) icon.textContent = open ? 'close' : 'menu';
+        };
+
+        menuBtn.addEventListener('click', function () {
+          setOpen(menuBtn.getAttribute('aria-expanded') !== 'true');
+        });
+
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' && menuBtn.getAttribute('aria-expanded') === 'true') {
+            setOpen(false);
+            menuBtn.focus();
+          }
+        });
+
+        window.addEventListener('resize', function () {
+          if (window.innerWidth >= 768) setOpen(false);
+        });
+      })();
     </script>
   </body>
 </html>

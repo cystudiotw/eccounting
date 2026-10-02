@@ -1,0 +1,74 @@
+---
+interface Message {
+  side: 'user' | 'ai';
+  text: string;
+}
+
+interface Props {
+  messages: Message[];
+  title?: string;
+  badge?: string;
+  footerIcon?: string;
+  footer?: string;
+}
+
+const {
+  messages,
+  title = 'AI 記帳模式',
+  badge = '示意畫面',
+  footerIcon = 'task_alt',
+  footer = '',
+} = Astro.props;
+
+type Segment = { mono: boolean; value: string };
+
+const segments = (text: string): Segment[] =>
+  text
+    .split(/(\[\[.*?\]\])/)
+    .filter(Boolean)
+    .map((part) =>
+      part.startsWith('[[')
+        ? { mono: true, value: part.slice(2, -2) }
+        : { mono: false, value: part }
+    );
+---
+
+<div class="rounded-lg border border-mist/50 bg-white shadow-paper p-5 md:p-6">
+  <div class="flex items-center gap-2 pb-4 border-b border-hairline-soft">
+    <span class="material-symbols-outlined text-xl text-ledger-blue" aria-hidden="true">forum</span>
+    <span class="font-label-sm text-sm font-bold text-ink">{title}</span>
+    <span class="font-data-mono text-xs text-steel ml-auto">{badge}</span>
+  </div>
+
+  <div class="mt-4 space-y-3">
+    {
+      messages.map((message) => (
+        <div class={message.side === 'user' ? 'flex justify-end' : 'flex justify-start'}>
+          <p
+            class:list={[
+              'max-w-[85%] font-body-md text-sm rounded-lg px-3.5 py-2.5 leading-[1.6]',
+              message.side === 'user'
+                ? 'bg-ledger-blue text-white rounded-br-sm'
+                : 'bg-vellum text-ink rounded-bl-sm',
+            ]}
+          >
+            {segments(message.text).map((segment) =>
+              segment.mono ? <span class="font-data-mono">{segment.value}</span> : segment.value
+            )}
+          </p>
+        </div>
+      ))
+    }
+  </div>
+
+  {
+    footer && (
+      <div class="mt-4 flex items-center gap-2 rounded-md bg-sage-wash px-3 py-2.5">
+        <span class="material-symbols-outlined text-lg text-sage" aria-hidden="true">
+          {footerIcon}
+        </span>
+        <span class="font-label-sm text-sm text-sage font-medium">{footer}</span>
+      </div>
+    )
+  }
+</div>

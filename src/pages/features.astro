@@ -1,189 +1,508 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ChatMockup from '../components/ChatMockup.astro';
 
-const FEATURE_OCR_URL = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCZst70K3rB53qJTwF-RVpUEsfaDfwJKFm0Sn33QL2IvUXcALR4g44PBGWUdYzJvfaNrxKC8vVj-zj9WFiTeY5N--WmMHq-yxotqbzLQpsV8Ue9oBM7LOfWwTVSU8W_k8fkpXxMYzERHy21mwt5RwP66ThC9uhQ9j0RFnT4gVpVzQU7_sqB-1EJ2PA0K0DrnUb0a57aFmoqvVJbP6C-DFpJShu1PvbjSkhhXnFJZ0OlwDUbxNczWKGqaa9fWI35ZKpdg9agLaisqoCS';
-const FEATURE_AI_URL = 'https://lh3.googleusercontent.com/aida-public/AB6AXuDxw-4RKVMn9-ok6HzAgitFbkUXyf1zu0sqEj9gRRunJaoDJLW2WFygV9YgNw50P3fVN806ikd7EUu5mF-hTlxdYSm3JTEioFysJRnRsOCOjMkPk_nUyofqmKymZnWFGODw8eeutERBL7Joby-wzdKoNVUTdIL2g1UpjDvjZv7wemERMssDSKL02GqprPIvrKyl2RtT7NrBXTSGmM7oZtv5J9XMV5fyTIPJOxmQ4uX11cfNgQ3HXKQcmjeO3x_5os_sYom2hNDjcFRc';
-const FEATURE_SYNC_URL = 'https://lh3.googleusercontent.com/aida-public/AB6AXuB3OhCCA-zLoS7SuyiaZrFiJqtVzf_gsylFxqIgWCYYLTMvolsT2QCCggJYi-zGD6XcZPY_QllcUlq6W9IFQs3f9pN9XFG7t79gSw0yFkZHuxcenOIU3zx79iHK9K4ZvpxiTzFThAi7Kn4II6mkEy2alGbM2IUOReXiUpxrFKmhe1lCF_r_WPkJOCtLAkYgtspQ1xyUrLYEJlvDhoK4ptrfxTTDROnKLzQFTAC1euWE5WTd_uR3Ei9_mBGos9o7RuadwpdgeElLQI6F';
+const TRIAL_URL = 'https://s1.eccounting.com.tw';
+
+type Row = { label: string; detail: string };
+type Feature = {
+  icon: string;
+  title: string;
+  lead: string;
+  checks: string[];
+  rows: Row[];
+  reverse: boolean;
+  panel: 'chat' | 'channels' | 'file' | 'team' | 'analysis';
+};
+
+const CHAT_CHANNEL_PANEL = [
+  { name: '網頁版', plan: '試用方案即可使用', note: '含使用額度限制' },
+  { name: 'Telegram', plan: '試用版即可使用', note: '綁定後在聊天室直接記帳' },
+  { name: 'LINE', plan: '需付費方案', note: '與 Telegram 相同功能' },
+];
+
+// 與首頁同一個元件，換成「新增 → 編輯」的另一段示範對話。
+const AI_CHAT_MESSAGES = [
+  { side: 'user' as const, text: '昨天跟客戶聚餐我請客，3,600' },
+  {
+    side: 'ai' as const,
+    text: '已建立支出紀錄：交際費 [[NT$ 3,600]]，日期2026/01/01。不得扣抵進項營業稅。',
+  },
+  { side: 'user' as const, text: '改成 3,200' },
+  { side: 'ai' as const, text: '已更新為 [[NT$ 3,200]]，其餘欄位不變。' },
+];
+
+const TEAM_MEMBERS = [
+  { name: '王小明', role: '管理者', scope: '可編輯' },
+  { name: '陳怡君', role: '編輯者', scope: '可編輯' },
+  { name: '張家豪', role: '查閱者', scope: '唯讀' },
+];
+
+const AUDIT_LOG = [
+  { time: '02/14 09:12', who: '陳怡君', what: '新增支出 NT$ 8,400' },
+  { time: '02/14 09:41', who: '王小明', what: '調整科目「差旅費」' },
+  { time: '02/13 18:03', who: '張家豪', what: '檢視 2026/01 報表' },
+];
+
+type ReceivableRange = {
+  label: string;
+  receivableCount: number;
+  receivableAmount: number;
+  payableCount: number;
+  payableAmount: number;
+  active: boolean;
+};
+
+const RECEIVABLE_RANGES: ReceivableRange[] = [
+  {
+    receivableCount: 3,
+    receivableAmount: 128000,
+    payableCount: 2,
+    payableAmount: 64000,
+    active: false,
+  },
+  {
+    receivableCount: 7,
+    receivableAmount: 286000,
+    payableCount: 4,
+    payableAmount: 126000,
+    active: true,
+  },
+  {
+    receivableCount: 15,
+    receivableAmount: 592000,
+    payableCount: 8,
+    payableAmount: 303000,
+    active: false,
+  },
+];
+
+const THREE_YEAR = [
+  { year: '2024', cash: 320, invoice: 296 },
+  { year: '2025', cash: 415, invoice: 402 },
+  { year: '2026', cash: 268, invoice: 254 },
+];
+
+const YEAR_MAX = Math.max(...THREE_YEAR.map((row) => Math.max(row.cash, row.invoice)));
+
+const CATEGORY_STATS = [
+  { label: '服務收入', pct: 46 },
+  { label: '差旅費', pct: 18 },
+  { label: '交際費', pct: 12 },
+];
+
+const EXPORTS = [
+  { label: '每月明細 CSV', detail: '下載' },
+  { label: '每月明細 PDF', detail: '下載' },
+];
+
+const nt = (n: number) => `NT$ ${n.toLocaleString('en-US')}`;
+
+const FEATURES: Feature[] = [
+  {
+    icon: 'forum',
+    title: 'AI 記帳模式：像聊天一樣記帳',
+    lead:
+      '不用開表單。你直接用一句話描述今天發生什麼事，或傳一張發票照片，AI 就把這一筆記進去，而且不只新增而已。改金額、刪掉記錯的那筆、問它上個月哪些能扣抵，都用講的。',
+    checks: [
+      '一句話新增一筆帳，不必填欄位',
+      '用講的編輯與刪除，記錯了改得掉',
+      '直接問它：分析、統整、列出符合條件的項目',
+      '發票拍照直接傳，AI 讀出號碼、金額與日期',
+      '財政部電子發票平台的 Excel 一併丟進對話匯入',
+      '習慣手動輸入的人，傳統表單仍然可用',
+    ],
+    rows: [],
+    reverse: false,
+    panel: 'chat',
+  },
+  {
+    icon: 'chat',
+    title: '在 LINE 與 Telegram 裡直接記帳',
+    lead:
+      '已經在用通訊軟體談事情了，記帳不該再逼你開另一個 App。把 LINE 或 Telegram 綁定之後，在聊天室裡傳訊息就完成記帳，照片和 Excel 也照樣能丟。同一份帳，不會因為換個地方記就分開。',
+    checks: [
+      '在聊天室直接新增、修改、刪除帳目',
+      '照片與電子發票平台 Excel 都能從聊天裡送出',
+      '帳目即時同步回雲端，網頁版看得到完整資料',
+      '沿用同一組 AI 記帳能力與科目建議',
+    ],
+    rows: [],
+    reverse: true,
+    panel: 'channels',
+  },
+  {
+    icon: 'description',
+    title: '產出財政部規範的媒體申報檔',
+    lead:
+      '記帳順不順順，決定了這件事能不能撐一年。日常憑證管理得再乾淨，最後都要變成一份國稅局能接受的檔案。雲記帳直接輸出符合財政部規範的 .txt 與 .bi，可匯入營業稅申報軟體，或直接交給合作的會計師。',
+    checks: [],
+    rows: [
+      { label: '格式正確', detail: '依財政部規範產出，不需事後修檔。' },
+      { label: '兩種檔案', detail: '.txt 與 .bi 依你的申報流程選擇。' },
+      { label: '交接無障礙', detail: '給自己用或交給記帳士，流程一樣。' },
+    ],
+    reverse: false,
+    panel: 'file',
+  },
+  {
+    icon: 'group',
+    title: '多用戶雲端同步',
+    lead:
+      '支援合夥人與外包團隊共同記帳，權限分明。透過角色權限管理系統確保敏感財務資料的安全，團隊成員無論身在何處都能即時協作。',
+    checks: [
+      '多層級權限設定：管理者、編輯者、查閱者',
+      '即時資料雲端同步與備份',
+      '完整操作稽核日誌，誰動了哪筆都留痕',
+    ],
+    rows: [],
+    reverse: true,
+    panel: 'team',
+  },
+  {
+    icon: 'monitoring',
+    title: '財務分析與應收付通知',
+    lead:
+      '帳記得夠久，數字就會自己說話。應收付快到期時主動提醒，也可以切到一季、半年或一年的範圍看總額，資料直接搬進行事曆。收益分析拉出近年金流與發票紀錄的進出比較，也能依會計科目分類統計。每個月的明細都能匯出 CSV 或 PDF，交給會計師時不用重打一次。',
+    checks: [
+      '應收付到期前提醒，可切一季／半年／一年查看',
+      '應收付資料也能直接在行事曆上看',
+      '收益分析比較近年金流與發票紀錄的進出',
+      '依會計科目分類統計收支',
+      '每月明細可匯出 CSV 與 PDF',
+    ],
+    rows: [],
+    reverse: false,
+    panel: 'analysis',
+  },
+];
 
 const additionalSchema = [
   {
     '@type': 'ItemList',
     name: '雲記帳核心功能',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: '多種輸入記帳方式' },
-      { '@type': 'ListItem', position: 2, name: 'AI 驅動的自動化記帳' },
-      { '@type': 'ListItem', position: 3, name: '多用戶雲端同步' },
+      { '@type': 'ListItem', position: 1, name: 'AI 記帳模式：像聊天一樣記帳' },
+      { '@type': 'ListItem', position: 2, name: '在 LINE 與 Telegram 裡直接記帳' },
+      { '@type': 'ListItem', position: 3, name: '產出財政部規範的媒體申報檔' },
+      { '@type': 'ListItem', position: 4, name: '多用戶雲端同步' },
+      { '@type': 'ListItem', position: 5, name: '財務分析與應收付通知' },
     ],
   },
 ];
 ---
+
 <BaseLayout title="功能介紹 - 雲記帳 - 你的雲端財務神隊友" currentPath="/features/" additionalSchema={additionalSchema}>
-  <div class="w-full max-w-[1280px] mx-auto px-4 md:px-8 lg:px-16 pt-10 pb-20">
+  <div class="w-full max-w-ledger mx-auto px-4 md:px-8 lg:px-16 pt-10 pb-20">
     <!-- Header -->
-    <section class="text-center mb-16 md:mb-24">
-      <h1 class="font-headline-lg text-2xl md:text-4xl text-[#005f9d] mb-4">核心功能詳解</h1>
-      <p class="font-body-lg text-base md:text-lg text-[#404750] max-w-2xl mx-auto leading-relaxed">
-        為新創團隊與自由工作者量身打造的專業雲端記帳解決方案，透過自動化與人工智慧，讓您的財務管理更高效、更精確。
+    <header class="max-w-2xl mb-16 md:mb-24">
+      <h1 class="font-headline-lg text-2xl md:text-4xl text-ink tracking-[-0.015em] leading-[1.25] text-balance">
+        核心功能詳解
+      </h1>
+      <p class="font-body-lg text-base md:text-lg text-graphite leading-[1.75] mt-4">
+        為新創團隊與自由工作者打造的雲端記帳系統。記帳用講的，交出去的是報稅可以直接用的檔案。
       </p>
-    </section>
+    </header>
 
-    <section class="mb-24 md:mb-32">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-10 lg:gap-16 items-center">
-        <div class="order-2 md:order-1 space-y-6">
-          <div class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-[#f3f3f4] text-[#005f9d] mb-2 shadow-xs">
-            <span class="material-symbols-outlined text-2xl">photo_camera</span>
-          </div>
-          <h2 class="font-headline-md text-2xl md:text-3xl text-[#1a1c1c]">多種輸入記帳方式</h2>
-          <p class="font-body-md text-base text-[#404750] leading-relaxed">
-            收入、支出、發票除了能手動輸入，也能透過電子發票平台資料自動匯入。還能支援各類常見發票格式，直接AI辨識發票QRCode、發票號碼、金額與日期，大幅減少人工建檔的時間與錯誤率，讓財務歸檔變得輕鬆無負擔。
-          </p>
-          <ul class="space-y-3 font-body-md text-sm md:text-base text-[#404750]">
-            <li class="flex items-center gap-2">
-              <span class="material-symbols-outlined text-[#005f9d] text-xl">check_circle</span>
-              支援電子發票平台匯入
-            </li>
-            <li class="flex items-center gap-2">
-              <span class="material-symbols-outlined text-[#005f9d] text-xl">check_circle</span>
-              支援多種發票格式 (電子發票、二聯式、三聯式、手寫發票)
-            </li>
-            <li class="flex items-center gap-2">
-              <span class="material-symbols-outlined text-[#005f9d] text-xl">check_circle</span>
-              自動進銷項稅額計算
-            </li>
-          </ul>
-        </div>
-        <div class="order-1 md:order-2">
-          <div class="rounded-xl overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-[#c0c7d2]/50 bg-white relative aspect-[4/3] group">
-            <img src={FEATURE_OCR_URL} alt="拍照辨識示意圖" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-          </div>
-        </div>
-      </div>
-    </section>
+    {
+      FEATURES.map((feature) => (
+        <section class="mb-20 md:mb-28 last:mb-0">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+            <div class={feature.reverse ? 'lg:order-2' : ''}>
+              <div class="w-12 h-12 rounded-md bg-vellum text-ledger-blue flex items-center justify-center mb-5 shadow-xs">
+                <span class="material-symbols-outlined text-2xl" aria-hidden="true">
+                  {feature.icon}
+                </span>
+              </div>
+              <h2 class="font-headline-md text-2xl md:text-3xl text-ink leading-[1.3] text-balance">
+                {feature.title}
+              </h2>
+              <p class="font-body-md text-base text-graphite leading-[1.75] mt-4">{feature.lead}</p>
 
-    <section class="mb-24 md:mb-32">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-10 lg:gap-16 items-center">
-        <div class="order-2 space-y-6">
-          <div class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-[#f3f3f4] text-[#005f9d] mb-2 shadow-xs">
-            <span class="material-symbols-outlined text-2xl">group</span>
-          </div>
-          <h2 class="font-headline-md text-2xl md:text-3xl text-[#1a1c1c]">多用戶雲端同步</h2>
-          <p class="font-body-md text-base text-[#404750] leading-relaxed">
-            支援合夥人與外包團隊共同記帳，權限分明。透過角色權限管理系統，確保敏感財務資料的安全性。無論身在何處，團隊成員皆可即時協作，提升整體營運效率。
-          </p>
-          <ul class="space-y-3 font-body-md text-sm md:text-base text-[#404750]">
-            <li class="flex items-center gap-2">
-              <span class="material-symbols-outlined text-[#005f9d] text-xl">check_circle</span>
-              多層級權限設定 (管理者/編輯者/查閱者)
-            </li>
-            <li class="flex items-center gap-2">
-              <span class="material-symbols-outlined text-[#005f9d] text-xl">check_circle</span>
-              即時資料雲端同步與備份
-            </li>
-            <li class="flex items-center gap-2">
-              <span class="material-symbols-outlined text-[#005f9d] text-xl">check_circle</span>
-              完整操作稽核日誌
-            </li>
-          </ul>
-        </div>
-        <div class="order-1">
-          <div class="rounded-xl overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-[#c0c7d2]/50 bg-white relative aspect-[4/3] group">
-            <img src={FEATURE_SYNC_URL} alt="多用戶雲端同步 管理介面" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-          </div>
-        </div>
-      </div>
-    </section>
+              {feature.checks.length > 0 && (
+                <ul class="mt-6 space-y-3">
+                  {feature.checks.map((point) => (
+                    <li class="flex items-start gap-3 font-body-md text-sm md:text-base text-graphite">
+                      <span
+                        class="material-symbols-outlined text-xl text-ledger-blue shrink-0 mt-0.5"
+                        aria-hidden="true"
+                      >
+                        check_circle
+                      </span>
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
 
-    <section class="mb-24 md:mb-32">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-10 lg:gap-16 items-center">
-        <div class="order-2 md:order-1 space-y-6">
-          <div class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-[#f3f3f4] text-[#005f9d] mb-2 shadow-xs">
-            <span class="material-symbols-outlined text-2xl">bolt</span>
-          </div>
-          <h2 class="font-headline-md text-2xl md:text-3xl text-[#1a1c1c]">報稅季不再手忙腳亂</h2>
-          <p class="font-body-md text-base text-[#404750] leading-relaxed">
-            雲端記帳系統讓日常進項憑證管理變得輕鬆簡單。不論是傳統發票還是手開發票，都能透過直覺的介面快速建檔；更支援電子發票輕鬆匯入，大幅減少手動輸入的時間，讓帳務井然有序。
-          </p>
-          <ul class="space-y-4">
-            <li class="flex items-start gap-3">
-              <span class="material-symbols-outlined text-[#005f9d] text-2xl mt-0.5">check_circle</span>
-              <div>
-                <strong class="font-label-sm text-[#1a1c1c] text-base block">發票匯入與快速建檔</strong>
-                <span class="font-body-md text-sm md:text-base text-[#404750]">支援電子發票快速匯入與憑證輕鬆新增，將帳務數位化集中管理，徹底告別紙本堆疊與遺失風險。</span>
-              </div>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="material-symbols-outlined text-[#005f9d] text-2xl mt-0.5">check_circle</span>
-              <div>
-                <strong class="font-label-sm text-[#1a1c1c] text-base block">一鍵匯出媒體檔</strong>
-                <span class="font-body-md text-sm md:text-base text-[#404750]">無縫產出符合財政部申報規範的格式，無論是直接交給會計師處理，或是自行申報都順暢無礙。</span>
-              </div>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="material-symbols-outlined text-[#005f9d] text-2xl mt-0.5">check_circle</span>
-              <div>
-                <strong class="font-label-sm text-[#1a1c1c] text-base block">5 分鐘完成申報準備</strong>
-                <span class="font-body-md text-sm md:text-base text-[#404750]">省去繁瑣的對帳與單據整理流程，將節省下來的寶貴時間，專注在更重要的業務發展上。</span>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <div class="order-1 md:order-2">
-          <div class="relative h-64 md:h-96 rounded-xl overflow-hidden shadow-[0px_4px_12px_rgba(0,0,0,0.05)] bg-gradient-to-br from-[#cee1ff] to-[#f3f3f4] border border-[#c0c7d2]/50 flex items-center justify-center p-6">
-            <div class="grid grid-cols-2 gap-4 w-full max-w-sm">
-              <div class="bg-white p-4 rounded-lg shadow-xs border border-[#e2e2e2] space-y-2">
-                <div class="h-2 bg-[#e2e2e2] rounded w-1/2"></div>
-                <div class="h-8 bg-[#cee1ff] rounded w-full flex items-center px-2 text-xs font-data-mono text-[#005f9d] font-bold">銷項發票 16 筆</div>
-              </div>
-              <div class="bg-white p-4 rounded-lg shadow-xs border border-[#e2e2e2] space-y-2">
-                <div class="h-2 bg-[#e2e2e2] rounded w-1/2"></div>
-                <div class="h-8 bg-[#d0e4ff] rounded w-full flex items-center px-2 text-xs font-data-mono text-[#005f9d] font-bold">進項發票 42 筆</div>
-              </div>
-              <div class="col-span-2 bg-white p-4 rounded-lg shadow-sm border border-[#005f9d]/30 flex justify-between items-center">
-                <div>
-                  <div class="text-xs text-[#005f9d] font-bold">媒體檔匯出就緒</div>
-                  <div class="text-[11px] text-[#404750]">格式: 營業稅軟體匯入檔 .TXT, .BI</div>
+              {feature.rows.length > 0 && (
+                <dl class="mt-6 border-t border-mist">
+                  {feature.rows.map((row) => (
+                    <div class="py-3 border-b border-mist">
+                      <dt class="font-label-sm text-base font-bold text-ink">{row.label}</dt>
+                      <dd class="font-body-md text-sm md:text-base text-graphite leading-[1.75] mt-1">
+                        {row.detail}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              )}
+            </div>
+
+            <div class={feature.reverse ? 'lg:order-1' : ''}>
+              {feature.panel === 'chat' ? (
+                <figure>
+                  <ChatMockup
+                    messages={AI_CHAT_MESSAGES}
+                    footer="AI 先提出建議，按下確認的權限在你手上"
+                    footerIcon="task_alt"
+                  />
+                  <figcaption class="mt-3 font-label-sm text-sm text-graphite">
+                    示意對話，非實際資料。這裡示範的是「用講的改金額」。
+                  </figcaption>
+                </figure>
+              ) : feature.panel === 'team' ? (
+                <div class="rounded-lg border border-mist/50 bg-white p-6 md:p-8 shadow-paper">
+                  <div class="flex items-center justify-between gap-4 pb-4 border-b border-mist">
+                    <span class="font-label-sm text-sm font-bold text-ink">角色權限</span>
+                    <span class="font-data-mono text-xs text-ledger-blue bg-ledger-blue/10 px-2 py-1 rounded">
+                      管理者 / 編輯者 / 查閱者
+                    </span>
+                  </div>
+                  <dl class="divide-y divide-hairline-soft">
+                    {TEAM_MEMBERS.map((member) => (
+                      <div class="py-3.5 flex flex-wrap items-center gap-x-3 gap-y-1.5">
+                        <dt class="font-headline-md text-base text-ink">{member.name}</dt>
+                        <span class="font-data-mono text-xs text-ledger-blue bg-ledger-blue/10 px-2 py-0.5 rounded">
+                          {member.role}
+                        </span>
+                        <span class="font-body-md text-sm text-graphite ml-auto font-data-mono text-xs">
+                          {member.scope}
+                        </span>
+                      </div>
+                    ))}
+                  </dl>
+
+                  <div class="mt-5 pt-4 border-t border-mist">
+                    <p class="font-label-sm text-xs text-steel">操作稽核日誌</p>
+                    <ul class="mt-2.5 space-y-1.5">
+                      {AUDIT_LOG.map((entry) => (
+                        <li class="flex flex-wrap items-baseline gap-x-2 font-data-mono text-xs text-graphite">
+                          <span class="text-steel">{entry.time}</span>
+                          <span class="text-ink font-semibold">{entry.who}</span>
+                          <span>{entry.what}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div class="mt-4 flex items-center gap-2 rounded-md bg-sage-wash px-3 py-2.5">
+                    <span class="material-symbols-outlined text-lg text-sage" aria-hidden="true">
+                      history
+                    </span>
+                    <span class="font-label-sm text-sm text-sage font-medium">
+                      誰動了哪一筆都留痕，共記事帳不等於共事風險
+                    </span>
+                  </div>
+                  <p class="mt-4 font-body-md text-xs text-steel leading-[1.75]">
+                    示意畫面。成員、角色與可見範圍僅為示例，非實際帳目資料。
+                  </p>
                 </div>
-                <span class="material-symbols-outlined text-[#005f9d] text-2xl animate-bounce">cloud_download</span>
-              </div>
+              ) : feature.panel === 'analysis' ? (
+                <div class="rounded-lg border border-mist/50 bg-white p-6 md:p-8 shadow-paper">
+                  <div class="flex items-center justify-between gap-4 pb-4 border-b border-mist">
+                    <span class="font-label-sm text-sm font-bold text-ink">報表與匯出</span>
+                  </div>
+
+                  <div class="mt-5">
+                    <p class="font-label-sm text-xs text-steel">應收付到期提醒</p>
+
+                    <dl class="mt-3 divide-y divide-hairline-soft">
+                      {RECEIVABLE_RANGES.filter((range) => range.active).map((range) => (
+                        <>
+                          <div class="py-2.5 flex items-baseline justify-between gap-4">
+                            <dt class="font-body-md text-sm text-graphite">
+                              應收 {range.receivableCount} 筆
+                            </dt>
+                            <dd class="font-data-mono text-sm font-semibold text-ink">
+                              {nt(range.receivableAmount)}
+                            </dd>
+                          </div>
+                          <div class="py-2.5 flex items-baseline justify-between gap-4">
+                            <dt class="font-body-md text-sm text-graphite">
+                              應付 {range.payableCount} 筆
+                            </dt>
+                            <dd class="font-data-mono text-sm font-semibold text-ink">
+                              {nt(range.payableAmount)}
+                            </dd>
+                          </div>
+                        </>
+                      ))}
+                    </dl>
+                    <p class="mt-3 flex items-start gap-2 font-body-md text-xs text-graphite leading-[1.6]">
+                      <span class="material-symbols-outlined text-base text-steel shrink-0" aria-hidden="true">
+                        calendar_month
+                      </span>
+                      <span>應收付也能直接在行事曆上看到到期日與行程。</span>
+                    </p>
+                  </div>
+
+                  <div class="mt-5 pt-4 border-t border-mist">
+                    <p class="font-label-sm text-xs text-steel">收益分析比較</p>
+                    <div class="mt-3 flex items-end gap-4 h-28">
+                      {THREE_YEAR.map((row) => (
+                        <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end">
+                          <div class="w-full flex items-end justify-center gap-1 h-full">
+                            <div
+                              class="w-2.5 rounded-t-sm bg-ledger-blue/30"
+                              style={`height: ${Math.max(6, Math.round((row.cash / YEAR_MAX) * 82))}%`}
+                            />
+                            <div
+                              class="w-2.5 rounded-t-sm bg-ledger-blue/70"
+                              style={`height: ${Math.max(6, Math.round((row.invoice / YEAR_MAX) * 82))}%`}
+                            />
+                          </div>
+                          <span class="font-data-mono text-[10px] text-steel leading-none">{row.year}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <div class="mt-2.5 flex items-center gap-4">
+                      <span class="flex items-center gap-1.5 font-data-mono text-[10px] text-steel">
+                        <span class="w-2.5 h-2.5 rounded-sm bg-ledger-blue/30" aria-hidden="true" />
+                        金流
+                      </span>
+                      <span class="flex items-center gap-1.5 font-data-mono text-[10px] text-steel">
+                        <span class="w-2.5 h-2.5 rounded-sm bg-ledger-blue/70" aria-hidden="true" />
+                        發票紀錄
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="mt-5 pt-4 border-t border-mist">
+                    <p class="font-label-sm text-xs text-steel">依會計科目分類統計</p>
+                    <ul class="mt-2.5 space-y-2">
+                      {CATEGORY_STATS.map((row) => (
+                        <li class="flex items-center gap-3">
+                          <span class="font-body-md text-sm text-graphite w-16 shrink-0">{row.label}</span>
+                          <span class="flex-1 h-1.5 rounded-full bg-vellum overflow-hidden">
+                            <span
+                              class="block h-full rounded-full bg-ledger-blue/40"
+                              style={`width: ${row.pct}%`}
+                            />
+                          </span>
+                          <span class="font-data-mono text-xs text-steel w-9 text-right">{row.pct}%</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div class="mt-5 pt-4 border-t border-mist">
+                    <p class="font-label-sm text-xs text-steel">每月明細匯出</p>
+                    <dl class="mt-2.5 divide-y divide-hairline-soft">
+                      {EXPORTS.map((row) => (
+                        <div class="py-2.5 flex items-baseline justify-between gap-4">
+                          <dt class="font-data-mono text-sm font-semibold text-ink">{row.label}</dt>
+                          <dd class="font-body-md text-xs text-graphite text-right">{row.detail}</dd>
+                        </div>
+                      ))}
+                    </dl>
+                  </div>
+
+                  <p class="mt-4 font-body-md text-xs text-steel leading-[1.75]">
+                    示意畫面。期間、金額與科目比例僅為示例，非實際帳目資料。
+                  </p>
+                </div>
+              ) : feature.panel === 'channels' ? (
+                <div class="rounded-lg border border-mist/50 bg-white p-6 md:p-8 shadow-paper">
+                  <div class="flex items-center justify-between gap-4 pb-4 border-b border-mist">
+                    <span class="font-label-sm text-sm font-bold text-ink">記帳管道</span>
+                    <span class="font-data-mono text-xs text-steel">方案需求如實標示</span>
+                  </div>
+                  <dl class="divide-y divide-hairline-soft">
+                    {CHAT_CHANNEL_PANEL.map((channel) => (
+                      <div class="py-4">
+                        <dt class="flex items-center gap-2 flex-wrap">
+                          <span class="font-headline-md text-base text-ink">{channel.name}</span>
+                          <span class="font-data-mono text-xs text-ledger-blue bg-ledger-blue/10 px-2 py-0.5 rounded">
+                            {channel.plan}
+                          </span>
+                        </dt>
+                        <dd class="font-body-md text-sm text-graphite leading-[1.75] mt-1.5">
+                          {channel.note}
+                        </dd>
+                      </div>
+                    ))}
+                  </dl>
+                  <div class="mt-4 flex items-center gap-2 rounded-md bg-sage-wash px-3 py-2.5">
+                    <span class="material-symbols-outlined text-lg text-sage" aria-hidden="true">
+                      notifications_active
+                    </span>
+                    <span class="font-label-sm text-sm text-sage font-medium">
+                      同一組綁定也能收到應收付到期通知
+                    </span>
+                  </div>
+                  <p class="mt-4 font-body-md text-xs text-steel leading-[1.75]">
+                    示意畫面。各方案的實際計價方式以官方方案頁面為準。
+                  </p>
+                </div>
+              ) : (
+                <div class="rounded-lg border border-mist/50 bg-white p-6 md:p-8 shadow-paper">
+                  <div class="flex items-center justify-between gap-4 pb-4 border-b border-mist">
+                    <span class="font-label-sm text-sm font-bold text-ink">申報檔輸出</span>
+                    <span class="font-data-mono text-xs text-ledger-blue bg-ledger-blue/10 px-2 py-1 rounded">
+                      .txt / .bi
+                    </span>
+                  </div>
+                  <dl class="divide-y divide-hairline-soft">
+                    <div class="py-3 flex items-baseline justify-between gap-4">
+                      <dt class="font-body-md text-sm text-graphite">銷項發票</dt>
+                      <dd class="font-data-mono text-sm font-semibold text-ink">16 筆</dd>
+                    </div>
+                    <div class="py-3 flex items-baseline justify-between gap-4">
+                      <dt class="font-body-md text-sm text-graphite">進項發票</dt>
+                      <dd class="font-data-mono text-sm font-semibold text-ink">42 筆</dd>
+                    </div>
+                    <div class="py-3 flex items-baseline justify-between gap-4">
+                      <dt class="font-body-md text-sm text-graphite">申報期間</dt>
+                      <dd class="font-data-mono text-sm font-semibold text-ink">2026 / 05</dd>
+                    </div>
+                  </dl>
+                  <div class="mt-4 flex items-center gap-2 rounded-md bg-sage-wash px-3 py-2.5">
+                    <span class="material-symbols-outlined text-lg text-sage" aria-hidden="true">
+                      task_alt
+                    </span>
+                    <span class="font-label-sm text-sm text-sage font-medium">媒體檔已就緒，可匯入申報軟體</span>
+                  </div>
+                  <p class="mt-4 font-body-md text-xs text-steel leading-[1.75]">
+                    示意畫面，非實際申報資料。實際欄位與檔案格式依財政部規範。
+                  </p>
+                </div>
+              )}
             </div>
           </div>
-        </div>
-      </div>
-    </section>
+        </section>
+      ))
+    }
 
-    <section class="mb-12">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-10 lg:gap-16 items-center">        
-        <div class="order-2 space-y-6">
-          <div class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-[#f3f3f4] text-[#005f9d] mb-2 shadow-xs">
-            <span class="material-symbols-outlined text-2xl">smart_toy</span>
-          </div>
-          <h2 class="font-headline-md text-2xl md:text-3xl text-[#1a1c1c]">AI 驅動的自動化記帳</h2>
-          <p class="font-body-md text-base text-[#404750] leading-relaxed">
-            從發票辨識、科目歸類到資料防呆，AI 全力打造無痛記帳體驗。隨著資料的累積，系統將自動建悉您的財務輪廓，產生深度的財務分析圖表。
-          </p>
-          </p>
-          <ul class="space-y-3 font-body-md text-sm md:text-base text-[#404750]">
-            <li class="flex items-center gap-2">
-              <span class="material-symbols-outlined text-[#005f9d] text-xl">check_circle</span>
-              發票拍照即記，自動辨識明細
-            </li>
-            <li class="flex items-center gap-2">
-              <span class="material-symbols-outlined text-[#005f9d] text-xl">check_circle</span>
-              智慧判定會計科目與是否能扣抵營業稅
-            </li>
-            <li class="flex items-center gap-2">
-              <span class="material-symbols-outlined text-[#005f9d] text-xl">check_circle</span>
-              自動防呆與異常數據檢測
-            </li>
-          </ul>
-        </div>
-
-        <div class="order-1">
-          <div class="rounded-xl overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-[#c0c7d2]/50 bg-white relative aspect-[4/3] group">
-            <img src={FEATURE_AI_URL} alt="AI 智慧財務顧問" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-          </div>
-        </div>
+    <!-- CTA -->
+    <section class="mt-20 md:mt-28 rounded-lg bg-white border border-mist/50 p-8 md:p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-paper">
+      <div class="max-w-xl">
+        <h2 class="font-headline-md text-xl md:text-2xl font-bold text-ink">想看實際跑起來長什麼樣？</h2>
+        <p class="font-body-md text-sm md:text-base text-graphite leading-[1.75] mt-2">
+          註冊即可試用，不綁定信用卡。也可以先看
+          <a href="/faq/" class="text-ledger-blue underline underline-offset-4 hover:text-ledger-blue-hover transition-colors">常見問題</a>
+          裡其他用戶最在意的事。
+        </p>
       </div>
+      <a
+        href={TRIAL_URL}
+        target="_blank"
+        rel="noopener"
+        class="shrink-0 bg-ledger-blue text-white font-label-sm text-sm px-6 py-3 rounded-md hover:bg-ledger-blue-hover transition-colors duration-200 shadow-xs flex items-center gap-2"
+      >
+        前往免費使用
+        <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_outward</span>
+      </a>
     </section>
   </div>
 </BaseLayout>

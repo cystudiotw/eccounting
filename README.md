@@ -16,7 +16,7 @@
 | 圖示 | Google Material Symbols（Outlined） |
 | 部署 | Cloudflare Pages |
 | Serverless | Cloudflare Pages Function（聯絡表單 API） |
-| 表單驗證 | reCAPTCHA v3 |
+| 表單驗證 | Cloudflare Turnstile |
 | 郵件服務 | Resend |
 
 ---
@@ -87,9 +87,10 @@ PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
 ```
 eccounting/
 ├── functions/api/contact.ts   # Serverless Function
+├── public/                    # favicon / apple-touch-icon
 ├── src/
 │   ├── layouts/
-│   │   └── BaseLayout.astro   # 共用版型（導覽列、頁尾、手機選單、TrialModal）
+│   │   └── BaseLayout.astro   # 共用版型（導覽列、頁尾、手機選單、JSON-LD）
 │   ├── pages/                 # 7 個頁面
 │   └── styles/
 │       └── global.css         # Tailwind v4 匯入 + 自訂字型工具類別
@@ -98,6 +99,27 @@ eccounting/
 ├── wrangler.toml
 └── .env.example
 ```
+
+---
+
+## 設計系統
+
+| 檔案 | 說明 |
+|---|---|
+| `PRODUCT.md` | 產品事實基準：受眾、定位、能力、證據 |
+| `DESIGN.md` | 視覺系統：token、字級、間距、元件、禁用模式 |
+| `.impeccable/design.json` | Impeccable design sidecar（machine-readable） |
+
+色彩、字級、圓角、間距一律取自 `DESIGN.md` 的 token，不得在 markup 內硬編碼。
+
+---
+
+## 開發輔助
+
+| 指令 | 說明 |
+|---|---|
+| `npm run check` | `astro check` — strict TypeScript 診斷 |
+| `npm run detect` | Impeccable 反模式偵測 |
 
 ---
 

@@ -6,86 +6,169 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <!-- Cloudflare Turnstile -->
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
-  <div class="w-full max-w-[1280px] mx-auto px-4 md:px-8 lg:px-16 pt-10 pb-20">
+  <div class="w-full max-w-ledger mx-auto px-4 md:px-8 lg:px-16 pt-10 pb-20">
     <!-- Header -->
-    <section class="text-center mb-16">
-      <h1 class="font-headline-lg text-2xl md:text-4xl text-[#005f9d] mb-4">聯絡我們</h1>
-      <p class="font-body-lg text-base md:text-lg text-[#404750] max-w-2xl mx-auto leading-relaxed">
-        不論是產品諮詢、商務合作或是遇到任何使用上的問題，我們的團隊隨時準備好為您提供協助。
+    <header class="max-w-2xl mb-16">
+      <h1 class="font-headline-lg text-2xl md:text-4xl text-ink tracking-[-0.015em] leading-[1.25]">
+        聯絡我們
+      </h1>
+      <p class="font-body-lg text-base md:text-lg text-graphite leading-[1.75] mt-4">
+        不論是產品諮詢、商務合作或使用上的問題，寫下你的狀況，我們盡快回覆。
       </p>
-    </section>
+    </header>
 
-    <section class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-8 lg:gap-12">
-      <!-- Left Column: Info Cards -->
-      <div class="md:col-span-5 space-y-6">
-        <div class="bg-white rounded-xl p-6 md:p-8 shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-[#c0c7d2]/40 space-y-4">
-          <div class="w-10 h-10 rounded-lg bg-[#f3f3f4] text-[#005f9d] flex items-center justify-center">
-            <span class="material-symbols-outlined text-xl">mail</span>
+    <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+      <!-- Info -->
+      <div class="lg:col-span-5 space-y-6">
+        <div class="bg-white rounded-lg p-6 md:p-8 shadow-paper border border-mist/50">
+          <div class="w-10 h-10 rounded-md bg-vellum text-ledger-blue flex items-center justify-center mb-4">
+            <span class="material-symbols-outlined text-xl" aria-hidden="true">mail</span>
           </div>
-          <div>
-            <h3 class="font-headline-md text-lg text-[#1a1c1c] font-bold">支援與合作</h3>
-            <p class="font-body-md text-sm text-[#404750] mt-1">寄送電子郵件給我們，我們將盡快回覆。</p>
-          </div>
-          <div class="pt-2">
-            <a href="mailto:help@eccounting.com.tw" class="font-data-mono text-[#005f9d] text-base font-semibold hover:underline inline-flex items-center gap-1">
+          <h2 class="font-headline-md text-lg text-ink font-bold">支援與合作</h2>
+          <p class="font-body-md text-sm text-graphite leading-[1.75] mt-1">
+            直接寫信給我們也可以。
+          </p>
+          <div class="pt-4 mt-4 border-t border-hairline-soft">
+            <a
+              href="mailto:help@eccounting.com.tw"
+              class="font-data-mono text-sm text-ledger-blue font-semibold hover:underline underline-offset-4 inline-flex items-center gap-1.5 transition-colors break-all"
+            >
               help@eccounting.com.tw
-              <span class="material-symbols-outlined text-sm">open_in_new</span>
             </a>
           </div>
         </div>
-        <div class="bg-white rounded-xl p-6 md:p-8 shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-[#c0c7d2]/40 space-y-4">
-          <div class="w-10 h-10 rounded-lg bg-[#f3f3f4] text-[#005f9d] flex items-center justify-center">
-            <span class="material-symbols-outlined text-xl">schedule</span>
+
+        <div class="bg-white rounded-lg p-6 md:p-8 shadow-paper border border-mist/50">
+          <div class="w-10 h-10 rounded-md bg-vellum text-ledger-blue flex items-center justify-center mb-4">
+            <span class="material-symbols-outlined text-xl" aria-hidden="true">schedule</span>
           </div>
-          <div>
-            <h3 class="font-headline-md text-lg text-[#1a1c1c] font-bold">諮詢時間</h3>
-            <p class="font-body-md text-sm text-[#404750] mt-1">週一至週五，國定假日除外。</p>
+          <h2 class="font-headline-md text-lg text-ink font-bold">諮詢時間</h2>
+          <p class="font-body-md text-sm text-graphite leading-[1.75] mt-1">週一至週五，國定假日除外。</p>
+          <div class="pt-4 mt-4 border-t border-hairline-soft">
+            <div class="flex items-baseline gap-3">
+              <span class="font-data-mono text-base font-semibold text-ink">09:00 – 18:00</span>
+              <span class="text-xs text-graphite">台北時間</span>
+            </div>
           </div>
-          <div class="pt-2 font-data-mono text-[#1a1c1c] text-base font-semibold">09:00 AM - 18:00 PM</div>
+        </div>
+
+        <div class="rounded-lg bg-vellum/60 border border-hairline p-6 flex items-start gap-3">
+          <span class="material-symbols-outlined text-xl text-steel shrink-0 mt-0.5" aria-hidden="true">tips_and_updates</span>
+          <p class="font-body-md text-sm text-graphite leading-[1.75]">
+            已經有帳務問題想先自己查？<a
+              href="/faq/"
+              class="text-ledger-blue underline underline-offset-4 hover:text-ledger-blue-hover transition-colors"
+              >常見問題</a
+            > 裡有十題是用戶最常問的。
+          </p>
         </div>
       </div>
 
-      <!-- Right Column: Contact Form -->
-      <div class="md:col-span-7 bg-white rounded-xl p-6 md:p-10 shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-[#c0c7d2]/40">
+      <!-- Form -->
+      <div class="lg:col-span-7 bg-white rounded-lg p-6 md:p-10 shadow-paper border border-mist/50">
         <div id="contact-form-container">
-          <form id="contact-form" class="space-y-6">
-            <h3 class="font-headline-md text-xl text-[#1a1c1c] font-bold">填寫諮詢需求</h3>
-            <div class="space-y-4">
+          <form id="contact-form" novalidate>
+            <h2 class="font-headline-md text-xl text-ink font-bold mb-6">填寫諮詢需求</h2>
+
+            <div class="space-y-5">
               <div>
-                <label class="block font-label-sm text-xs md:text-sm text-[#1a1c1c] mb-1">姓名 <span class="text-[#ba1a1a]">*</span></label>
-                <input type="text" name="name" required placeholder="請輸入您的姓名" class="w-full px-4 py-2.5 rounded-lg border border-[#c0c7d2] focus:border-[#005f9d] focus:ring-1 focus:ring-[#005f9d] outline-none text-sm font-body-md transition-all" />
+                <label for="contact-name" class="block font-label-sm text-xs md:text-sm text-ink mb-1.5">
+                  姓名 <span class="text-hazard" aria-hidden="true">*</span><span class="sr-only">（必填）</span>
+                </label>
+                <input
+                  id="contact-name"
+                  type="text"
+                  name="name"
+                  required
+                  autocomplete="name"
+                  placeholder="請輸入您的姓名"
+                  class="w-full px-4 py-2.5 rounded-md border border-mist bg-white text-ink placeholder:text-steel focus:border-ledger-blue focus:ring-1 focus:ring-ledger-blue outline-none text-sm font-body-md transition-all min-h-[44px]"
+                />
               </div>
+
               <div>
-                <label class="block font-label-sm text-xs md:text-sm text-[#1a1c1c] mb-1">公司名稱 / 工作室名稱</label>
-                <input type="text" name="company" placeholder="例：智慧雲端科技工作室" class="w-full px-4 py-2.5 rounded-lg border border-[#c0c7d2] focus:border-[#005f9d] focus:ring-1 focus:ring-[#005f9d] outline-none text-sm font-body-md transition-all" />
+                <label for="contact-company" class="block font-label-sm text-xs md:text-sm text-ink mb-1.5">
+                  公司名稱 / 工作室名稱 <span class="text-steel font-normal">（選填）</span>
+                </label>
+                <input
+                  id="contact-company"
+                  type="text"
+                  name="company"
+                  autocomplete="organization"
+                  placeholder="例：智慧雲端科技工作室"
+                  class="w-full px-4 py-2.5 rounded-md border border-mist bg-white text-ink placeholder:text-steel focus:border-ledger-blue focus:ring-1 focus:ring-ledger-blue outline-none text-sm font-body-md transition-all min-h-[44px]"
+                />
               </div>
+
               <div>
-                <label class="block font-label-sm text-xs md:text-sm text-[#1a1c1c] mb-1">聯絡信箱 <span class="text-[#ba1a1a]">*</span></label>
-                <input type="email" name="email" required placeholder="name@example.com" class="w-full px-4 py-2.5 rounded-lg border border-[#c0c7d2] focus:border-[#005f9d] focus:ring-1 focus:ring-[#005f9d] outline-none text-sm font-body-md transition-all" />
+                <label for="contact-email" class="block font-label-sm text-xs md:text-sm text-ink mb-1.5">
+                  聯絡信箱 <span class="text-hazard" aria-hidden="true">*</span><span class="sr-only">（必填）</span>
+                </label>
+                <input
+                  id="contact-email"
+                  type="email"
+                  name="email"
+                  required
+                  autocomplete="email"
+                  placeholder="name@example.com"
+                  class="w-full px-4 py-2.5 rounded-md border border-mist bg-white text-ink placeholder:text-steel focus:border-ledger-blue focus:ring-1 focus:ring-ledger-blue outline-none text-sm font-body-md transition-all min-h-[44px]"
+                />
+                <p class="mt-1.5 font-body-md text-xs text-steel">我們只用這個信箱回覆你，不會寄送其他廣告。</p>
               </div>
+
               <div>
-                <label class="block font-label-sm text-xs md:text-sm text-[#1a1c1c] mb-1">您的的需求 / 諮詢問題 <span class="text-[#ba1a1a]">*</span></label>
-                <textarea name="needs" required rows="4" placeholder="請簡述您的財務記帳需求、團隊規模或欲諮詢的問題..." class="w-full px-4 py-2.5 rounded-lg border border-[#c0c7d2] focus:border-[#005f9d] focus:ring-1 focus:ring-[#005f9d] outline-none text-sm font-body-md transition-all resize-none"></textarea>
+                <label for="contact-needs" class="block font-label-sm text-xs md:text-sm text-ink mb-1.5">
+                  需求 / 諮詢問題 <span class="text-hazard" aria-hidden="true">*</span><span class="sr-only">（必填）</span>
+                </label>
+                <textarea
+                  id="contact-needs"
+                  name="needs"
+                  required
+                  rows="5"
+                  placeholder="請簡述你的記帳需求、團隊規模，或想先確認的問題。例如：一人接案，想知道每月要自己處理多少申報作業。"
+                  class="w-full px-4 py-2.5 rounded-md border border-mist bg-white text-ink placeholder:text-steel focus:border-ledger-blue focus:ring-1 focus:ring-ledger-blue outline-none text-sm font-body-md transition-all resize-y"
+                ></textarea>
               </div>
             </div>
 
-            <div class="cf-turnstile" data-sitekey={import.meta.env.PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY} data-action="submit"></div>
+            <div class="cf-turnstile mt-6" data-sitekey={import.meta.env.PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY} data-action="submit"></div>
 
-            <!-- Error message -->
-            <div id="contact-error" class="hidden p-3 bg-[#ffdad6] text-[#ba1a1a] rounded-lg text-sm font-body-md"></div>
+            <div
+              id="contact-error"
+              role="alert"
+              aria-live="assertive"
+              class="hidden mt-5 p-3 bg-hazard-wash text-hazard rounded-md text-sm font-body-md"
+            >
+            </div>
 
-            <button type="submit" class="w-full bg-[#005f9d] hover:bg-[#2079be] text-white font-label-sm text-sm py-3 rounded-lg transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-xs">
-              <span class="material-symbols-outlined text-lg">send</span>
-              送出表單
+            <button
+              type="submit"
+              class="mt-6 w-full bg-ledger-blue hover:bg-ledger-blue-hover disabled:bg-steel disabled:cursor-not-allowed text-white font-label-sm text-sm py-3 rounded-md transition-colors duration-200 flex items-center justify-center gap-2 shadow-xs min-h-[44px]"
+            >
+              <span class="material-symbols-outlined text-lg" aria-hidden="true">send</span>
+              <span id="submit-label">送出表單</span>
             </button>
+
+            <p class="mt-4 font-body-md text-xs text-steel leading-[1.75] text-center">
+              送出即表示你同意我們依
+              <a href="/privacy/" class="underline underline-offset-4 hover:text-graphite transition-colors">隱私權政策</a>
+              處理你的聯絡資訊。
+            </p>
           </form>
-          <!-- Success Message -->
-          <div id="contact-success" class="hidden py-12 text-center space-y-4 animate-fade-in">
-            <div class="w-16 h-16 bg-[#e8f5e9] text-[#2e7d32] rounded-full flex items-center justify-center mx-auto">
-              <span class="material-symbols-outlined text-3xl">check</span>
+
+          <!-- Success -->
+          <div id="contact-success" hidden class="py-12 text-center space-y-4 animate-rise-in">
+            <div class="w-16 h-16 bg-sage-wash text-sage rounded-full flex items-center justify-center mx-auto">
+              <span class="material-symbols-outlined text-3xl" aria-hidden="true">check</span>
             </div>
-            <h3 class="font-headline-md text-2xl text-[#1a1c1c]">訊息已成功送出！</h3>
-            <p class="font-body-md text-[#404750] max-w-md mx-auto">感謝您的聯絡，我們會盡快回覆您的信箱。</p>
+            <h2 class="font-headline-md text-2xl text-ink" role="status">訊息已成功送出！</h2>
+            <p class="font-body-md text-graphite leading-[1.75] max-w-md mx-auto">
+              感謝你的聯絡，我們會在營業時間內盡快回覆到你的信箱。
+            </p>
+            <p class="font-body-md text-sm text-steel">
+              等待期間可以先看看
+              <a href="/features/" class="text-ledger-blue underline underline-offset-4 hover:text-ledger-blue-hover transition-colors">功能介紹</a>。
+            </p>
           </div>
         </div>
       </div>
@@ -93,30 +176,54 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </div>
 
   <script>
-    (function() {
+    (function () {
       const form = document.getElementById('contact-form') as HTMLFormElement;
       if (!form) return;
 
-      form.addEventListener('submit', async function(e) {
-        e.preventDefault();
+      const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      const submitLabel = document.getElementById('submit-label');
+      const errorEl = document.getElementById('contact-error');
+      const successEl = document.getElementById('contact-success');
 
-        const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
-        const errorEl = document.getElementById('contact-error');
+      function showError(message: string) {
+        if (!errorEl) return;
+        errorEl.textContent = message;
+        errorEl.classList.remove('hidden');
+      }
+
+      function resetButton() {
+        submitBtn.disabled = false;
+        if (submitLabel) submitLabel.textContent = '送出表單';
+      }
+
+      function setBusy(busy: boolean) {
+        submitBtn.disabled = busy;
+        if (submitLabel) submitLabel.textContent = busy ? '傳送中...' : '送出表單';
+      }
+
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        if (submitBtn.disabled) return;
+
+        errorEl?.classList.add('hidden');
+
+        // Native constraint check first so the browser names the offending field.
+        if (!form.checkValidity()) {
+          const invalid = form.querySelector(':invalid') as HTMLElement | null;
+          showError('請填寫所有必填欄位，信箱格式也需正確。');
+          invalid?.focus();
+          return;
+        }
 
         const turnstileInput = form.querySelector('input[name="cf-turnstile-response"]') as HTMLInputElement | null;
         const turnstileToken = turnstileInput?.value;
 
         if (!turnstileToken) {
-          if (errorEl) {
-            errorEl.textContent = '請先完成機器人驗證';
-            errorEl.classList.remove('hidden');
-          }
+          showError('請先完成機器人驗證再送出。');
           return;
         }
 
-        btn.disabled = true;
-        btn.innerHTML = '<span class="material-symbols-outlined text-lg">sync</span> 傳送中...';
-        if (errorEl) errorEl.classList.add('hidden');
+        setBusy(true);
 
         try {
           const formData = new FormData(form);
@@ -132,26 +239,27 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             }),
           });
 
-          const data = await res.json();
+          let data: { ok?: boolean; error?: string } = {};
+          try {
+            data = await res.json();
+          } catch {
+            // Non-JSON response (e.g. a gateway error page).
+          }
 
-          if (data.ok) {
-            form.classList.add('hidden');
-            document.getElementById('contact-success')?.classList.remove('hidden');
-          } else {
-            if (errorEl) {
-              errorEl.textContent = data.error || '送出失敗，請稍後再試';
-              errorEl.classList.remove('hidden');
+          if (res.ok && data.ok) {
+            form.hidden = true;
+            if (successEl) {
+              successEl.hidden = false;
+              successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
-            btn.disabled = false;
-            btn.innerHTML = '<span class="material-symbols-outlined text-lg">send</span> 送出表單';
+            return;
           }
+
+          showError(data.error || '送出失敗，請稍後再試，或直接來信 help@eccounting.com.tw。');
+          resetButton();
         } catch {
-          if (errorEl) {
-            errorEl.textContent = '網路錯誤，請檢查連線後再試';
-            errorEl.classList.remove('hidden');
-          }
-          btn.disabled = false;
-          btn.innerHTML = '<span class="material-symbols-outlined text-lg">send</span> 送出表單';
+          showError('網路連線失敗，請確認連線後再試。');
+          resetButton();
         }
       });
     })();

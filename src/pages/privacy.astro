@@ -1,86 +1,117 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+type LegalItem = { term?: string; text: string };
+type LegalSection = { title: string; body?: string[]; list?: LegalItem[] };
+
+const SECTIONS: LegalSection[] = [
+  {
+    title: '一、隱私權政策概述',
+    body: [
+      '歡迎使用「雲記帳」（以下簡稱「本公司」或「本系統」）。我們極度重視您的數據資料隱私與財務安全。本服務隱私權保護政策（以下簡稱「本政策」）將說明當您在使用我們的雲端記帳與稅務服務時，我們如何蒐集、處理、利用與保護您的個人資訊。請細閱本政策，以了解我們對您隱私的承諾。',
+    ],
+  },
+  {
+    title: '二、我們蒐集的資訊',
+    body: ['為了提供高品質的記帳與稅務分析服務，我們可能會蒐集以下類型的資訊：'],
+    list: [
+      { term: '帳戶基本資料：', text: '當您在註冊帳號時提供的姓名、電子郵件地址、公司名稱及統一編號等。' },
+      { term: '財務單據資料：', text: '您透過拍照上傳、系統匯入或手動輸入的發票、收據、票據等財務憑證與帳務資訊。' },
+      { term: '第三方通訊軟體資訊', text: '當您授權綁定 Line、Telegram 等第三方通訊軟體時，我們所取得的平台使用者識別碼及相關公開設定檔。' },
+      { term: '使用紀錄：', text: '您使用本服務的時間、頻率、瀏覽紀錄與操作日誌。' },
+      { term: '裝置資訊：', text: '您所使用的瀏覽器類型、作業系統、IP 位址等技術性資訊。' },
+    ],
+  },
+  {
+    title: '三、資訊的使用目的',
+    body: ['我們蒐集的資訊僅用於以下目的：'],
+    list: [
+      { term: '服務提供與優化：', text: '提供、維護及改進本系統的記帳功能，以及營業稅申報檔匯出等核心服務。' },
+      { term: 'AI 智慧辨識：', text: '透過 AI 影像與文字辨識技術，自動解析並擷取您上傳的發票與單據內容。' },
+      { term: '自動化通知與客服：', text: '透過系統或您綁定的第三方通訊軟體，發送自動化帳務通知、系統警示或進行客服回覆與聯繫。' },
+      { term: '系統安全維護：', text: '確保系統運作安全，偵測並防範詐欺、惡意攻擊或未經授權的存取行為。' },
+    ],
+  },
+  {
+    title: '四、資訊的保護措施',
+    body: ['我們採用業界高標準的安全技術與嚴格的存取規範來保護您的資料：'],
+    list: [
+      { term: '傳輸層加密防護：', text: '所有資料在傳輸過程中，全面採用 TLS 1.3 現代加密協定，確保資料傳輸的極致安全性與完整性。' },
+      { term: '高強度資料庫加密：', text: '針對您的敏感性財務單據與個人資料，系統底層配置 AES-256-GCM 等高強度加密演算法進行儲存防護。' },
+      { term: '嚴格存取控制：', text: '嚴密管控內部人員對用戶資料的存取權限，僅限必要之維護人員在授權下操作。' },
+      { term: '即時雲端備份：', text: '建置完善的資料備援機制，確保您的資料不會因突發硬體故障而遺失。' },
+    ],
+  },
+  {
+    title: '五、資訊的分享與揭露',
+    body: ['除以下情況外，我們絕不會將您的個人資料提供、交換或出售給其他個人、法人或第三方單位：'],
+    list: [
+      { text: '經您明確同意或主動指示。' },
+      { text: '因應法律明文規定或司法、政府機關依法定程序之要求。' },
+      { text: '為保護本公司、其他用戶或公眾的合法權益免受重大危害。' },
+      { text: '與可信賴的第三方服務提供商（如雲端基礎設施供應商）合作，且該等供應商皆受嚴格的保密協議與隱私權規範約束。' },
+    ],
+  },
+  {
+    title: '六、Cookie 的使用',
+    body: [
+      '本系統可能使用 Cookie 及類似技術來提升您的使用體驗，例如記住您的登入狀態與系統偏好設定。您可透過瀏覽器設定管理或停用 Cookie，但這可能導致本系統部分功能無法正常運作。',
+    ],
+  },
+  {
+    title: '七、您的權利',
+    body: ['根據台灣《個人資料保護法》及相關數據保護法令，您對自身的個人資料享有以下權利：'],
+    list: [
+      { text: '查詢、請求閱覽或請求製給複製本。' },
+      { text: '請求補充或更正有誤之個人資料。' },
+      { text: '請求停止蒐集、處理或利用您的個人資料。' },
+      { text: '請求刪除您的個人資料（註銷帳號）。' },
+    ],
+  },
+  {
+    title: '八、政策修訂',
+    body: [
+      '本政策將因應科技發展趨勢、相關法規之修訂或其他環境變遷等因素而不定期更新。修訂後的政策將於本頁面公告，並更新「最後更新日期」。建議您定期查閱本政策，以確保您始終了解最新的隱私保護措施。',
+    ],
+  },
+];
 ---
+
 <BaseLayout title="隱私權政策 - 雲記帳 - 你的雲端財務神隊友" currentPath="/privacy/">
-  <div class="w-full max-w-[1280px] mx-auto px-4 md:px-8 lg:px-16 pt-10 pb-20">
-    <section class="text-center mb-16">
-      <h1 class="font-headline-lg text-2xl md:text-4xl text-[#005f9d] mb-4">隱私權保護政策</h1>
-      <p class="font-body-lg text-base md:text-lg text-[#404750] max-w-2xl mx-auto leading-relaxed">
-        最後更新日期：2026 年 08 月
-      </p>
-    </section>
+  <div class="w-full max-w-ledger mx-auto px-4 md:px-8 lg:px-16 pt-10 pb-20">
+    <header class="measure-reading mx-auto mb-14 md:mb-20">
+      <h1 class="font-headline-lg text-2xl md:text-4xl text-ink tracking-[-0.015em] leading-[1.25]">
+        隱私權保護政策
+      </h1>
+      <p class="font-body-lg text-base text-graphite leading-[1.75] mt-3">最後更新日期：2026 年 08 月</p>
+    </header>
 
-    <div class="max-w-3xl mx-auto space-y-10 font-body-md text-[#404750] leading-relaxed">
-      <section class="space-y-4">
-        <h2 class="font-headline-md text-xl md:text-2xl text-[#1a1c1c] font-bold">一、隱私權政策概述</h2>
-        <p>歡迎使用「雲記帳」（以下簡稱「本公司」或「本系統」）。我們極度重視您的數據資料隱私與財務安全。本服務隱私權保護政策（以下簡稱「本政策」）將說明當您在使用我們的雲端記帳與稅務服務時，我們如何蒐集、處理、利用與保護您的個人資訊。請細閱本政策，以了解我們對您隱私的承諾。</p>
-      </section>
+    <div class="measure-reading mx-auto">
+      {SECTIONS.map((section) => (
+        <section class="pt-8 pb-8 border-t border-mist first:border-t-0 first:pt-0">
+          <h2 class="font-headline-md text-xl md:text-2xl text-ink font-bold mb-4">{section.title}</h2>
+          <div class="font-body-md text-base text-graphite leading-[1.85] space-y-4">
+            {section.body && section.body.map((para) => (
+              <p>{para}</p>
+            ))}
+            {section.list && (
+              <ul class="space-y-2.5 pl-5 list-disc marker:text-mist">
+                {section.list.map((item) => (
+                  <li>
+                    {item.term && <strong class="font-semibold text-ink">{item.term}</strong>}
+                    {item.text}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </section>
+      ))}
+    </div>
 
-      <section class="space-y-4">
-        <h2 class="font-headline-md text-xl md:text-2xl text-[#1a1c1c] font-bold">二、我們蒐集的資訊</h2>
-        <p>為了提供高品質的記帳與稅務分析服務，我們可能會蒐集以下類型的資訊：</p>
-        <ul class="space-y-2 pl-6 list-disc">
-          <li><strong>帳戶基本資料：</strong>當您在註冊帳號時提供的姓名、電子郵件地址、公司名稱及統一編號等。</li>
-          <li><strong>財務單據資料：</strong>您透過拍照上傳、系統匯入或手動輸入的發票、收據、票據等財務憑證與帳務資訊。</li>
-          <li><strong>第三方通訊軟體資訊</strong>當您授權綁定 Line、Telegram 等第三方通訊軟體時，我們所取得的平台使用者識別碼及相關公開設定檔。</li>
-          <li><strong>使用紀錄：</strong>您使用本服務的時間、頻率、瀏覽紀錄與操作日誌。</li>
-          <li><strong>裝置資訊：</strong>您所使用的瀏覽器類型、作業系統、IP 位址等技術性資訊。</li>
-        </ul>
-      </section>
-
-      <section class="space-y-4">
-        <h2 class="font-headline-md text-xl md:text-2xl text-[#1a1c1c] font-bold">三、資訊的使用目的</h2>
-        <p>我們蒐集的資訊僅用於以下目的：</p>
-        <ul class="space-y-2 pl-6 list-disc">
-          <li><strong>服務提供與優化：</strong>提供、維護及改進本系統的記帳功能，以及營業稅申報檔匯出等核心服務。</li>
-          <li><strong>AI 智慧辨識：</strong>透過 AI 影像與文字辨識技術，自動解析並擷取您上傳的發票與單據內容。</li>
-          <li><strong>自動化通知與客服：</strong>透過系統或您綁定的第三方通訊軟體，發送自動化帳務通知、系統警示或進行客服回覆與聯繫。</li>
-          <li><strong>系統安全維護：</strong>確保系統運作安全，偵測並防範詐欺、惡意攻擊或未經授權的存取行為。</li>
-        </ul>
-      </section>
-
-      <section class="space-y-4">
-        <h2 class="font-headline-md text-xl md:text-2xl text-[#1a1c1c] font-bold">四、資訊的保護措施</h2>
-        <p>我們採用業界高標準的安全技術與嚴格的存取規範來保護您的資料：</p>
-        <ul class="space-y-2 pl-6 list-disc">
-          <li><strong>傳輸層加密防護：</strong>所有資料在傳輸過程中，全面採用 TLS 1.3 現代加密協定，確保資料傳輸的極致安全性與完整性。</li>
-          <li><strong>高強度資料庫加密：</strong>針對您的敏感性財務單據與個人資料，系統底層配置 AES-256-GCM 等高強度加密演算法進行儲存防護。</li>
-          <li><strong>嚴格存取控制：</strong>嚴密管控內部人員對用戶資料的存取權限，僅限必要之維護人員在授權下操作。</li>
-          <li><strong>即時雲端備份：</strong>建置完善的資料備援機制，確保您的資料不會因突發硬體故障而遺失。</li>
-        </ul>
-      </section>
-
-      <section class="space-y-4">
-        <h2 class="font-headline-md text-xl md:text-2xl text-[#1a1c1c] font-bold">五、資訊的分享與揭露</h2>
-        <p>除以下情況外，我們絕不會將您的個人資料提供、交換或出售給其他個人、法人或第三方單位：</p>
-        <ul class="space-y-2 pl-6 list-disc">
-          <li>經您明確同意或主動指示。</li>
-          <li>因應法律明文規定或司法、政府機關依法定程序之要求。</li>
-          <li>為保護本公司、其他用戶或公眾的合法權益免受重大危害。</li>
-          <li>與可信賴的第三方服務提供商（如雲端基礎設施供應商）合作，且該等供應商皆受嚴格的保密協議與隱私權規範約束。</li>
-        </ul>
-      </section>
-
-      <section class="space-y-4">
-        <h2 class="font-headline-md text-xl md:text-2xl text-[#1a1c1c] font-bold">六、Cookie 的使用</h2>
-        <p>本系統可能使用 Cookie 及類似技術來提升您的使用體驗，例如記住您的登入狀態與系統偏好設定。您可透過瀏覽器設定管理或停用 Cookie，但這可能導致本系統部分功能無法正常運作。</p>
-      </section>
-
-      <section class="space-y-4">
-        <h2 class="font-headline-md text-xl md:text-2xl text-[#1a1c1c] font-bold">七、您的權利</h2>
-        <p>根據台灣《個人資料保護法》及相關數據保護法令，您對自身的個人資料享有以下權利：</p>
-        <ul class="space-y-2 pl-6 list-disc">
-          <li>查詢、請求閱覽或請求製給複製本。</li>
-          <li>請求補充或更正有誤之個人資料。</li>
-          <li>請求停止蒐集、處理或利用您的個人資料。</li>
-          <li>請求刪除您的個人資料（註銷帳號）。</li>
-        </ul>
-      </section>
-
-      <section class="space-y-4">
-        <h2 class="font-headline-md text-xl md:text-2xl text-[#1a1c1c] font-bold">八、政策修訂</h2>
-        <p>本政策將因應科技發展趨勢、相關法規之修訂或其他環境變遷等因素而不定期更新。修訂後的政策將於本頁面公告，並更新「最後更新日期」。建議您定期查閱本政策，以確保您始終了解最新的隱私保護措施。</p>
-      </section>
+    <div class="measure-reading mx-auto mt-12 pt-8 border-t border-mist flex flex-wrap gap-x-6 gap-y-2 font-body-md text-sm">
+      <a href="/terms/" class="text-ledger-blue underline underline-offset-4 hover:text-ledger-blue-hover transition-colors">服務條款</a>
+      <a href="/contact/" class="text-ledger-blue underline underline-offset-4 hover:text-ledger-blue-hover transition-colors">聯絡我們</a>
     </div>
   </div>
 </BaseLayout>

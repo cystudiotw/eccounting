@@ -3,11 +3,19 @@ interface Env {
   CLOUDFLARE_TURNSTILE_SECRET: string;
 }
 
+interface ContactBody {
+  name?: string;
+  company?: string;
+  email?: string;
+  needs?: string;
+  turnstileToken?: string;
+}
+
 export const onRequestPost: PagesFunction<Env> = async (context) => {
   const { env } = context;
 
   try {
-    const body = await context.request.json();
+    const body = (await context.request.json()) as ContactBody;
     const { name, company, email, needs, turnstileToken } = body;
 
     if (!name || !email || !needs || !turnstileToken) {

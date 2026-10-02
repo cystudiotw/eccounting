@@ -1,0 +1,269 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-01T00:00:00.000Z",
+  "title": "Design System: 雲記帳",
+  "extensions": {
+    "colorMeta": {
+      "ledger-blue": {
+        "role": "primary",
+        "displayName": "帳冊藍 Ledger Blue",
+        "canonical": "oklch(47.3% 0.125 247.2)",
+        "tonalRamp": ["#00092b", "#001f58", "#003c77", "#005896", "#2676b6", "#4895d7", "#78c5ff", "#e4f0fc"]
+      },
+      "ledger-blue-mid": {
+        "role": "secondary",
+        "displayName": "帳冊藍・次階",
+        "canonical": "oklch(58.4% 0.133 248.0)",
+        "tonalRamp": ["#00082d", "#001e5c", "#003b7b", "#00589b", "#1f76bb", "#4394dc", "#73c4ff", "#e4f0fc"]
+      },
+      "ledger-blue-hover": {
+        "role": "primary",
+        "displayName": "帳冊藍・懸停",
+        "canonical": "oklch(56.0% 0.134 247.3)",
+        "tonalRamp": ["#00082d", "#001e5c", "#003b7b", "#00589a", "#1c76bb", "#4195dc", "#72c5ff", "#e4f0fc"]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "墨黑 Ink",
+        "canonical": "oklch(22.4% 0.003 196.9)",
+        "tonalRamp": ["#0a0b0b", "#202222", "#393b3b", "#535656", "#707272", "#8d9090", "#bbbebe", "#ecefef"]
+      },
+      "graphite": {
+        "role": "neutral",
+        "displayName": "石墨 Graphite",
+        "canonical": "oklch(39.5% 0.018 254.7)",
+        "tonalRamp": ["#080b10", "#1c222a", "#343b44", "#4f565f", "#6b727c", "#88909a", "#b6bfc9", "#e7effb"]
+      },
+      "steel": {
+        "role": "neutral",
+        "displayName": "鋼灰 Steel",
+        "canonical": "oklch(48.3% 0.047 255.4)",
+        "tonalRamp": ["#040b18", "#122237", "#2a3c53", "#44576f", "#60738d", "#7d91ac", "#aac0dc", "#e6effc"]
+      },
+      "mist": {
+        "role": "neutral",
+        "displayName": "霧灰 Mist",
+        "canonical": "oklch(82.8% 0.017 259.4)",
+        "tonalRamp": ["#080b10", "#1d222a", "#353b44", "#50565f", "#6c727c", "#89909a", "#b7bec9", "#e8effa"]
+      },
+      "vellum": {
+        "role": "neutral",
+        "displayName": "文件白 Vellum",
+        "canonical": "oklch(96.4% 0.001 286.4)",
+        "tonalRamp": ["#0b0b0b", "#212122", "#3a3a3b", "#555556", "#717172", "#8f8f90", "#bdbdbe", "#eeeeef"]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "紙白 Paper",
+        "canonical": "oklch(98.2% 0.000 89.9)",
+        "tonalRamp": ["#0b0b0b", "#222222", "#3a3a3a", "#555555", "#717171", "#8f8f8f", "#bebebe", "#eeeeee"]
+      },
+      "hazard": {
+        "role": "tertiary",
+        "displayName": "警示紅 Hazard",
+        "canonical": "oklch(50.6% 0.193 27.7)",
+        "tonalRamp": ["#2f0000", "#600000", "#830000", "#a60001", "#ca2e29", "#ee5348", "#ff8575", "#fceae7"]
+      },
+      "sage": {
+        "role": "tertiary",
+        "displayName": "任務綠 Sage",
+        "canonical": "oklch(52.3% 0.135 144.2)",
+        "tonalRamp": ["#001300", "#002f00", "#004a00", "#12671b", "#37853a", "#56a458", "#85d485", "#e7f2e6"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "每頁唯一的一級標題。" },
+      "headline": { "displayName": "Headline", "purpose": "區塊標題與 hero 的次級層級。" },
+      "title": { "displayName": "Title", "purpose": "卡片標題、FAQ 問題。" },
+      "body": { "displayName": "Body", "purpose": "所有段落文字，行高放寬到 1.75。" },
+      "label": { "displayName": "Label", "purpose": "按鈕、表單標籤、導覽列。" },
+      "data": { "displayName": "Data Mono", "purpose": "金額、筆數、時間、檔案格式。帳冊裡的數字字體。" }
+    },
+    "shadows": [
+      {
+        "name": "paper",
+        "value": "0 4px 12px rgba(0,0,0,0.05)",
+        "purpose": "卡片、示意圖面板、含表單區塊。存在感極低，讓元素離開紙面而非被強調。"
+      },
+      {
+        "name": "structure",
+        "value": "0 4px 12px rgba(0,0,0,0.08)",
+        "purpose": "固定導覽列、startup 頁計算結果面板。層級比 paper 高一級。"
+      },
+      {
+        "name": "micro",
+        "value": "0 1px 2px rgba(0,0,0,0.05)",
+        "purpose": "內嵌元素、icon 方塊、次要面板。"
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out-quart",
+        "value": "cubic-bezier(0.25, 1, 0.5, 1)",
+        "purpose": "全站預設緩動。真實物體平滑減速，不彈跳。"
+      },
+      {
+        "name": "duration-state",
+        "value": "200ms",
+        "purpose": "顏色與透明度狀態轉換（hover、focus）。"
+      },
+      {
+        "name": "duration-reveal",
+        "value": "300ms",
+        "purpose": "面板展開與淡入。"
+      }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "畫面上唯一的權威動作。填色帳冊藍，用於導覽列 CTA、表單送出、面板主按鈕。",
+      "html": "<button class=\"ds-btn-primary\">立即免費試用</button>",
+      "css": ".ds-btn-primary { background:#005f9d; color:#fff; padding:12px 24px; font-family:'IBM Plex Sans','Noto Sans TC',sans-serif; font-weight:500; font-size:0.875rem; line-height:1.5; border:none; border-radius:8px; cursor:pointer; transition:background-color 200ms cubic-bezier(0.25,1,0.5,1), transform 200ms cubic-bezier(0.25,1,0.5,1); } .ds-btn-primary:hover { background:#2079be; } .ds-btn-primary:active { transform:scale(0.96); } .ds-btn-primary:focus-visible { outline:2px solid #005f9d; outline-offset:2px; }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "次要動作。1px 帳冊藍邊框、白底、帳冊藍字，用於與填色按鈕並列時。",
+      "html": "<button class=\"ds-btn-outline\">功能介紹</button>",
+      "css": ".ds-btn-outline { background:#fff; color:#005f9d; padding:12px 24px; font-family:'IBM Plex Sans','Noto Sans TC',sans-serif; font-weight:500; font-size:0.875rem; line-height:1.5; border:1px solid #005f9d; border-radius:8px; cursor:pointer; transition:background-color 200ms cubic-bezier(0.25,1,0.5,1); } .ds-btn-outline:hover { background:rgba(0,95,157,0.1); } .ds-btn-outline:focus-visible { outline:2px solid #005f9d; outline-offset:2px; }"
+    },
+    {
+      "name": "On-fill Button",
+      "kind": "button",
+      "refersTo": "button-on-fill",
+      "description": "放在帳冊藍或漸層面板上的反白按鈕。",
+      "html": "<button class=\"ds-btn-onfill\">前往免費使用</button>",
+      "css": ".ds-btn-onfill { background:#fff; color:#005f9d; padding:12px 24px; font-family:'IBM Plex Sans','Noto Sans TC',sans-serif; font-weight:500; font-size:0.875rem; line-height:1.5; border:none; border-radius:8px; cursor:pointer; transition:background-color 200ms cubic-bezier(0.25,1,0.5,1); } .ds-btn-onfill:hover { background:#f3f3f4; } .ds-btn-onfill:focus-visible { outline:2px solid #fff; outline-offset:2px; }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "聯絡表單的文字輸入。1px 霧灰框線，focus 時轉帳冊藍並加 1px 外環。最小高度 44px。",
+      "html": "<label class=\"ds-field-label\">聯絡信箱 <span class=\"ds-req\">*</span></label><input class=\"ds-field\" type=\"email\" placeholder=\"name@example.com\">",
+      "css": ".ds-field-label { display:block; font-family:'IBM Plex Sans','Noto Sans TC',sans-serif; font-weight:500; font-size:0.75rem; color:#1a1c1c; margin-bottom:4px; } .ds-req { color:#ba1a1a; } .ds-field { width:100%; padding:10px 16px; font-family:'Work Sans','Noto Sans TC',sans-serif; font-size:0.875rem; color:#1a1c1c; background:#fff; border:1px solid #c0c7d2; border-radius:8px; outline:none; min-height:44px; box-sizing:border-box; transition:border-color 200ms, box-shadow 200ms; } .ds-field::placeholder { color:#4d6079; } .ds-field:focus { border-color:#005f9d; box-shadow:0 0 0 1px #005f9d; }"
+    },
+    {
+      "name": "Ledger Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "標準內容卡。12px 圓角、白底、1px 霧灰框線、紙面陰影。三層表面（paper → white → vellum）構成主要層次。",
+      "html": "<div class=\"ds-card\"><div class=\"ds-icon-tile\"><span class=\"ds-glyph\">account_balance_wallet</span></div><h3 class=\"ds-card-title\">個人接案稅率高</h3><p class=\"ds-card-body\">缺乏系統性的收入與支出紀錄，導致報稅時無法有效列舉扣除額。</p></div>",
+      "css": ".ds-card { background:#fff; border:1px solid #c0c7d2; border-radius:12px; padding:32px; box-shadow:0 4px 12px rgba(0,0,0,0.05); transition:box-shadow 200ms; } .ds-card:hover { box-shadow:0 6px 16px rgba(0,0,0,0.08); } .ds-icon-tile { width:48px; height:48px; border-radius:12px; background:#f3f3f4; color:#005f9d; display:flex; align-items:center; justify-content:center; font-size:24px; margin-bottom:16px; } .ds-glyph { font-family:sans-serif; } .ds-card-title { font-family:'Manrope','Noto Sans TC',sans-serif; font-weight:600; font-size:1.25rem; color:#1a1c1c; margin:0 0 12px; } .ds-card-body { font-family:'Work Sans','Noto Sans TC',sans-serif; font-size:0.9375rem; line-height:1.75; color:#404750; margin:0; }"
+    },
+    {
+      "name": "Navigation Bar",
+      "kind": "nav",
+      "refersTo": "nav",
+      "description": "固定頂端的紙白導覽列，backdrop-blur，底部 1px 霧灰線。作用中項目為帳冊藍粗體加底部 2px 帳冊藍線。",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-item is-active\">功能介紹</a><a class=\"ds-nav-item\">常見問題</a><a class=\"ds-nav-item\">創業優勢</a><a class=\"ds-nav-item\">聯絡我們</a></nav>",
+      "css": ".ds-nav { display:flex; align-items:center; gap:32px; } .ds-nav-item { font-family:'IBM Plex Sans','Noto Sans TC',sans-serif; font-weight:500; font-size:0.875rem; color:#404750; text-decoration:none; padding:4px 8px; border-radius:6px; transition:color 200ms, background-color 200ms; } .ds-nav-item:hover { color:#005f9d; background:#f3f3f4; } .ds-nav-item.is-active { color:#005f9d; font-weight:700; border-bottom:2px solid #005f9d; border-radius:0; background:transparent; } .ds-nav-item:focus-visible { outline:2px solid #005f9d; outline-offset:2px; }"
+    },
+    {
+      "name": "Stat Row",
+      "kind": "custom",
+      "refersTo": "accent-stat-row",
+      "description": "startup 頁的優勢列。左側鋼灰 icon 加標籤，右側帳冊藍粗體結論。窄螢幕垂直堆疊。無框線無陰影。",
+      "html": "<div class=\"ds-stat-row\"><div class=\"ds-stat-label\"><span class=\"ds-stat-glyph\">train</span><span>交通差旅</span></div><div class=\"ds-stat-value\">可扣抵5%營業稅，降低營所稅基</div></div>",
+      "css": ".ds-stat-row { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:20px; border-top:1px solid #f1f5f9; transition:background-color 200ms; } .ds-stat-row:hover { background:#f9f9f9; } .ds-stat-label { display:flex; align-items:center; gap:8px; font-weight:500; color:#1a1c1c; font-size:0.9375rem; } .ds-stat-glyph { color:#4d6079; } .ds-stat-value { margin-left:auto; color:#005f9d; font-weight:700; font-size:0.875rem; }"
+    },
+    {
+      "name": "Disclosure Row",
+      "kind": "custom",
+      "refersTo": "ledger-disclosure",
+      "description": "FAQ 手風琴列。chevron 隨 open 狀態旋轉 180 度，緩動為 ease-out-quart。",
+      "html": "<details class=\"ds-disclosure\" open><summary class=\"ds-disclosure-summary\"><span class=\"ds-disclosure-q\">資料安全嗎？</span><span class=\"ds-chevron\">v</span></summary><div class=\"ds-disclosure-body\">本系統目前尚未正式申請 ISO 27001 認證，但整體架構完全參照該資訊安全標準打造。</div></details>",
+      "css": ".ds-disclosure { background:#fff; border:1px solid #c0c7d2; border-radius:12px; overflow:hidden; } .ds-disclosure-summary { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:24px; cursor:pointer; list-style:none; transition:background-color 200ms; } .ds-disclosure-summary::-webkit-details-marker { display:none; } .ds-disclosure-summary:hover { background:#f9f9f9; } .ds-disclosure-q { font-family:'Manrope','Noto Sans TC',sans-serif; font-weight:600; font-size:1.125rem; color:#1a1c1c; } .ds-chevron { color:#005f9d; transition:transform 300ms cubic-bezier(0.25,1,0.5,1); } .ds-disclosure[open] .ds-chevron { transform:rotate(180deg); } .ds-disclosure-body { padding:8px 24px 24px; border-top:1px solid #f3f3f4; font-family:'Work Sans','Noto Sans TC',sans-serif; font-size:1rem; line-height:1.75; color:#404750; animation:ds-fade 250ms cubic-bezier(0.25,1,0.5,1); } @keyframes ds-fade { from { opacity:0; transform:scale(0.98); } to { opacity:1; transform:scale(1); } }"
+    },
+    {
+      "name": "Slider",
+      "kind": "custom",
+      "refersTo": "ledger-slider",
+      "description": "節稅試算器的 range 滑桿。6px 霧灰軌道、22px 帳冊藍滑塊加白色外框，不依賴瀏覽器預設 accent-color。",
+      "html": "<input class=\"ds-slider\" type=\"range\" min=\"0\" max=\"100000\" step=\"2000\" value=\"25000\">",
+      "css": ".ds-slider { appearance:none; -webkit-appearance:none; width:100%; height:6px; border-radius:9999px; background:#e2e2e2; cursor:pointer; outline:none; } .ds-slider::-webkit-slider-thumb { -webkit-appearance:none; width:22px; height:22px; border-radius:9999px; background:#005f9d; border:3px solid #fff; box-shadow:0 4px 12px rgba(0,0,0,0.05); } .ds-slider::-moz-range-thumb { width:16px; height:16px; border-radius:9999px; background:#005f9d; border:3px solid #fff; box-shadow:0 4px 12px rgba(0,0,0,0.05); } .ds-slider:focus-visible { outline:2px solid #005f9d; outline-offset:4px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "整理好的帳冊",
+    "overview": "這個系統的視覺承諾不是「很炫的財務工具」，而是「一本已經整理好、可以直接遞交出去的帳冊」。這個比喻直接來自產品的事實：雲記帳最終產出物是一份檔案。視覺系統的每一個決定都從這個終點往回推。如果一個畫面讓人聯想到的是混亂的收據堆，就不該出現在這個系統裡。\n\n帳冊這個比喻帶來三個具體的視覺後果。紙：介面底色是接近紙張的暖白與冷灰，不是純白的螢幕感，內容區塊像攤開在桌上的紙面。欄線：分隔線、框線、表格邊界都偏冷灰且纖細，像帳冊裡印好的格線，而不是陰影做出來的層次。對齊的數字：所有金額、筆數、時間都用等寬字體（JetBrains Mono），因為帳冊裡的數字本來就要能上下對齊比較。\n\n細節上偏機構感、克制、幾乎不裝飾。留白比陰影重要，邊框比漸層重要，字重差異比顏色差異重要。使用者是要處理稅務文件的人，他們的預期是「這個工具會把事情做對」，所以任何看起來像在炫技的東西都是噪音。",
+    "keyCharacteristics": [
+      "帳冊藍作為唯一權威色，只出現在動作與連結上，不做裝飾",
+      "紙感底色（paper）與白色卡片構成主要層次，而非陰影",
+      "等寬字體承載每一個數字",
+      "冷灰細框線劃分欄位，取代厚重陰影",
+      "圓角溫和（最大 16px），貼近紙張邊緣而非 APP 卡片",
+      "動態只用於狀態回饋與淡入，不做裝飾性運動"
+    ],
+    "rules": [
+      {
+        "name": "The One Voice Rule",
+        "body": "帳冊藍只出現在使用者可以點下去的東西上（連結、按鈕、focus、作用中的導覽列）。它從不作為裝飾色塊出現。藍色的稀有性就是它的說服力。",
+        "section": "colors"
+      },
+      {
+        "name": "The Ink Means Ink Rule",
+        "body": "墨黑與石墨只出現在真實的文字內容上。不拿來畫 icon 底、不拿來當分隔線、不拿來當漸層端點。",
+        "section": "colors"
+      },
+      {
+        "name": "The Numbers Are Monospace Rule",
+        "body": "任何代表金額、筆數、時間、日期、稅率或檔案格式的數字都必須使用 font-data-mono（JetBrains Mono），不加例外。帳冊裡的數字要能上下對齊比較。",
+        "section": "typography"
+      },
+      {
+        "name": "The Reading Line Rule",
+        "body": "內文行長不超過 max-w-2xl（約 42rem／67ch）。內文預設 text-sm 可用於卡片內說明，但頁面層級說明文字用 text-base。",
+        "section": "typography"
+      },
+      {
+        "name": "The Section Beats Rule",
+        "body": "相鄰 section 之間的垂直間距不得小於 section 內部間距。當版面看起來擠，第一個要檢查的就是這個比值，而不是字級。",
+        "section": "colors"
+      },
+      {
+        "name": "The Hairline Carries The Weight Rule",
+        "body": "分隔兩個表面靠的是 1px 的 mist 框線，不是陰影。如果一個元素需要陰影才能跟背景分開，先檢查它是否缺少框線。",
+        "section": "elevation"
+      },
+      {
+        "name": "The No Glow Rule",
+        "body": "沒有內發光、外發光或彩色陰影。帳冊不發光。",
+        "section": "elevation"
+      },
+      {
+        "name": "The Paper Edge Rule",
+        "body": "圓角上限 16px，且不得只框住一條邊。帳冊的紙頁有四個角，也許邊緣有一條彩色的標籤，但不會有半個彩色邊框。",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do 用 font-data-mono 呈現每一個數字：金額、筆數、時間、日期、稅率、副檔名。",
+      "Do 用三層表面（paper → white → vellum）加 1px mist 框線來表達深度，而不是加重陰影。",
+      "Do 把帳冊藍限制在可點擊的元素上，稀缺地使用。",
+      "Do 讓 section 之間的間距至少是 section 內部間距的 3 倍。",
+      "Do 用 rounded-lg（12px）作為卡片圓角，8px 用於控制項，16px 用於大面板。",
+      "Do 保留誠實的限定語（未認證、AI 需自行核對、不取代會計師），在介面上要與功能描述同等清楚。",
+      "Do 在內文使用 text-base（1rem）與 1.75 行高，讓條款與說明好讀。"
+    ],
+    "donts": [
+      "Don't 在圓角元素上只框一條邊（border-t-4、border-l-4）。這是最容易被辨識為機器生成的樣式，且與帳冊的紙頁邊緣矛盾。改用完整 1px 框線，或改用 icon tile 表達強調。",
+      "Don't 用 animate-bounce 或任何彈跳／回彈緩動。真實物體是平滑減速的。改用線性淡入或位移。",
+      "Don't 用 ledger-blue-mid（#2c80c6）作為白底文字色，對比只有 4.19:1，低於 WCAG AA 的 4.5:1。",
+      "Don't 硬編碼 hex 色碼。用 global.css 的 @theme token；新的 hex 值必須先成為 token 才能使用。",
+      "Don't 為同一個元件在不同頁面寫不同的 class 字串。間距、圓角、字級、框線都用 token。",
+      "Don't 在這個產品裡發明社會證明。沒有客戶見證、沒有用戶數、沒有認證標章。現有的誠實揭露比發明的背書更有力。",
+      "Don't 用柔和的漸層取代結構。帳冊靠線與欄，不靠漸層。",
+      "Don't 在同一個畫面上放兩個以上焦點。首頁 hero 的主要動作永遠只有一個。"
+    ]
+  }
+}

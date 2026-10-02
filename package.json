@@ -7,12 +7,20 @@
     "dev": "astro dev --port 3000 --host 0.0.0.0",
     "dev:full": "npm run build && npx wrangler pages dev dist --port 3000",
     "build": "astro build",
+    "check": "astro check",
+    "detect": "impeccable detect --json src/pages",
     "preview": "astro preview",
     "clean": "rm -rf dist .astro"
   },
   "dependencies": {
-    "astro": "^5.18.2",
     "@tailwindcss/vite": "^4.3.3",
+    "astro": "^5.18.2",
+    "impeccable": "^2.3.2",
     "tailwindcss": "^4.3.3"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@cloudflare/workers-types": "^5.20261001.1",
+    "typescript": "^5.9.3"
   }
 }
